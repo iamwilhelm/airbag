@@ -1,1 +1,23 @@
-<h1>Hello</h1>
+<div class="container clear">
+  <div class="one_third">
+    <div id="search_controls">
+      <form action="{% url graphs.views.search %}" method="GET" 
+            data-remote="true" data-update="search_results">
+        <input type="text" class="search" id="query" name="query" style="width: 90%" />
+      </form>
+    </div>
+
+    <div id="search_results">
+      {% include "graphs/_search.html" %}
+    </div>
+  </div>
+
+  <div class="two_third">
+    <div id="graph">
+      {% if datapack %}
+      {% include "graphs/_visualization.html" %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
