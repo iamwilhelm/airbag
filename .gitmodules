@@ -1,0 +1,3 @@
+[submodule "public/stylesheets/css_commons"]
+	path = public/stylesheets/css_commons
+	url = git@github.com:iamwilhelm/css_commons.git
