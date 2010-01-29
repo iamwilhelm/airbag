@@ -1,0 +1,121 @@
+body {
+    background-color: white;
+    background-image: url('/site-media/images/backgrounds/grey_to_white_gradient.png');
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    text-align: left;
+    color: #303030;
+}
+
+.frame {
+    width: 1000px;
+    background-color: white;
+    border-top: 1px solid #95be82;
+    border-left: 1px solid #95be82;
+    border-bottom: 1px solid #438d21;
+    border-right: 1px solid #438d21;
+
+    margin-bottom: 40px;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-box-shadow: 0px 0px 10px rgb(0, 0, 0);
+}
+
+.header h1 {
+    font-size: 2em;
+    margin: 0px;
+}
+
+.splash {
+    background-image: url('/site-media/images/decor/splash.png');
+    background-position: left;
+    font-family: Georgia, serif;
+}
+
+.splash h2 {
+    font-size: 2em;
+    font-weight: normal;
+    line-height: 1.5em;
+}
+
+.splash p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+
+p {
+    font-family: Georgia;
+    font-size: 14px;
+    line-height: 1.6em;
+}
+
+/* basic link stylings */
+a {
+    color: #438d21;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    color: #444;
+    text-decoration: underline;
+}
+
+/* menu stylings */
+ul.menu.top.horizontal {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+ul.menu.top.horizontal li {
+    text-transform: capitalize;
+}
+
+ul.menu.legend.horizontal li {
+    
+}
+ul.menu.legend.buttoned li {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+//    height: 2em;
+}
+ul.menu.legend.buttoned li a { 
+    text-align: center;
+    display: inline;
+    padding: 0.3em 1em;
+}
+ul.menu.legend.buttoned li a:first-child {
+    padding-right: 0px;
+}
+ul.menu.legend.buttoned li a + a {
+    padding-left: 3px;
+}
+ul.menu.legend.buttoned li a:last-child {
+    padding-right: 15px;
+}
+ul.menu.legend.buttoned li a:hover { 
+    background-color: transparent;
+}
+ul.menu.legend.buttoned li:hover { 
+    background-color: #eee;
+}
+
+/* form stylings */
+
+input.search {
+    background-image: url('/site-media/images/icons/search.png');
+    Background-position: 4px 4px;
+    background-repeat: none;
+    padding: 4px 0px 4px 22px;
+}
+
+/* result stylings */
+
+#search_results {
+    height: 450px;
+    overflow: scroll;
+}
