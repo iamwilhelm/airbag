@@ -41,6 +41,7 @@ ActionController::Routing::Routes.draw do |map|
     funnelcake.benefits_funnelcake "benefits", :action => "benefits"
     funnelcake.help_funnelcake "help", :action => "help"
     funnelcake.about_funnelcake "about", :action => "about"
+    funnelcake.feedback_funnelcake "feedback", :action => "feedback"
   end
 
   # visualization routes

@@ -25,6 +25,11 @@ class FunnelcakeControllerTest < ActionController::TestCase
     assert_show_page("about")
   end
 
+  test "can show feedback" do
+    get :feedback
+    assert_show_page("feedback")
+  end
+
   private
 
   def assert_show_page(page_name)

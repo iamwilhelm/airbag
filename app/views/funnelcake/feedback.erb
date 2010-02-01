@@ -1,0 +1,21 @@
+<div class="half">
+  <div class="container">
+    <h1>Give us feedback</h1>
+    <p>
+      <ul>
+        <li style="font-size: 18px">
+          Please 
+          <%= mail_to "wil@graphbug.com", "email us", :subject => "[graphbug] Hello, here's my feedback", :encode => "hex", :replace_at => " at ", :replace_dot => " dot " %>
+          if you have any questions.  We write back.
+        </li>
+      </ul>
+    </p>
+  </div>
+</div>
+<div class="half">
+  <div class="container">
+    <p>
+      <%= image_tag "decor/screenshot_closeup.png" %>
+    </p>
+  </div>
+</div>
