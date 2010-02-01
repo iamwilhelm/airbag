@@ -32,15 +32,8 @@
           logout
         </div>
       </div>
-      
-      <div class="section" id="notifications">
-        <% if flash[:notice] %>
-          <p class="notice container"><%= notice %></p>
-        <% end %>
-        <% if flash[:error] %>
-          <p class="error container"><%= error %></p>
-        <% end %>
-      </div>
+
+      <%= render :partial => "layouts/app_notification" %>
 
       <div class="section" id="content">
         <%= yield %>

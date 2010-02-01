@@ -1,0 +1,8 @@
+<div class="section" id="notifications">
+  <% if flash[:notice] %>
+  <p class="notice container"><%= notice %></p>
+  <% end %>
+  <% if flash[:error] %>
+  <p class="error container"><%= error %></p>
+  <% end %>
+</div>

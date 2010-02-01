@@ -34,17 +34,10 @@
         {% endblock %}
       </div>
       
-      <div class="section" id="notifications">
-        {% if notice %}
-          <p class="notice container">{{ notice }}</p>
-        {% endif %}
-        {% if error %}
-          <p class="error container">{{ error }}</p>
-        {% endif %}
-      </div>
 
       {% block splash %}
       {% endblock %}
+      <%= render :partial => "layouts/app_notification" %>
 
       <div class="section" id="content">
         {% block content %}{% endblock %}
