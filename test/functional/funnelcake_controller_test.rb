@@ -16,5 +16,11 @@ class FunnelcakeControllerTest < ActionController::TestCase
     assert_response :success
     assert_template "benefits"
   end
+
+  test "can show help" do
+    get :help
+    assert_response :success
+    assert_template "help"
+  end
   
 end
