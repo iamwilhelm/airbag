@@ -48,15 +48,18 @@
 
 <div class="half">
   <div class="container">
-    <h2>I wanna alpha test</h2>
+    <h2>Interested in easily visualizing public datasets?</h2>
     <p>
-      Interested in easily visualizing public datasets?  Want to give  
-      feedback to help shape graphbug?  Just fill out your email below, and we'll get 
-      back to you as soon as we have something.
+      We'll notify you when we launch.
     </p>
-    <form action="{% url funnelcake.views.request_launch %}" method="POST">
-      <%= render :partial => "launch_form" %>
-      <input type="submit" value="Get me in line" style="font-size: 1.2em;" />
-    </form>
+    <p>
+      <% form_tag(launch_notify_funnelcake_path, :method => :post) do %>
+        <div class="headroom legroom">
+          <%= text_field_tag("email", nil, :class => "balloon", :style => "width: 300px", 
+                             :placeholder => "Leave your email, we don't spam.") %>
+        </div>
+        <%= submit_tag "Send", :class => "balloon", :style => "font-size: 1.2em; width: 300px" %>
+      <% end %>
+    </p>
   </div>
 </div>

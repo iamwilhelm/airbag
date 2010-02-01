@@ -1,8 +1,12 @@
 <div class="section" id="notifications">
   <% if flash[:notice] %>
-  <p class="notice container"><%= notice %></p>
+  <div class="notice balloon">
+    <span class="container"><%= flash[:notice] %></span>
+  </div>
   <% end %>
   <% if flash[:error] %>
-  <p class="error container"><%= error %></p>
+  <div class="error balloon">
+    <span class="error balloon"><%= flash[:error] %></span>
+  </div>
   <% end %>
 </div>

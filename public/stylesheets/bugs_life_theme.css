@@ -35,7 +35,8 @@ body {
 }
 
 .splash h2 {
-    font-size: 2em;
+    font-family: Helvetica, sans-serif;
+    font-size: 1.8em;
     font-weight: normal;
     line-height: 1.5em;
 }
@@ -51,6 +52,17 @@ p {
     line-height: 1.6em;
 }
 
+/* application notification stylings */
+.notice {
+   border-top: 1px solid #D8EABA;   /* -5 rgb of bg color */
+   border-bottom: 1px solid #D0E2B2;/* -13 rgb of bg color */
+}
+
+.error {
+   border-top: 1px solid #FCC2CC;
+   border-bottom: 1px solid #F3C9C3;
+}
+
 /* basic link stylings */
 a {
     color: #438d21;
@@ -64,6 +76,27 @@ a:visited {
 a:hover {
     color: #444;
     text-decoration: underline;
+}
+
+/* basic properties */
+.stretch {
+   width: 100%;
+}
+
+.headroom {
+   margin-top: 15px;
+}
+
+.legroom {
+   margin-bottom: 15px;
+}
+
+.balloon {
+   padding: 5px 0px;
+}
+
+.roundify {
+   -moz-border-radius: 10px;
 }
 
 /* menu stylings */

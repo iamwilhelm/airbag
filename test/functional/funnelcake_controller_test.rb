@@ -30,6 +30,12 @@ class FunnelcakeControllerTest < ActionController::TestCase
     assert_show_page("feedback")
   end
 
+  test "can notify developers of request to notify when launch" do
+    post :launch_notify, :email => "wil@graphbug.com"
+    assert ActionMailer::Base.deliveries.length == 1
+    assert_redirected_to root_path
+  end
+  
   private
 
   def assert_show_page(page_name)
