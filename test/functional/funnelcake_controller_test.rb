@@ -1,8 +1,20 @@
 require 'test_helper'
 
 class FunnelcakeControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  def setup
   end
+  
+  test "can show index" do
+    get :index
+    assert_response :success
+    assert_template "index"
+  end
+
+  test "can show benefits" do
+    get :benefits
+    assert_response :success
+    assert_template "benefits"
+  end
+  
 end
