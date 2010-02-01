@@ -1,3 +1,6 @@
 [submodule "public/stylesheets/css_commons"]
 	path = public/stylesheets/css_commons
 	url = git@github.com:iamwilhelm/css_commons.git
+[submodule "lib/french_maid"]
+	path = lib/french_maid
+	url = git@github.com:iamwilhelm/french_maid.git
