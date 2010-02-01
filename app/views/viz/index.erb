@@ -14,9 +14,9 @@
 
   <div class="two_third">
     <div id="graph">
-      {% if datapack %}
-      {% include "graphs/_visualization.html" %}
-      {% endif %}
+      <% if @datapack %>
+        <%= render :partial => "visualization" %>
+      <% end %>
     </div>
   </div>
 </div>

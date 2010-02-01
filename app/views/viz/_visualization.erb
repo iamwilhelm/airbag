@@ -1,0 +1,83 @@
+<div style="padding-left: 25px;">
+  <ul id="cardinal" class="menu horizontal legend buttoned">
+  </ul>
+</div>
+
+<script type="text/javascript+protovis">
+  $(document).ready(function() {
+    tuft = Tuftee('graph', 620, 400)
+             .byBar()
+             .add({{ ordinal_pack|safe }}, {{ cardinal_pack|safe }})
+             .addLinkKeys({{ ordinal_list|safe }}, "{{ datapack.dimension }}")
+             .render(true);
+
+    // interface handlers
+    drawGraph = function(js_dp, textStatus) {
+        // console.log("drawGraph: " + js_dp);
+        tuft.clear()
+            .add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
+            .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+            .render()
+     };
+    
+    overlayGraph = function(js_dp, textStatus) {
+        // console.log(js_dp);
+        // console.log(tuft.legend.names);
+        tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
+            .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+            .render();
+    };
+
+    removeGraph = function(cardinalKey) {
+        tuft.remove(cardinalKey)
+            .removeLinkKeys(cardinalKey)
+            .render();
+    };
+
+    changeOrdinal = function(ordinalKey, cardinalKeys) {
+        tuft.clear();
+        _.each(cardinalKeys, function(cardinalKey) {
+          $.get("/graphs/data", { dimension: cardinalKey, xaxis: ordinalKey }, 
+                function(js_dp) {
+                   tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
+                       .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+                       .render();
+                }, "json");
+        });
+    };
+
+    deactivateGraph = function(dataset_name) {
+        alert("deactivate " + dataset_name);
+    };
+
+  });
+</script>
+
+<div id="visualization"></div>
+
+<div style="padding-left: 25px;">
+  <ul id="ordinal" class="menu horizontal legend buttoned">
+    <li>
+      <a href="{% url graphs.views.data %}?dimension={{ datapack.dimension }}" 
+         data-remote="true" data-update="overwriteData">{{ datapack.x_axis }}</a>
+    </li>
+  </ul>
+</div>
+
+<p id="debug">
+</p>
+
+{% if debug %}
+  <div>
+    <a href="" data-remote="false" data-update="datapack">Debug datapack</a>
+    <div id="datapack" style="display: none">
+      <ul>
+      {% for key, value in datapack_debug.items %}
+        <li>{{ key }}: {{ value }}</li>
+      {% empty %}
+        <li>datapack_debug is not currently set</li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}

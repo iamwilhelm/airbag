@@ -1,0 +1,50 @@
+<li class="license">
+  <div class="sidebar">
+    <img src="/site-media/images/icons/sparkline.png" />
+    <a href="{% url graphs.views.data %}?dimension={{ dimension.key }}"
+       data-remote="true" data-update-success="overlayGraph">
+      Overlay
+      </a>
+  </div>
+  <div class="details">
+    <p class="shrink fade">{{ dimension.source_name|truncatewords:6 }} 
+      <span style="float: right">
+        <a href="{{ dimension.url }}">source</a>
+      </span>
+    </p>
+    <h3><a href="{% url graphs.views.data %}?dimension={{ dimension.key }}" 
+           data-remote="true" data-update-success="drawGraph">
+        {{ dimension.name }}
+    </a></h3>
+    <p class="shrink">
+      default xaxis by {{ dimension.default_xaxis }}
+    </p>
+    
+    <div>
+      <a href="" data-remote="false" data-update="{{ dimension.html_id }}_description">
+        {{ dimension.description|truncatewords:5 }}
+      </a>
+      <p id="{{ dimension.html_id }}_description" class="hidden">
+        {{ dimension.description }}
+      </p>
+    </div>
+
+    
+    <table width="100%" style="font-size: 14px">
+      <tr>
+        <td>
+          {% spaceless %}
+            {% for i in 12345|make_list %}
+              <img src="/site-media/images/icons/star_empty.png" />
+            {% endfor %}
+          {% endspaceless %}
+        </td>
+        <td style="text-align: right">
+          <span class="shrink fade">
+            Published {{ dimension.publish_date|date:"M Y" }}
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</li>
