@@ -7,20 +7,29 @@ class FunnelcakeControllerTest < ActionController::TestCase
   
   test "can show index" do
     get :index
-    assert_response :success
-    assert_template "index"
+    assert_show_page("index")
   end
 
   test "can show benefits" do
     get :benefits
-    assert_response :success
-    assert_template "benefits"
+    assert_show_page("benefits")
   end
 
   test "can show help" do
     get :help
+    assert_show_page("help")
+  end
+
+  test "can show about" do
+    get :about
+    assert_show_page("about")
+  end
+
+  private
+
+  def assert_show_page(page_name)
     assert_response :success
-    assert_template "help"
+    assert_template page_name.to_s
   end
   
 end
