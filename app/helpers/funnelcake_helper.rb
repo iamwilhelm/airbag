@@ -1,0 +1,2 @@
+module FunnelcakeHelper
+end

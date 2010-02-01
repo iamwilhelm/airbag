@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    background-image: url('/site-media/images/backgrounds/grey_to_white_gradient.png');
+    background-image: url('/images/backgrounds/grey_to_white_gradient.png');
     background-position: 0px 0px;
     background-repeat: repeat-x;
     background-attachment: fixed;
@@ -29,7 +29,7 @@ body {
 }
 
 .splash {
-    background-image: url('/site-media/images/decor/splash.png');
+    background-image: url('/images/decor/splash.png');
     background-position: left;
     font-family: Georgia, serif;
 }
@@ -107,7 +107,7 @@ ul.menu.legend.buttoned li:hover {
 /* form stylings */
 
 input.search {
-    background-image: url('/site-media/images/icons/search.png');
+    background-image: url('/images/icons/search.png');
     Background-position: 4px 4px;
     background-repeat: none;
     padding: 4px 0px 4px 22px;

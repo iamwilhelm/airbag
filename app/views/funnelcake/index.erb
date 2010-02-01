@@ -1,0 +1,62 @@
+<% content_for :splash do %>
+  <div class="section splash">
+    <div class="half">
+      <div class="container">
+        <h2>Easily Find and Visualize Public Data</h2>
+        <p>
+          There's lots of public data out there, but there's <br/>
+          no quick way to visually explore that data.
+        </p>
+        <p>
+          We're here to help.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="half">
+  <div class="container">
+    <h2>What is it?</h2>
+    <p>
+      <span style="font-weight: bold;">Graphbug</span> is a quick way to find 
+      public datasets and explore it through visualizations.
+    </p>
+    
+    <h2>How do I do that?</h2>
+    <p>
+      You look for a set of data, we pull it up and graph it for you.  You can 
+      also overlay different datasets.  You can also submit new datasets for us 
+      to process.
+    </p>
+    
+    <h2>What datasets?</h2>
+    <p>
+      Currently, we're starting with public government data in CSV files, and 
+      other low hanging fruit.  If there's a dataset that you'd like to be 
+      included, you can request it in our queue.
+    </p>
+
+    <h2>Where is it?</h2>
+    <p>
+      It's currently under development, and we'd like you to be an alpha tester.
+      We're pretty excited to show it to you once we have something basic, 
+      then you can throw all the flowers or rotten tomatoes to help make it better.
+    </p>
+  </div>
+</div>
+
+<div class="half">
+  <div class="container">
+    <h2>I wanna alpha test</h2>
+    <p>
+      Interested in easily visualizing public datasets?  Want to give  
+      feedback to help shape graphbug?  Just fill out your email below, and we'll get 
+      back to you as soon as we have something.
+    </p>
+    <form action="{% url funnelcake.views.request_launch %}" method="POST">
+      <%= render :partial => "launch_form" %>
+      <input type="submit" value="Get me in line" style="font-size: 1.2em;" />
+    </form>
+  </div>
+</div>

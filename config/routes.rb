@@ -35,6 +35,12 @@ ActionController::Routing::Routes.draw do |map|
 
   # See how all your routes lay out with "rake routes"
 
+  # doorway routes
+  map.with_options :controller => "funnelcake" do |funnelcake|
+    funnelcake.home "", :action => "index"
+  end
+
+  # visualization routes
   map.resources :viz
 
   # Install the default routes as the lowest priority.
