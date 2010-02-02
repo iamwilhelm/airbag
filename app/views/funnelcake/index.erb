@@ -52,7 +52,7 @@
     <p>
       We'll notify you when we launch.
     </p>
-    <p>
+    <div>
       <% form_tag(launch_notify_funnelcake_path, :method => :post) do %>
         <div class="headroom legroom">
           <%= text_field_tag("email", nil, :class => "balloon", :style => "width: 300px", 
@@ -60,6 +60,6 @@
         </div>
         <%= submit_tag "Send", :class => "balloon", :style => "font-size: 1.2em; width: 300px" %>
       <% end %>
-    </p>
+    </div>
   </div>
 </div>
