@@ -122,7 +122,7 @@ class Tyra
       "xaxislabels" => xaxislabels,
       "data" => data,
       "units" => units,
-      "source" => source 
+      "source" => source }
   end
 
   private
