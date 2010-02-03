@@ -19,9 +19,16 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "pg"                 # the postgresql to ruby interface
-  config.gem "ezmobius-redis-rb"  # the redis interface
-  config.gem "json_pure"          # the C variant of standard json lib
+
+  RUBYFORGE = "http://gems.rubyforge.org"
+  GITHUB = "http://gems.github.com"
+  
+  # postgresql interface
+  config.gem "pg", :version => "0.8", :source => RUBYFORGE
+  # the redis interface
+  config.gem "ezmobius-redis-rb", :lib => "redis", :version => "0.1", :source => GITHUB
+  # the C variant of standard json lib
+  config.gem "json_pure", :lib => "json", :version => "1.2.0" ,:source => RUBYFORGE
   
 #  config.gem "haml"           # haml markup language
 #  config.gem "sass"           # sass css markup language
