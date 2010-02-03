@@ -23,8 +23,8 @@ class Tyra
       
       # find units.  dim is not plottable if it is the parent of a 'category'
       # or if it is perpendicular to yaxes with different units
-      #
-      #   unitskey = to_key(meta["units"][dim] || meta["units"]["default"])
+      # Equivalent code in 2 lines:
+      #   unitskey = to_key(meta["units"][dim] || meta["units"]["default"] ? 'default' : nil)
       #   next if unitskey.nil?
       if meta['units'].has_key?(dim)
         unitskey = to_key(dim)
