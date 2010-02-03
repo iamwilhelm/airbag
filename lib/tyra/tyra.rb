@@ -19,7 +19,7 @@ class Tyra
     # look up each dimension's metadata
     dimensions.map do |dim_name|
       dataset, dim = dim_name.split("|")
-      meta = JSON.parse(@data_db[to_key(dataset)])
+      meta = get_metadata(dataset)
       
       # find units.  dim is not plottable if it is the parent of a 'category'
       # or if it is perpendicular to yaxes with different units
@@ -56,8 +56,7 @@ class Tyra
     keylist["Category"] = category
 
     # get the metadata for the dataset
-    dataset_key = to_key(dataset)
-    meta = JSON.parse(@data_db[dataset_key])
+    meta = get_metadata(dataset)
 
     # get xaxis, check default if not passed in
     xaxis = meta['default'] if xaxis.nil?
@@ -125,6 +124,11 @@ class Tyra
       "source" => source }
   end
 
+  # gets the metadata for a dataset
+  def get_metadata(dataset)
+    JSON.parse(@data_db[to_key(dataset)])
+  end
+  
   private
   
   # converts a string into a valid redis key
@@ -140,5 +144,8 @@ if __FILE__ == $0
 
   p tyra.lookup("price_of_beverage")
   p "---------"
+  p tyra.get_metadata("price_of_beverage")
+  p "---------"
   p tyra.get_data("price_of_beverage")
+  
 end
