@@ -48,18 +48,97 @@ class Tyra
         "publish_date" => sourceval["publishDate"] }
     end
   end
-    
-  private
 
+  # get the data for a dimension
+  def get_data(dimension, xaxis = nil, xaxislabels = [], zaxis = nil)
+    keylist = {}
+    dataset, category = dimension.split("|")
+    keylist["Category"] = category
+
+    # get the metadata for the dataset
+    dataset_key = to_key(dataset)
+    meta = JSON.parse(@data_db[dataset_key])
+
+    # get xaxis, check default if not passed in
+    xaxis = meta['default'] if xaxis.nil?
+    
+    # get slice indicies
+    if xaxislabels.empty?
+      xaxislabels = meta['dims'][xaxis].reject { |label| label == "Total" }.sort
+    end
+
+    # get list of sorted dimensions for this dataset
+    dims = meta['dims'].keys.sort
+    
+    # build otherdim key
+    otherDims = dims.map do |dim|
+      [dim, meta["otherDims"].include?(dim) ? xaxislabels : "Total"]
+    end
+    otherDims = Hash[*otherDims.flatten]  # convert array to hash
+    
+    # find sum on all dims other than xaxis
+    dims.each do |dim|
+      keylist[dim] = "Total" if dim != xaxis and (dim != "Category" or category.nil?)
+    end
+
+    # pull the actual data
+    datakeys = []
+    xaxislabels.each do |label|
+      keylist[xaxis] = label
+      datakeys << to_key(dataset + "|" + dims.map { |d| keylist[d] }.join("|"))
+    end
+    data = @data_db.mget(datakeys)
+
+    # find units
+    if meta['units'].has_key?(to_key(category))
+      units = meta['units'][to_key(category)]
+    elsif meta['units']['default']
+      units = nil # this shouldn't happen.  It means the dimension is unplottable
+    end
+
+    # extract sources
+    if !meta['otherDims'].empty?
+      source = []
+      otherdims.each do |dim, type_or_values|
+        if type_or_values == "Total"
+          source += meta['sources'].values.map { |v| v['source'] }
+        else
+          source += meta['sources'].reject { |prop_name, _|
+            type_or_values.includes?(prop_name)
+          }.map { |_, props|
+            props['source']
+          }
+        end
+      end
+    elsif meta['sources']['default']
+      source = [meta['sources']['default']['source']]
+    else
+      source = nil
+    end
+
+    # populate and return hash
+    { "dimension" => dimension,
+      "xaxis" => xaxis,
+      "xaxislabels" => xaxislabels,
+      "data" => data,
+      "units" => units,
+      "source" => source 
+  end
+
+  private
+  
   # converts a string into a valid redis key
   def to_key(str)
     return nil if str.nil?
     str.gsub(" ", "_").downcase
   end
+  
 end
 
 if __FILE__ == $0
   tyra = Tyra.new(0)
 
   p tyra.lookup("price_of_beverage")
+  p "---------"
+  p tyra.get_data("price_of_beverage")
 end
