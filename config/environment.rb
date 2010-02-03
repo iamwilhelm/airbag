@@ -21,6 +21,8 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "pg"                 # the postgresql to ruby interface
   config.gem "ezmobius-redis-rb"  # the redis interface
+  config.gem "json_pure"          # the C variant of standard json lib
+  
 #  config.gem "haml"           # haml markup language
 #  config.gem "sass"           # sass css markup language
 #  config.gem "compass"        # the stylesheet authoring tool
