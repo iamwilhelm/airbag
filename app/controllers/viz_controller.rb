@@ -6,7 +6,7 @@ class VizController < ApplicationController
   before_filter :connect_tyra
   
   def index
-    @dimension_key = params[:query] || "price_of_beverage"
+    @dimension_key = params[:dimension] || "price_of_beverage"
     @metadata = @tyra.get_metadata(to_dataset_name(@dimension_key))
     @datapack = @tyra.get_data(@dimension_key)
     
@@ -18,9 +18,6 @@ class VizController < ApplicationController
 
     respond_to do |wants|
       wants.html {}
-      wants.json do
-        render :template => "search.html"
-      end
     end
   end
 

@@ -7,8 +7,8 @@
   $(document).ready(function() {
     tuft = Tuftee('graph', 620, 400)
              .byBar()
-             .add(<%= @ordinal_pack %>, <%= @cardinal_pack %>)
-             .addLinkKeys(<%= @datapack["ordinals"] %>, "<%= @datapack["dimension"] %>")
+             .add(<%= @ordinal_pack.inspect %>, <%= @cardinal_pack.inspect %>)
+             .addLinkKeys(<%= @datapack["ordinals"].inspect %>, <%= @datapack["dimension"].inspect %>)
              .render(true);
 
     // interface handlers
@@ -37,7 +37,7 @@
     changeOrdinal = function(ordinalKey, cardinalKeys) {
         tuft.clear();
         _.each(cardinalKeys, function(cardinalKey) {
-          $.get("/graphs/data", { dimension: cardinalKey, xaxis: ordinalKey }, 
+          $.get("/graphs/data", { dimension: cardinalKey, xaxis: ordinalKey },
                 function(js_dp) {
                    tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
                        .addLinkKeys(js_dp.ordinals, js_dp.dimension)
