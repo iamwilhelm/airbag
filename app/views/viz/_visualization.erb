@@ -7,8 +7,8 @@
   $(document).ready(function() {
     tuft = Tuftee('graph', 620, 400)
              .byBar()
-             .add({{ ordinal_pack|safe }}, {{ cardinal_pack|safe }})
-             .addLinkKeys({{ ordinal_list|safe }}, "{{ datapack.dimension }}")
+             .add(<%= @ordinal_pack %>, <%= @cardinal_pack %>)
+             .addLinkKeys(<%= @datapack["ordinals"] %>, "<%= @datapack["dimension"] %>")
              .render(true);
 
     // interface handlers
@@ -58,26 +58,9 @@
 <div style="padding-left: 25px;">
   <ul id="ordinal" class="menu horizontal legend buttoned">
     <li>
-      <a href="{% url graphs.views.data %}?dimension={{ datapack.dimension }}" 
-         data-remote="true" data-update="overwriteData">{{ datapack.x_axis }}</a>
+      <a href="<%= viz_path(:id => @datapack['dimension']) %>" 
+         data-remote="true" data-update="overwriteData"><%= @datapack['xaxis'] %></a>
     </li>
   </ul>
 </div>
 
-<p id="debug">
-</p>
-
-{% if debug %}
-  <div>
-    <a href="" data-remote="false" data-update="datapack">Debug datapack</a>
-    <div id="datapack" style="display: none">
-      <ul>
-      {% for key, value in datapack_debug.items %}
-        <li>{{ key }}: {{ value }}</li>
-      {% empty %}
-        <li>datapack_debug is not currently set</li>
-      {% endfor %}
-      </ul>
-    </div>
-  </div>
-{% endif %}

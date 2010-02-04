@@ -1,27 +1,25 @@
-<% if dimensions %>
+<% if @dimensions %>
   <ul class="results">
-    <% for dimension in dimensions %>
+    <% @dimensions.each do |@dimension| %>
       <%= render :partial => "dimension" %>
-    <% endfor %>
+    <% end %>
   </ul>
   <div style="text-align: center">
     Pagination is not yet implemented
   </div>
 <% else %>
   There are no datasets matching your search<br/>
-  Would you like to <a href="mailto:wil@graphbug.com">request it?</a>
+  Would you like to <%= mail_to "wil@graphbug.com", "request it?" %>
 
   <!-- this list is a hack that hardcodes possible datasets -->
   <h4>Otherwise, explore the following searches</h4>
   <div class="container">
     <ul>
       <% %w(population beverage death production act_score beer).each do |query| %>
-      <li><a href="<% url graphs.views.search %>?query=population" 
-             data-remote="true" data-update="search_results" 
-             onclick="$('input.search').val('population')">
-             US population
-           </a></li>
+      <li><%= link_to query, viz_index_path, "query" => "population", 
+             "data-remote" => "true", "data-update" => "search_results", 
+             "onclick" => "$('input.search').val('population')" %></li>
       <% end %>
     </ul>
   </div>
-<% endif %>
+<% end %>

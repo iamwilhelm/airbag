@@ -1,10 +1,9 @@
 <div class="container clear">
   <div class="one_third">
     <div id="search_controls">
-      <form action="{% url graphs.views.search %}" method="GET" 
-            data-remote="true" data-update="search_results">
-        <input type="text" class="search" id="query" name="query" style="width: 90%" />
-      </form>
+      <% form_tag(viz_index_path, :method => :get, :"data-remote" => "true", :"data-update" => "search_results") do -%>
+        <%= text_field_tag :query, nil, :class => "search", :style => "width: 90%" -%>
+      <% end -%>
     </div>
 
     <div id="search_results">
@@ -18,6 +17,15 @@
         <%= render :partial => "visualization" %>
       <% end %>
     </div>
+  </div>
+</div>
+
+<div style="clear: both">
+  <%= link_to "Debug info", "", :"data-remote" => false, :"data-update" => "debug" -%>
+  <div id="debug" class="hidden">
+    <%= @dimension_key %>
+    <%= debug @metadata %>
+    <%= debug @datapack %>
   </div>
 </div>
 
