@@ -7,3 +7,6 @@
 [submodule "lib/underscore"]
 	path = lib/underscore
 	url = git@github.com:iamwilhelm/underscore.git
+[submodule "lib/protovis"]
+	path = lib/protovis
+	url = git@github.com:iamwilhelm/protovis.git
