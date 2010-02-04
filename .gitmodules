@@ -4,3 +4,6 @@
 [submodule "lib/french_maid"]
 	path = lib/french_maid
 	url = git@github.com:iamwilhelm/french_maid.git
+[submodule "lib/underscore"]
+	path = lib/underscore
+	url = git@github.com:iamwilhelm/underscore.git
