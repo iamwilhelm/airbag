@@ -180,11 +180,11 @@ var Tuftee =
         
         debugging: function() {
             console.log("xAxis");
-            console.log(this.xAxis.range())
-            console.log(this.xAxis.range().band)
+            console.log(this.xAxis.range());
+            console.log(this.xAxis.range().band);
             
             console.log("yAxis");
-            console.log(this.yAxis.range())
+            console.log(this.yAxis.range());
             
             console.log("dataMatrix's matrix");
             console.log(this.dataMatrix.matrix());

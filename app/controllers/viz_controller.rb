@@ -24,6 +24,7 @@ class VizController < ApplicationController
     @datapack = @tyra.get_data(@dimension_key)
     
     # combine metadata's ordinals into the datapack because we need it
+    # TODO this merge belongs in tyra
     @datapack.merge!({ "ordinals" => @metadata['dims'].keys })
     
     @ordinal_pack = extract_ordinal_pack(@datapack)
