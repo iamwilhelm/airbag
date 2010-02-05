@@ -1,11 +1,12 @@
 module VizHelper
 
   def humanized_dimension(dimension)
-    datasource_name, dimension_arr = dimension['dim'].split('\|+')
-    key_parts = if dimension_arr.nil?
+    dims = dimension['dim'].split(/\|+/)
+    datasource_name = dims.shift
+    key_parts = if dims.empty?
                   "totals"
                 else
-                  dimension_arr.join(" by ")
+                  dims.join(" by ")
                 end
     return "#{datasource_name} #{key_parts}"
   end
