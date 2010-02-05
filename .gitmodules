@@ -10,3 +10,6 @@
 [submodule "lib/protovis"]
 	path = lib/protovis
 	url = git@github.com:iamwilhelm/protovis.git
+[submodule "lib/qunit"]
+	path = lib/qunit
+	url = git://github.com/jquery/qunit.git
