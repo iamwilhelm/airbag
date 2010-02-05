@@ -20,7 +20,7 @@
     
     <div>
       <a href="" data-remote="false" data-update="<%= htmlized_dimension(@dimension) %>_description">
-        <%= truncate(@dimension['description'], 30) %>
+        <%= truncate(@dimension['description'], :length => 30) %>
       </a>
       <p id="<%= htmlized_dimension(@dimension) %>_description" class="hidden">
         <%= @dimension['description'] %>
