@@ -6,7 +6,7 @@ Would you like to <%= mail_to "wil@graphbug.com", "request it?" %>
 <div class="container">
   <ul>
     <% %w(population beverage death production act_score beer).each do |query| %>
-    <li><%= link_to query, search_viz_path(:q => "population"), 
+    <li><%= link_to query, search_viz_path(:q => query), 
                     :"data-remote" => "true", :"data-update" => "search_results", 
                     "onclick" => "$('input.search').val('" + query + "')" %></li>
     <% end %>
