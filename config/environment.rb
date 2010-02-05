@@ -22,7 +22,9 @@ Rails::Initializer.run do |config|
 
   RUBYFORGE = "http://gems.rubyforge.org"
   GITHUB = "http://gems.github.com"
-  
+
+  # ruby debugger (not needed for production)
+  config.gem "ruby-debug", :version => "0.10.3", :source => RUBYFORGE
   # postgresql interface
   config.gem "pg", :version => "0.8", :source => RUBYFORGE
   # the redis interface
