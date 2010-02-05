@@ -1,4 +1,4 @@
-<% if @dimensions %>
+<% unless @dimensions.empty? %>
   <ul class="results">
     <% @dimensions.each do |@dimension| %>
       <%= render :partial => "dimension" %>

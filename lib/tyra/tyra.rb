@@ -46,7 +46,7 @@ class Tyra
         "url" => sourceval["url"],
         "source_name" => sourceval["source"],
         "publish_date" => sourceval["publishDate"] }
-    end
+    end.compact
   end
 
   # get the data for a dimension
@@ -142,7 +142,7 @@ end
 if __FILE__ == $0
   tyra = Tyra.new(0)
 
-  p tyra.lookup("price_of_beverage")
+  p tyra.lookup("beer")
   p "---------"
   p tyra.get_metadata("price_of_beverage")
   p "---------"
