@@ -37,7 +37,7 @@
     changeOrdinal = function(ordinalKey, cardinalKeys) {
         tuft.clear();
         _.each(cardinalKeys, function(cardinalKey) {
-          $.get("/graphs/data", { dimension: cardinalKey, xaxis: ordinalKey },
+          $.get("/viz", { id: cardinalKey, xaxis: ordinalKey },
                 function(js_dp) {
                    tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
                        .addLinkKeys(js_dp.ordinals, js_dp.dimension)
