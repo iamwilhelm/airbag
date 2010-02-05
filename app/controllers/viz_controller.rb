@@ -2,27 +2,37 @@ require 'tyra/tyra'
 
 class VizController < ApplicationController
   layout "visualization"
+  helper :viz
   
   before_filter :connect_tyra
   
   def index
-    @dimension_key = params[:dimension] || "price_of_beverage"
+    show
+  end
+
+  # returns results of search.
+  # TODO We don't overload index because index and search need two
+  # different templates for html.
+  def search
+    @dimensions = @tyra.lookup(params[:q])
+    render :layout => false
+  end
+
+  def show
+    @dimension_key = params[:id] || "price_of_beverage"
     @metadata = @tyra.get_metadata(to_dataset_name(@dimension_key))
     @datapack = @tyra.get_data(@dimension_key)
     
     # combine metadata's ordinals into the datapack because we need it
     @datapack.merge!({ "ordinals" => @metadata['dims'].keys })
-
+    
     @ordinal_pack = extract_ordinal_pack(@datapack)
     @cardinal_pack = extract_cardinal_pack(@datapack)
 
     respond_to do |wants|
-      wants.html {}
+      wants.html { render :action => "show" }
+      wants.json { render :json => @datapack.to_json }
     end
-  end
-
-  def show
-    render :json => { "hello" => params[:id] }
   end
 
   private

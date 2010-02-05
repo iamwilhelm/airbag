@@ -1,0 +1,14 @@
+There are no datasets matching your search<br/>
+Would you like to <%= mail_to "wil@graphbug.com", "request it?" %>
+
+<!-- this list is a hack that hardcodes possible datasets -->
+<h4>Otherwise, explore the following searches</h4>
+<div class="container">
+  <ul>
+    <% %w(population beverage death production act_score beer).each do |query| %>
+    <li><%= link_to query, search_viz_path(:q => "population"), 
+                    :"data-remote" => "true", :"data-update" => "search_results", 
+                    "onclick" => "$('input.search').val('" + query + "')" %></li>
+    <% end %>
+  </ul>
+</div>

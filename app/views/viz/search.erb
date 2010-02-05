@@ -1,0 +1,12 @@
+<% if @dimensions %>
+  <ul class="results">
+    <% @dimensions.each do |@dimension| %>
+      <%= render :partial => "dimension" %>
+    <% end %>
+  </ul>
+  <div style="text-align: center">
+    Pagination is not yet implemented
+  </div>
+<% else %>
+  <%= render :partial => "suggestions" %>
+<% end %>

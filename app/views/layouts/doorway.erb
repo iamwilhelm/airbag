@@ -59,8 +59,12 @@
         </div>
 
         <div id="search" class="container hidden">
-          <form class="half" action="<!-- url graphs.views.search -->" method="get">
-            <input type="text" class="search" id="query" name="query" style="width: 100%" />
+          <% form_tag(search_viz_path, :method => :get) do -%>
+            <%= text_field_tag :q, nil, :class => "search", :style => "width: 90%" -%>
+          <% end -%>
+
+          <form class="half" action="" method="get">
+            <input type="text" class="search" id="q" name="q" style="width: 100%" />
           </form>
           <span class="clear">&nbsp;</span>
         </div>

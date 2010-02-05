@@ -1,13 +1,13 @@
 <div class="container clear">
   <div class="one_third">
     <div id="search_controls">
-      <% form_tag(viz_index_path, :method => :get, :"data-remote" => "true", :"data-update" => "search_results") do -%>
-        <%= text_field_tag :query, nil, :class => "search", :style => "width: 90%" -%>
+      <% form_tag(search_viz_path, :method => :get, :"data-remote" => "true", :"data-update" => "search_results") do -%>
+        <%= text_field_tag :q, nil, :class => "search", :style => "width: 90%" -%>
       <% end -%>
     </div>
 
     <div id="search_results">
-      <%= render :partial => "search" %>
+      <%= render :partial => "suggestions" %>
     </div>
   </div>
 
