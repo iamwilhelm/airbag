@@ -256,7 +256,7 @@ var Tuftee =
                     .textBaseline("center");
                 this.vis.bottom(this.axisHeight);
             }
-        },
+        }
         
     };
     
