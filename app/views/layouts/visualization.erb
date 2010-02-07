@@ -19,6 +19,9 @@
     <%= javascript_include_tag "tuftee.js" %>
     <%= javascript_include_tag "application.js" %>
 
+    <% if RAILS_ENV == "development" and Graphbug::FIREBUG %>
+      <%= javascript_include_tag "http://getfirebug.com/releases/lite/1.2/firebug-lite" %>
+    <% end %>
     <%= yield :include %>
   </head>
   <body>
