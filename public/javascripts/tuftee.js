@@ -7,16 +7,16 @@ var maybe_t = function(compare_func, default_value) {
         return ( compare_func(cond_var) ) ? default_value : value_func();
     };
 };
-    maybe_t.zero = maybe_t(function(x) { return (x === 0) }, 0);
-    maybe_t.inf = maybe_t(function(x) { return (x == -Infinity || x == Infinity) }, 100);
+maybe_t.zero = maybe_t(function(x) { return (x === 0); }, 0);
+maybe_t.inf = maybe_t(function(x) { return (x == -Infinity || x == Infinity); }, 100);
     
 // transmorgify isn't being used as well as zeroify.  it's a generalization of nullify
 var transify_t = function(default_value) {
     return function (test_value) {
         return function(x) {
             return ( x === test_value ) ? default_value : x;
-        }
-    }
+        };
+    };
 };
     transify_t.zeroify = transify_t(0)(0);
     transify_t.nanify = transify_t("nan")(null);
@@ -25,7 +25,7 @@ var transify_t = function(default_value) {
 var nullify_t = function(test_value) {
     return function(x) {
         return ( x === test_value ) ? null : x;
-    }
+    };
 };
     nullify_t.nan = nullify_t("nan");
     nullify_t.none = nullify_t("none");
@@ -42,9 +42,9 @@ var Tuftee =
             if ( (index % number) === 0 ) {
                 return block_func.call(binding || this, index);
             } else {
-                return default_value
+                return default_value;
             }
-        }
+        };
     };
     var every_five = every_t(5, "");
     
@@ -303,17 +303,19 @@ var Tuftee =
         this.update = function(axis, dataMatrix) {
             if ( axis == "ordinal" ) {
                 $("ul#ordinal").html("");
-                for (var i in dataMatrix.ordinalLinkKeys()) {
-                    var ordinalLinkKey = dataMatrix.ordinalLinkKeys()[i];
-                    var cardinalLinkKeys = dataMatrix.cardinalLinkKeysOf(ordinalLinkKey);
-                    $("ul#" + ordinal_id).append(this.ordinalView(ordinalLinkKey, cardinalLinkKeys));
-                }
+                var ordinalLinkKeys = dataMatrix.ordinalLinkKeys();
+                _.each(ordinalLinkKeys, function(ordinalLinkKey) {
+                           var cardinalLinkKeys = dataMatrix.cardinalLinkKeysOf(ordinalLinkKey);
+                           var view = this.ordinalView(ordinalLinkKey, cardinalLinkKeys);
+                           $("ul#" + ordinal_id).append(view);
+                       }, this);
             } else {
                 $("ul#cardinal").html("");
-                for (var i in dataMatrix.cardinalKeys()) {
-                    var key = dataMatrix.cardinalKeys()[i];
-                    $("ul#" + cardinal_id).append(this.cardinalView(key));
-                }
+                var cardinalLinkKeys = dataMatrix.cardinalKeys();
+                _.each(cardinalLinkKeys, function(cardinalLinkKey) {
+                           var view = this.cardinalView(cardinalLinkKey);
+                           $("ul#" + cardinal_id).append(view);
+                       }, this);
             }
             return true;
         };
