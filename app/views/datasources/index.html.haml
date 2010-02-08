@@ -1,0 +1,32 @@
+.container
+  %h2 Importer
+  %div
+    - form_for @datasource do |f|
+      = f.label :url, "What URI would you like to import?"
+      <br/>
+      = f.text_field :url
+      = f.submit "Import"
+
+  .h2 Data Sources
+  %div
+    %table#datasources
+      %tr
+        %th Title
+        %th Type
+        %th Tables
+        %th Action
+      - if @datasources
+        - @datasources.each do |ds|
+          %tr
+            %td.name
+              = link_to ds.title, datasource_path(ds)
+            %td
+              = ds.type
+            %td.num
+              = "##"
+            %td
+              = button_to "Delete", datasource_path(ds), :method => :delete
+      - else
+        %tr
+          %td There are currently no datasources
+

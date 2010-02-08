@@ -1,0 +1,16 @@
+.frame
+  .header
+    .container{ :style => "float: left" }
+      %h1 Graphbug
+    .container.nav
+      logout
+  
+  = render :partial => "layouts/app_notification"
+  
+  .section#content
+    = yield
+
+  .footer
+    .container
+      Graphbug (c) 2009, 2010
+      = render :partial => "layouts/analytics"
