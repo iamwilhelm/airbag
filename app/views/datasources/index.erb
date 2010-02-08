@@ -30,7 +30,7 @@
             <%= "##" %>
           </td>
           <td>
-            <%= button_to "Delete", datasource_path(ds) -%>
+            <%= button_to "Delete", datasource_path(ds), :method => :delete -%>
           </td>
         </tr>
       <% end.empty? %>

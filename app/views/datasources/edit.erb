@@ -1,7 +1,7 @@
 <h2>Edit Datasource</h2>
 <% form_for(:datasource, @datasource, 
             :url => datasource_path(@datasource), 
-            :html => { :method => "put" }) do |f| %>
+            :html => { :method => :put }) do |f| %>
   <div>
     <%= f.label :title -%><br/>
     <%= f.text_field :title -%>

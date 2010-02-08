@@ -40,27 +40,14 @@ class DatasourcesController < ApplicationController
   def update
     @datasource = Datasource.find(params[:id])
     @datasource.update_attributes!(params[:datasource])
-
     redirect_to datasource_path(:id => @datasource)
   end
 
-  # # # shows a data source of specific type
-  # # #--
-  # # # we put it down here below /datasources/:id/edit, so that "edit" doesn't get 
-  # # # overshadowed by this route
-  # # get '/datasources/:id/:type' do
-  # #   @datasource = Source.const_get(Source::Datasource.class_name_of(params["type"])).
-  # #     find(params["id"], :include => ["imported_tables"])
-  # #   @doc = @datasource.document
-    
-  # #   erb :"/datasources/show"
-  # # end
-
-  # # deletes a data source
-  # def destroy
-  #   @datasource = Source::Datasource.find(params["id"])
-  #   @datasource.destroy
-  #   redirect back
-  # end
+  # deletes a data source
+  def destroy
+    @datasource = Datasource.find(params[:id])
+    @datasource.destroy
+    redirect_to datasources_path
+  end
 
 end

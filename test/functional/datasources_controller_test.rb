@@ -41,5 +41,12 @@ class DatasourcesControllerTest < ActionController::TestCase
       assert_contains(:datasource, @attributes)
     end
   end
+
+  test "can destroy a specific datasource" do
+    @datasource = @datasources.first
+    assert_destroyed(:datasource) do
+      delete :destroy, :id => @datasource
+    end
+  end
   
 end
