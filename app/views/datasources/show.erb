@@ -3,7 +3,7 @@
   <%= render :partial => "source" %>
 
   <div>
-    <a href="/">Back to Dashboard</a>
+    <%= link_to "Back to Dashboard", datasources_path %>
   </div>
   
   <div>
@@ -13,17 +13,15 @@
 
     <div id="table_info" class="half">
       <ul id="table_list">
-        # <% # if @datasource.imported_tables.each do |tbl| %>
-        #   <li id="table_<%# tbl.id %>_info">
-        #     <!-- This should be a partial -->
-        #     <%# tbl.is_numeric %>::<%# tbl.table_heading %> (<%# tbl.units %>) |
-        #     <a href="/datasources/<%# @datasource.id %>/imported_tables/<%# tbl.id %>/edit"
-        #        data-remote="true"
-        #        data-update="table_<%= tbl.id %>_info">Edit</a>
-        #   </li>
-        # <%# end.empty? %>
-        #   <li>There are currently no tables</li>
-        # <%# end %>
+        <!-- if @datasource.imported_tables.each do |tbl| -->
+          <li id="table_<%# tbl.id %>_info">
+            <!-- This should be a partial -->
+            <!-- tbl.is_numeric -->::<!-- tbl.table_heading --> (<!-- tbl.units -->) |
+            <!-- edit table -->
+          </li>
+        <!-- end.empty? -->
+          <li>There are currently no tables</li>
+        <!-- end -->
       </ul>
       <div id="table_new">
       </div>
