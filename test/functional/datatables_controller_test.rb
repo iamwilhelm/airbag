@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'blueprints'
 
 class DatatablesControllerTest < ActionController::TestCase
 
