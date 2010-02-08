@@ -121,7 +121,8 @@ class Tyra
       "xaxislabels" => xaxislabels,
       "data" => data,
       "units" => units,
-      "source" => source }
+      "source" => source,
+      "ordinals" => dims }
   end
 
   # gets the metadata for a dataset

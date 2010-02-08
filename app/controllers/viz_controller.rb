@@ -20,15 +20,13 @@ class VizController < ApplicationController
 
   def show
     @dimension_key = params[:id] || "price_of_beverage"
-    @metadata = @tyra.get_metadata(to_dataset_name(@dimension_key))
     @datapack = @tyra.get_data(@dimension_key)
-    
-    # combine metadata's ordinals into the datapack because we need it
-    # TODO this merge belongs in tyra
-    @datapack.merge!({ "ordinals" => @metadata['dims'].keys })
     
     @ordinal_pack = extract_ordinal_pack(@datapack)
     @cardinal_pack = extract_cardinal_pack(@datapack)
+    
+    # temp: only used for debugging
+    @metadata = @tyra.get_metadata(to_dataset_name(@dimension_key))
 
     respond_to do |wants|
       wants.html { render :action => "show" }
