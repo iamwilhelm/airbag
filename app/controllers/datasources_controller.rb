@@ -30,19 +30,19 @@ class DatasourcesController < ApplicationController
   end
 
 
-  # # editing data source ajax
-  # def edit
-  #   @datasource = Source::Datasource.find(params["id"])
-  #   erb :"/datasources/edit", :layout => false
-  # end
+  # editing data source ajax
+  def edit
+    @datasource = Datasource.find(params[:id])
+    render :layout => false
+  end
 
-  # # updating data source ajax
-  # def update
-  #   @datasource = Source::Datasource.find(params["id"])
-  #   @datasource.update_attributes!(params["source"])
+  # updating data source ajax
+  def update
+    @datasource = Datasource.find(params[:id])
+    @datasource.update_attributes!(params[:datasource])
 
-  #   redirect "/datasources/#{@datasource.id}/#{@datasource.url_type}"
-  # end
+    redirect_to datasource_path(:id => @datasource)
+  end
 
   # # # shows a data source of specific type
   # # #--

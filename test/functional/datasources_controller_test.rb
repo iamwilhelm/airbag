@@ -25,4 +25,21 @@ class DatasourcesControllerTest < ActionController::TestCase
     get :show, :id => @datasource
     assert_show_page("show")
   end
+
+  test "can edit specific datasource" do
+    @datasource = @datasources.first
+    xhr :get, :edit, :id => @datasource
+    assert_show_page("edit")
+  end
+
+  test "can update specific datasource" do
+    @url = "http://census.gov"
+    @datasource = @datasources.first
+    assert_updated(:datasource) do
+      @attributes = { :url => @url }
+      put :update, :id => @datasource, :datasource => @attributes
+      assert_contains(:datasource, @attributes)
+    end
+  end
+  
 end
