@@ -29,7 +29,6 @@ class DatasourcesController < ApplicationController
     @datasource = Datasource.find(params[:id])
   end
 
-
   # editing data source ajax
   def edit
     @datasource = Datasource.find(params[:id])
