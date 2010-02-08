@@ -1,33 +1,33 @@
-class DatasourceController < ApplicationController
+class DatasourcesController < ApplicationController
   layout "importer"
   
   # Can make new datasource and lists data sources in the db
   def index
+    @datasource = Datasource.new
     @datasources = Datasource.all
   end
-
-  # # shows a data source
-  # def show
-  #   @datasource = Source::Datasource.find(params["id"], :include => ["imported_tables"])
-  #   @doc = @datasource.document
-
-  #   erb :"/datasources/show"
-  # end
 
   # # creates a data source
   # def create
   #   # TODO this can be refactored into the source tracker
-  #   @datasource = Source::Datasource.find_by_url(params["source"]["url"])
+  #   @datasource = Datasource.find_by_url(params["source"]["url"])
   #   if @datasource.nil?
   #     response = open(params["source"]["url"])
   #     @datasource = returning(Source::Datasource.new) do |ds|
   #       ds.url = params["source"]["url"]
-  #       ds.content_type = response.content_type
+  #       ds.type = response.content_type
   #     end
   #     @datasource.save!
   #   end
-  #   redirect "/datasources/#{@datasource.id}/#{@datasource.url_type}"
+    
+  #   redirect_to datasource_path(:id => @datasource)
   # end
+
+  # # shows a data source
+  # def show
+  #   @datasource = Source::Datasource.find(params["id"])
+  # end
+
 
   # # editing data source ajax
   # def edit
