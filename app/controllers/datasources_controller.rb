@@ -33,7 +33,9 @@ class DatasourcesController < ApplicationController
   # editing data source ajax
   def edit
     @datasource = Datasource.find(params[:id])
-    render :layout => false
+    respond_to do |wants|
+      wants.html { render :layout => false }
+    end
   end
 
   # updating data source ajax
