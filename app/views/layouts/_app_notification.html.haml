@@ -1,0 +1,10 @@
+.section#notifications
+  
+  - if flash[:notice]
+    %div.notice.balloon
+      %span.container= flash[:notice]
+
+  - if flash[:error]
+    %div.error.balloon
+      %span.container= flash[:error]
+
