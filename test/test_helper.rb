@@ -35,4 +35,12 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  private
+
+  def assert_show_page(page_name)
+    assert_response :success
+    assert_template page_name.to_s
+  end  
+
 end
+

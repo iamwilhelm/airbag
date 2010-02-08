@@ -36,11 +36,4 @@ class FunnelcakeControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
   
-  private
-
-  def assert_show_page(page_name)
-    assert_response :success
-    assert_template page_name.to_s
-  end
-  
 end

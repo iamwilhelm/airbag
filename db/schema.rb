@@ -9,6 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20100207234904) do
+
+  create_table "datasources", :force => true do |t|
+    t.string   "title",                           :default => "Untitled Datasource"
+    t.string   "url",             :limit => 2048,                                    :null => false
+    t.string   "type",                            :default => "text_html",           :null => false
+    t.datetime "last_crawled_at"
+    t.datetime "last_changed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
