@@ -7,10 +7,9 @@
   %div
     #remote_page.half
       = "datasource.display"
-
+    
     #table_info.half
-      %ul#table_list
-        %li some tables
+      = render :partial => "datatables/index"
 
       #table_new
 

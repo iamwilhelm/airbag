@@ -1,0 +1,3 @@
+class DatatablesController < ApplicationController
+
+end
