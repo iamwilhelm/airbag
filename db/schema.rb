@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100207234904) do
+ActiveRecord::Schema.define(:version => 20100208221716) do
 
   create_table "datasources", :force => true do |t|
     t.string   "title",                           :default => "Untitled Datasource"
@@ -17,6 +17,32 @@ ActiveRecord::Schema.define(:version => 20100207234904) do
     t.string   "type",                            :default => "TextHtml",            :null => false
     t.datetime "last_crawled_at"
     t.datetime "last_changed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "datatables", :force => true do |t|
+    t.integer  "datasource_id",                                      :null => false
+    t.string   "descr"
+    t.text     "notes"
+    t.string   "table_heading",      :limit => 100,                  :null => false
+    t.string   "col_heading",        :limit => 100,                  :null => false
+    t.string   "col_labels_one",     :limit => 100,                  :null => false
+    t.string   "col_labels_two",     :limit => 100,                  :null => false
+    t.string   "col_labels_content",                                 :null => false
+    t.string   "row_heading",        :limit => 100,                  :null => false
+    t.string   "row_labels_one",     :limit => 100,                  :null => false
+    t.string   "row_labels_two",     :limit => 100,                  :null => false
+    t.string   "row_labels_content",                                 :null => false
+    t.string   "data_one",           :limit => 100,                  :null => false
+    t.string   "data_two",           :limit => 100,                  :null => false
+    t.string   "other_dims"
+    t.string   "default_dim",        :limit => 100, :default => "",  :null => false
+    t.string   "is_numeric",         :limit => 1,   :default => "1", :null => false
+    t.string   "units",                                              :null => false
+    t.string   "multiplier",                        :default => "1"
+    t.string   "converter"
+    t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

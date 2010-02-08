@@ -4,6 +4,8 @@ class Datasource < ActiveRecord::Base
   validates_presence_of :url, :message => "can't be blank"
   validates_presence_of :type, :message => "can't be blank"
 
+  has_many :datatables
+  
   class << self
     # converts a content type to name of class
     def class_name_of(content_type_str)
