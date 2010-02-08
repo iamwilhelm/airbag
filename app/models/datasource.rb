@@ -1,21 +1,28 @@
 class Datasource < ActiveRecord::Base
+  include Subclass
+
   validates_presence_of :url, :message => "can't be blank"
   validates_presence_of :type, :message => "can't be blank"
 
   class << self
     # converts a content type to name of class
     def class_name_of(content_type_str)
-      table_name_of(content_type_str).camelize
+      table_name_of(content_type_str).classify
     end
     
     # converts a content_type from response to name of table
     def table_name_of(content_type_str)
-      content_type_str.gsub("/", "_")
+      content_type_str.gsub("/", "_").pluralize
     end
 
     # The content_type for a particular class.
     def content_type
-      self.name[/::(.*)$/, 1].underscore.gsub(/_/, '/')
+      name.tableize.singularize.gsub(/_/, "/")
+    end
+
+    # returns a list of type options for options_for_select
+    def type_options
+      subclasses.map(&:name).zip(subclasses.map { |sc| sc.content_type })
     end
   end
 
@@ -33,6 +40,8 @@ class Datasource < ActiveRecord::Base
   def url_type
     attributes["type"].gsub("/", "_")
   end
-
-
 end
+
+# register each subclass by running it, so they show up in
+# Datasource::subclasses call, since Rails lazy loads
+TextHtml
