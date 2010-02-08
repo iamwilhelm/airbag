@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20100207234904) do
   create_table "datasources", :force => true do |t|
     t.string   "title",                           :default => "Untitled Datasource"
     t.string   "url",             :limit => 2048,                                    :null => false
-    t.string   "type",                            :default => "text_html",           :null => false
+    t.string   "type",                            :default => "TextHtml",            :null => false
     t.datetime "last_crawled_at"
     t.datetime "last_changed_at"
     t.datetime "created_at"

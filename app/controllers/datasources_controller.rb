@@ -11,11 +11,11 @@ class DatasourcesController < ApplicationController
 
   # creates a data source
   def create
-    @datasource = Datasource.find_by_url(params["datasource"]["url"])
+    @datasource = Datasource.find_by_url(params[:datasource][:url])
     if @datasource.nil?
-      response = open(params["datasource"]["url"])
+      response = open(params[:datasource][:url])
       @datasource = returning(Datasource.new) do |ds|
-        ds.url = params["datasource"]["url"]
+        ds.url = params[:datasource][:url]
         ds.type = response.content_type
       end
       @datasource.save!
@@ -24,10 +24,10 @@ class DatasourcesController < ApplicationController
     redirect_to datasource_path(:id => @datasource)
   end
 
-  # # shows a data source
-  # def show
-  #   @datasource = Source::Datasource.find(params["id"])
-  # end
+  # shows a data source
+  def show
+    @datasource = Datasource.find(params[:id])
+  end
 
 
   # # editing data source ajax

@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DatasourcesControllerTest < ActionController::TestCase
   def setup
-    @datasources = [Datasource.new(:title => "earthquakes", :url => "http://usgs.gov"), 
-                    Datasource.new(:title => "population", :url => "http://census.gov")]
+    @datasources = [Datasource.create(:title => "earthquakes", :url => "http://usgs.gov"), 
+                    Datasource.create(:title => "population", :url => "http://census.gov")]
   end
 
   test "can show index" do
@@ -18,5 +18,11 @@ class DatasourcesControllerTest < ActionController::TestCase
       post :create, :datasource => @attributes
       assert_contains(:datasource, @attributes)
     end
+  end
+
+  test "can show specific datasource" do
+    @datasource = @datasources.first
+    get :show, :id => @datasource
+    assert_show_page("show")
   end
 end

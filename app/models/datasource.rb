@@ -5,7 +5,7 @@ class Datasource < ActiveRecord::Base
   class << self
     # converts a content type to name of class
     def class_name_of(content_type_str)
-      table_name_of.camelize
+      table_name_of(content_type_str).camelize
     end
     
     # converts a content_type from response to name of table
@@ -14,7 +14,6 @@ class Datasource < ActiveRecord::Base
     end
 
     # The content_type for a particular class.
-    # see Source::class_name_of
     def content_type
       self.name[/::(.*)$/, 1].underscore.gsub(/_/, '/')
     end
@@ -27,7 +26,7 @@ class Datasource < ActiveRecord::Base
   end
 
   def type=(type_str)
-    attributes["type"] = self.class.table_name_of(type_str)
+    attributes["type"] = Datasource::class_name_of(type_str)
   end
 
   # helper function to make it easy to construct urls based on datasource type

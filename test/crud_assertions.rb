@@ -9,7 +9,7 @@ module CrudAssertions
     assert_difference("#{model_name.to_s.classify}.count") do
       yield
       assert assigns(model_name)
-      assert_redirected_to datasource_path(:id => assigns(model_name))
+      assert_redirected_to datasource_path(assigns(model_name))
     end
   end
 

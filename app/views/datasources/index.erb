@@ -1,33 +1,41 @@
 <div class="container">
   <h2>Importer</h2>
-  <p>
+  <div>
     <% form_for @datasource do |f| -%>
       <%= f.label :url, "What URI would you like to import?" -%><br/>
       <%= f.text_field :url -%>
       <%= f.submit "Import" -%>
     <% end -%>
-  </p>
+  </div>
 
   <h2>Data Sources</h2>
-  <p>
+  <div>
     <table id="datasources">
-      <tr><th>Title</th><th>Type</th><th>Tables</th><th>Action</th></tr></b>
-      <% if @datasources.each do |s| %>
-        <tr><td class="name">
-            <a href="/datasources/<%= s.id %>/<%= s.url_type %>"><%= s.title %></a> 
-          </td><td>
-            <%= s.content_type %>
-          </td><td class="num">
-	    <%= s.imported_tables.count %>
-          </td><td>
-            <form method="post" action="/datasources/<%= s.id %>">
-              <input type="hidden"name="_method" value="delete" />
-              <div><button type="submit">Delete</button></div>
-            </form>
-        </td></tr>
+      <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Tables</th>
+      <th>Action</th>
+      </tr>
+      <% if @datasources %>
+        <% @datasources.each do |ds| %>
+        <tr>
+          <td class="name">
+            <%= link_to ds.title, datasource_path(ds) -%>
+          </td>
+          <td>
+            <%= ds.type -%>
+          </td>
+          <td class="num">
+            <%= "##" %>
+          </td>
+          <td>
+            <%= button_to "Delete", datasource_path(ds) -%>
+          </td>
+        </tr>
       <% end.empty? %>
         <tr><td>There are currently no data sources in the source tracker.</td></tr>
       <% end %>
     </table>
-  </p>
+  </div>
 </div>
