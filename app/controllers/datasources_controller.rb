@@ -11,12 +11,11 @@ class DatasourcesController < ApplicationController
 
   # creates a data source
   def create
-    # TODO this can be refactored into the source tracker
-    @datasource = Datasource.find_by_url(params["source"]["url"])
+    @datasource = Datasource.find_by_url(params["datasource"]["url"])
     if @datasource.nil?
-      response = open(params["source"]["url"])
+      response = open(params["datasource"]["url"])
       @datasource = returning(Datasource.new) do |ds|
-        ds.url = params["source"]["url"]
+        ds.url = params["datasource"]["url"]
         ds.type = response.content_type
       end
       @datasource.save!

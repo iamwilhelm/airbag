@@ -15,7 +15,7 @@ class DatasourcesControllerTest < ActionController::TestCase
     @url = "http://www.worldatlas.com/aatlas/populations/usapopa.htm"
     assert_created(:datasource) do
       @attributes = { :url => @url }
-      post :create, :source => @attributes
+      post :create, :datasource => @attributes
       assert_contains(:datasource, @attributes)
     end
   end
