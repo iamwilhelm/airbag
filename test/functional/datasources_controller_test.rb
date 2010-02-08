@@ -11,9 +11,12 @@ class DatasourcesControllerTest < ActionController::TestCase
     assert_show_page("index")
   end
 
-  # test "can create datasource" do
-  #   post :create, :source => { :url => "http://www.worldatlas.com/aatlas/populations/usapopa.htm" }
-  #   assert_redirect_to("show")
-  #   assert_template("show")
-  # end
+  test "can create datasource" do
+    @url = "http://www.worldatlas.com/aatlas/populations/usapopa.htm"
+    assert_created(:datasource) do
+      @attributes = { :url => @url }
+      post :create, :source => @attributes
+      assert_contains(:datasource, @attributes)
+    end
+  end
 end

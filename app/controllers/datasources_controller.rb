@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class DatasourcesController < ApplicationController
   layout "importer"
   
@@ -7,21 +9,21 @@ class DatasourcesController < ApplicationController
     @datasources = Datasource.all
   end
 
-  # # creates a data source
-  # def create
-  #   # TODO this can be refactored into the source tracker
-  #   @datasource = Datasource.find_by_url(params["source"]["url"])
-  #   if @datasource.nil?
-  #     response = open(params["source"]["url"])
-  #     @datasource = returning(Source::Datasource.new) do |ds|
-  #       ds.url = params["source"]["url"]
-  #       ds.type = response.content_type
-  #     end
-  #     @datasource.save!
-  #   end
+  # creates a data source
+  def create
+    # TODO this can be refactored into the source tracker
+    @datasource = Datasource.find_by_url(params["source"]["url"])
+    if @datasource.nil?
+      response = open(params["source"]["url"])
+      @datasource = returning(Datasource.new) do |ds|
+        ds.url = params["source"]["url"]
+        ds.type = response.content_type
+      end
+      @datasource.save!
+    end
     
-  #   redirect_to datasource_path(:id => @datasource)
-  # end
+    redirect_to datasource_path(:id => @datasource)
+  end
 
   # # shows a data source
   # def show
