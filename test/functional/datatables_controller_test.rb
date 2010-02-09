@@ -17,4 +17,10 @@ class DatatablesControllerTest < ActionController::TestCase
     assert_show_page(:new)
   end
   
+  test "can edit a datatable of datasource" do
+    @datatable = @datatables.first
+    xhr :get, :edit, :datasource_id => @texthtml_datasource, :id => @datatable
+    assert_show_page(:edit)
+  end
+  
 end

@@ -1,0 +1,4 @@
+%h3 Edit Datatable
+- form_for [:datasource, @datatable], :url => datasource_datatable_path(@datasource, @datatable), :html => { :method => :put } do |f|
+  = render :partial => "form", :locals => { :f => f }
+  = f.submit "Edit"
