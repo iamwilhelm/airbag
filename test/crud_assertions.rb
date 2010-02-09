@@ -1,6 +1,7 @@
 module CrudAssertions
   
   def assert_show_page(page_name)
+    raise Exception.new("does take block") if block_given?
     assert_response :success
     assert_template page_name.to_s
   end  

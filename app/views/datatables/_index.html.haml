@@ -3,6 +3,9 @@
   - unless @datasource.datatables.empty?
     - @datasource.datatables.each do |dt|
       %li
-        = link_to "#{dt.is_numeric}::#{dt.table_heading} (#{dt.units})", edit_datatable_path(dt)
+        = link_to "#{dt.is_numeric}::#{dt.table_heading} (#{dt.units})", edit_datasource_datatable_path(@datasource, dt)
   - else
     %li There are currently no datatables imported
+
+#table_new
+  = link_to "Add New Table", new_datasource_datatable_path(@datasource), :"data-remote" => true, :"data-update" => "table_new"

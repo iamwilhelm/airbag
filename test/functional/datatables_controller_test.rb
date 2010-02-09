@@ -12,5 +12,9 @@ class DatatablesControllerTest < ActionController::TestCase
     # this is only accessed as a partial inside of datasouces
   end
 
+  test "can new a datatable of datasource" do
+    xhr :get, :new, :datasource_id => @texthtml_datasource
+    assert_show_page(:new)
+  end
   
 end

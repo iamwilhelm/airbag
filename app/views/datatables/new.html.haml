@@ -1,0 +1,4 @@
+%h3 Add new datatable
+- form_for [:datasource, @datatable] do |f|
+  = render :partial => "form", :locals => { :f => f }
+  = f.submit "Create"
