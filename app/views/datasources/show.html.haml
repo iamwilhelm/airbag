@@ -5,9 +5,20 @@
     = link_to "Back to Datasources", datasources_path
 
   %div
-    #remote_page.half
-      = "datasource.display"
-    
     #table_info.half
       = render :partial => "datatables/index"
-      
+
+    #remote_page.half
+      %h3 HTML Tables
+      %ul{ :style => "margin-left: 10px" }
+        - @datasource.tables.each do |table|
+          %li
+            = link_to h(table.name), table.path
+            %ul{ :style => "margin-left: 10px" }
+              - @datasource.headers_of(table).each do |header|
+                %li
+                  = link_to h(formatted_html_content(header)), header.path
+                  = "[#{header.path[/\[(\d+)\]$/, 1]}]"
+                  <br/>
+                  = @datasource.columns_of(table, header).map(&:content).inspect
+            <br/>

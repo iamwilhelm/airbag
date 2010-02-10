@@ -30,9 +30,11 @@ Rails::Initializer.run do |config|
   # the redis interface
   config.gem "ezmobius-redis-rb", :lib => "redis", :version => "0.1", :source => GITHUB
   # the C variant of standard json lib
-  config.gem "json_pure", :lib => "json", :version => "1.2.0" ,:source => RUBYFORGE
+  config.gem "json_pure", :lib => "json", :version => "1.2.0" , :source => RUBYFORGE
+  # parses HTML, XML and CSS
+  config.gem "nokogiri", :version => "1.4.1", :source => RUBYFORGE
   # the layout templating and markup library for HTML and CSS
-  config.gem "haml"
+  config.gem "haml", :version => "2.2.17", :source => RUBYFORGE
 #  config.gem "compass"        # the stylesheet authoring tool
 
   # Only load the plugins named here, in the order given (default is alphabetical).
