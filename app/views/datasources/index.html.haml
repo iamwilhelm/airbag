@@ -1,11 +1,7 @@
 .container
   %h2 Importer
   %div
-    - form_for @datasource do |f|
-      = f.label :url, "What URI would you like to import?"
-      <br/>
-      = f.text_field :url
-      = f.submit "Import"
+    = render :partial => "new"
 
   .h2 Data Sources
   %div
