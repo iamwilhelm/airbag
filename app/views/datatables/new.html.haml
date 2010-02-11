@@ -9,18 +9,11 @@
 .container
   #detected_section.tabsection
     %h3 Detected HTML Tables in URL
-    %ul{ :style => "margin-left: 10px" }
-      - @datasource.tables.each do |table|
-        %li
-          = link_to "Add as datatable &rsaquo;&rsaquo; ", table.path
-          %ul{ :style => "margin-left: 10px" }
-            - @datasource.headers_of(table).each do |header|
-              %li
-                = link_to h(formatted_html_content(header)), header.path
-                = "[#{header.path[/\[(\d+)\]$/, 1]}]"
-                <br/>
-                = @datasource.columns_of(table, header).map(&:content).inspect
-          <br/>
+    - @datasource.tables.each do |table|
+      - form_for [:datasource, @datatable], :html => { :class => "headroom legroom" } do |f|
+        = render :partial => "selection_form", :locals => { :f => f, :table => table }
+        = f.submit "Add as datatable &rsaquo;&rsaquo;"
+
 
   #original_section.tabsection.hidden
     %h3 Original Remote Page

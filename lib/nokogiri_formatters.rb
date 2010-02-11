@@ -10,4 +10,10 @@ module NokogiriFormatters
   def formatted_html_content(elem)
     rm_spaces(elem.content).empty? ? "(empty)" : elem.content
   end
+
+  # convert an element's path to an id
+  def path_id(elem)
+    elem.path.gsub(/[\[\]\/]/, "_")
+  end
+  
 end
