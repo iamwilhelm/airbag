@@ -7,5 +7,4 @@
   - else
     %li There are currently no datatables imported
 
-#table_new
-  = link_to "Add New Table", new_datasource_datatable_path(@datasource), :"data-remote" => true, :"data-update" => "table_new"
+= link_to "Add New Table", new_datasource_datatable_path(@datasource)

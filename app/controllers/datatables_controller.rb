@@ -1,5 +1,6 @@
 class DatatablesController < ApplicationController
-
+  layout "importer"
+  
   def new
     @datasource = Datasource.find(params[:datasource_id])
     @datatable = @datasource.datatables.new

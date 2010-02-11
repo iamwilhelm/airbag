@@ -1,4 +1,28 @@
-%h3 Add new datatable
-- form_for [:datasource, @datatable] do |f|
-  = render :partial => "form", :locals => { :f => f }
-  = f.submit "Create"
+.container
+  %h2 Select Detected HTML Table to Import
+
+  %ul.menu.horizontal.tabbed
+    %li#detected_tab.selected= link_to_tab "Detected", "detected_tab", "detected_section"
+    %li#original_tab= link_to_tab "Original", "original_tab", "original_section"
+  %hr{ :style => "border-top: 1px solid #333; margin: 0px;" }
+
+.container
+  #detected_section.tabsection
+    %h3 Detected HTML Tables in URL
+    %ul{ :style => "margin-left: 10px" }
+      - @datasource.tables.each do |table|
+        %li
+          = link_to "Add as datatable &rsaquo;&rsaquo; ", table.path
+          %ul{ :style => "margin-left: 10px" }
+            - @datasource.headers_of(table).each do |header|
+              %li
+                = link_to h(formatted_html_content(header)), header.path
+                = "[#{header.path[/\[(\d+)\]$/, 1]}]"
+                <br/>
+                = @datasource.columns_of(table, header).map(&:content).inspect
+          <br/>
+
+  #original_section.tabsection.hidden
+    %h3 Original Remote Page
+    %iframe{ :src => @datasource.url, :width => "100%", :height => "600px", :overflow => "scroll" }
+      %h2 Your browser doesn't support iFrames
