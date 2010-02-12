@@ -2,10 +2,10 @@
   %tr 
     %th{ :style => "width: 200px" } Columns
     %th Values
-  - @datasource.headers_of(table).each do |header|
+  - @datasource.headers_of(table).each_with_index do |header, i|
     %tr.datacolumn.included
       %td
-        = check_box_tag "datacolumn_#{path_id(header)}", header.path, :checked => true
-        = label_tag "datacolumn_#{path_id(header)}", truncate(h(formatted_html_content(header)), :length => 20)
+        = check_box_tag "datatable[datacolumn_attributes][#{i}][xpath]", header.path, :checked => true
+        = label_tag "datatable[datacolumns_attributes][#{i}][xpath]", truncate(h(formatted_html_content(header)), :length => 20)
       %td
-        = @datasource.columns_of(table, header).map(&:content).inspect
+        = truncate(@datasource.columns_of(table, header).map(&:content).inspect, :length => 200)

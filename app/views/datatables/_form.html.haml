@@ -3,28 +3,6 @@
   %p
     = f.label field
     = f.text_field field
-
-%h4 Data
-- %w(col_labels row_labels).each do |field|
-  = button_to_function "Set", "setButton('#{field}')"
-  - %w(one two).each do |label_t|
-    %p
-      = f.label "#{field}_#{label_t}"
-      = f.text_field "#{field}_#{label_t}"
-
-  %p
-    = f.label "#{field}_content"
-    <br/>
-    = f.text_area "#{field}_content", :rows => 5
-
-%p
-  = button_to_function "Set", "setButton('data')"
-  = f.label "data"
-  <br/>
-  = text_area_tag "data_content", "", :rows => 5, :cols => 40
-  = f.hidden_field "data_one"
-  = f.hidden_field "data_two"
-
 %p
   = f.label "notes"
   <br/>
