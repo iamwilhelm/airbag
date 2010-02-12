@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100208221716) do
+ActiveRecord::Schema.define(:version => 20100212004211) do
 
   create_table "datasources", :force => true do |t|
     t.string   "title",                           :default => "Untitled Datasource"
@@ -22,29 +22,22 @@ ActiveRecord::Schema.define(:version => 20100208221716) do
   end
 
   create_table "datatables", :force => true do |t|
-    t.integer  "datasource_id",                                      :null => false
+    t.integer  "datasource_id",                  :null => false
     t.string   "descr"
     t.text     "notes"
-    t.string   "table_heading",      :limit => 100,                  :null => false
-    t.string   "col_heading",        :limit => 100,                  :null => false
-    t.string   "col_labels_one",     :limit => 100,                  :null => false
-    t.string   "col_labels_two",     :limit => 100,                  :null => false
-    t.string   "col_labels_content",                                 :null => false
-    t.string   "row_heading",        :limit => 100,                  :null => false
-    t.string   "row_labels_one",     :limit => 100,                  :null => false
-    t.string   "row_labels_two",     :limit => 100,                  :null => false
-    t.string   "row_labels_content",                                 :null => false
-    t.string   "data_one",           :limit => 100,                  :null => false
-    t.string   "data_two",           :limit => 100,                  :null => false
+    t.string   "table_heading"
+    t.string   "col_heading"
+    t.string   "row_heading"
     t.string   "other_dims"
-    t.string   "default_dim",        :limit => 100, :default => "",  :null => false
-    t.string   "is_numeric",         :limit => 1,   :default => "1", :null => false
-    t.string   "units",                                              :null => false
-    t.string   "multiplier",                        :default => "1"
+    t.string   "default_dim",   :default => ""
+    t.string   "is_numeric",    :default => "1"
+    t.string   "units"
+    t.string   "multiplier",    :default => "1"
     t.string   "converter"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "xpath",                          :null => false
   end
 
 end
