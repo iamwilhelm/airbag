@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-VER = "0.0.1"
+VER = "0.0.2"
 
 # bender
 # bends source data into a format the importer understands
@@ -26,24 +26,21 @@ class Bender
     end
 
     # remove comments, whitespace
-    @config.map! { |ll| ll.gsub /#.*/, "" }
-    @config = @config.select { |ll| ll.strip != "" }
+    @config = @config.map { |ll|
+      ll.gsub /#.*/, ""
+    }.select { |ll|
+      ll.strip != ""
+    }
 
     # process each command in order
-    @config.each do |command|
-      fields = command.split ' '
+    @config.each do |commandline|
+      command, *fields = commandline.split(' ')
 
-      case fields[0]
-      when "read" then readsource fields[1]
-      when "dropline" then droplines fields[1].to_i, fields[2].to_i
-      when "dropcols" then dropcol fields[1].to_i, fields[2].to_i, fields[3].to_i, fields[4].to_i
-      when "stack" then stack fields[1].to_i, fields[2].to_i, fields[3].to_i
-      when "replace" then replace fields[1], fields[2]
-      when "prefixlines" then prefixlines fields[1].to_i, fields[2].to_i, fields[3]
-      when "abbrev" then abbrev fields[1]
-      when "scale" then scale fields[1].to_i, fields[2].to_i, fields[3].to_i, fields[4].to_i, fields[5].to_i
-      when "writefile" then writefile fields[1]
-      end
+      # convert fields to numbers if they're a number
+      fields.map! { |field| field.to_i if numeric?(field) }
+
+      # dynamically call method based on command name
+      self.send("#{command}_cmd", *fields)
     end
 
     #puts "\nfile:"
@@ -52,8 +49,12 @@ class Bender
 
   private  # ---- the rest are private methods ----
 
+  def numeric?(obj)
+    true if Float(obj) rescue false
+  end
+  
   # read the data from the given source
-  def readsource(fname)
+  def read_cmd(fname)
     puts "reading " + fname
     @fname = fname
     @droppedlines = []
@@ -71,14 +72,15 @@ class Bender
   end
 
   # l1 l2 range of lines to remove (inclusive, indexed from 1)
-  def droplines(l1, l2)
+  def dropline_cmd(l1, l2)
     puts "dropping lines " + l1.to_s + " to " + l2.to_s
     (l1..l2).each { |ii| @datafile.delete_at(shiftedindex l1) }
     @droppedlines += (l1..l2).to_a
   end
 
   # drop the specified column range from the specified rows
-  def dropcol(col1, col2, l1, l2)
+  def dropcols_cmd(col1, col2, l1, l2)
+    col1, col2, l1, l2 = 
     puts "dropping cols " + col1.to_s + " to " + col2.to_s + " from lines " + l1.to_s + " to " + l2.to_s
     (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
       fields = @datafile[shiftedindex ii].split ","
@@ -97,7 +99,7 @@ class Bender
   end
 
   # replace str1 with str2 for whole datafile
-  def replace(str1, str2)
+  def replace_cmd(str1, str2)
     str1 = replaceparam str1
     str2 = replaceparam str2
     puts "replacing " + str1.to_s + " with " + str2.to_s
@@ -105,7 +107,7 @@ class Bender
   end
 
   # stack the specified rows to the right of l3
-  def stack(l1, l2, l3)
+  def stack_cmd(l1, l2, l3)
     puts "stacking " + l1.to_s + " to " + l2.to_s + " next to " + l3.to_s
     (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
       @datafile[shiftedindex l3 + ii-l1] += "," + @datafile[shiftedindex l1 + ii-l1]
@@ -114,7 +116,7 @@ class Bender
   end
 
   # prefix the specified lines with the given string and a comma
-  def prefixlines(l1, l2, str)
+  def prefixlines_cmd(l1, l2, str)
     puts "prefixing lines " + l1.to_s + " to " + l1.to_s + " with " + str
     (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
       @datafile[shiftedindex ii] = str + "," + @datafile[shiftedindex ii]
@@ -124,7 +126,7 @@ class Bender
   # scale values by given scale factor
   # datafile must be comma delimited
   # sf scale factor
-  def scale(l1, l2, c1, c2, sf)
+  def scale_cmd(l1, l2, c1, c2, sf)
     puts "scaling lines " + l1.to_s + " to " + l2.to_s + " cols " + c1.to_s + " to " + c2.to_s
     (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
       fields = @datafile[shiftedindex ii].split(",")
@@ -134,7 +136,7 @@ class Bender
   end
 
   # replace state names with abbreviations
-  def abbrev(str)
+  def abbrev_cmd(str)
     puts "replacing states with abbrev"
     stateabbrev = []
     File.open("states.txt", "r") do |fin|
@@ -148,7 +150,7 @@ class Bender
   end
 
   # write data to output file
-  def writefile(prefix)
+  def writefile_cmd(prefix)
     path, fname = File.split @fname
     ext = File.extname fname
     base = fname[0, fname.length-ext.length]
