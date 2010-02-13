@@ -11,6 +11,8 @@ VER = "0.0.2"
 # all col numbers refer to cols after col drops.
 
 class Bender
+  include StringUtils
+  
   def initialize()
     @config = nil
     @datafile = nil
@@ -25,12 +27,8 @@ class Bender
       @config = fin.readlines
     end
 
-    # remove comments, whitespace
-    @config = @config.map { |ll|
-      ll.gsub /#.*/, ""
-    }.select { |ll|
-      ll.strip != ""
-    }
+    @config = remove_comments(@config)
+    @config = remove_whitespace(@config)
 
     # process each command in order
     @config.each do |commandline|

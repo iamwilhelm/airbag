@@ -5,7 +5,13 @@ VER = "0.0.1"
 # expand an n-dimensional table into many two dimensional tables
 # given 2 independent variables, create a table for each dependent variable
 
+# TODO Suggest you name this to ExpandDimensionalTable or something
+# more enlightening.  I had no idea what a class called "BlowItUp"
+# could possibly do.
+
 class BlowItUp
+  include StringUtils
+  
   def initialize()
     @datafiles = []
     @indcols = [] # key is col name, value is list of col values
@@ -21,14 +27,15 @@ class BlowItUp
       config = fin.readlines
     end
 
-    # remove comments, whitespace
-    config.map! { |ll| ll.gsub /#.*/, "" }
-    config = config.select { |ll| ll.strip != "" }
+    config = remove_comments(config)
+    config = remote_whitespace(config)
 
     # process each line in order
     config.each do |ll|
       fields = ll.split ' '
 
+      # TODO you can use the same sort of method dispatch I used in
+      # bender using the send() method
       case fields[0]
       when "file" then @datafiles.push fields[1]
       when "ind" then @indcols.push fields[1]
