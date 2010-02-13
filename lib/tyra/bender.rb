@@ -154,7 +154,8 @@ class Bender
       end
     end
     @datafile.each do |ll|
-      stateabbrev.each { |aa| ll.sub! Regexp.new(aa[1]), aa[0] }
+      # FIXME I think you can use gsub with /#{s_name}/m here.  
+      stateabbrev.each { |s_abbr, s_name| ll.sub!(/#{s_name}/, s_abbr) }
     end 
   end
 
