@@ -52,6 +52,14 @@ class Bender
   def numeric?(obj)
     true if Float(obj) rescue false
   end
+
+  def each_line_in_range(linenum_start, linenum_end)
+    (linenum_start..linenum_end).reject do |line|
+      @droppedlines.include? line
+    end.each do |line|
+      yield line
+    end
+  end
   
   # read the data from the given source
   def read_cmd(fname)
@@ -82,10 +90,10 @@ class Bender
   def dropcols_cmd(col1, col2, l1, l2)
     col1, col2, l1, l2 = 
     puts "dropping cols " + col1.to_s + " to " + col2.to_s + " from lines " + l1.to_s + " to " + l2.to_s
-    (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
-      fields = @datafile[shiftedindex ii].split ","
-      (col1..col2).each { |cc| fields.delete_at col1 - 1 }
-      @datafile[shiftedindex ii] = fields.join ","
+    each_line_in_range(l1, l2) do |ii|
+      fields = @datafile[shiftedindex(ii)].split ","
+      (col1..col2).each { |cc| fields.delete_at(col1 - 1) }
+      @datafile[shiftedindex(ii)] = fields.join ","
     end
   end
 
@@ -109,7 +117,8 @@ class Bender
   # stack the specified rows to the right of l3
   def stack_cmd(l1, l2, l3)
     puts "stacking " + l1.to_s + " to " + l2.to_s + " next to " + l3.to_s
-    (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
+    each_line_in_range(l1, l2) do |ii|
+      # FIXME I can't tell the order of operations with shiftedindex...
       @datafile[shiftedindex l3 + ii-l1] += "," + @datafile[shiftedindex l1 + ii-l1]
     end
     droplines l1, l1 + l2 - l1
@@ -118,7 +127,7 @@ class Bender
   # prefix the specified lines with the given string and a comma
   def prefixlines_cmd(l1, l2, str)
     puts "prefixing lines " + l1.to_s + " to " + l1.to_s + " with " + str
-    (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
+    each_line_in_range(l1, l2) do |ii|
       @datafile[shiftedindex ii] = str + "," + @datafile[shiftedindex ii]
     end
   end
@@ -128,7 +137,7 @@ class Bender
   # sf scale factor
   def scale_cmd(l1, l2, c1, c2, sf)
     puts "scaling lines " + l1.to_s + " to " + l2.to_s + " cols " + c1.to_s + " to " + c2.to_s
-    (l1..l2).select { |ii| !@droppedlines.include? ii }.each do |ii|
+    each_line_in_range(l1, l2) do |ii|
       fields = @datafile[shiftedindex ii].split(",")
       fields[c1-1..c2-1] = fields[c1-1..c2-1].map{ |x| (x.to_f * sf).to_s }
       @datafile[shiftedindex ii] = fields.join(",")
