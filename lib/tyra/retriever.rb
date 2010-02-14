@@ -21,6 +21,12 @@ class Retriever
     # get list of dimensions
     dimensions = search_str.downcase.split.map do |token|
       @search_dw.keys("*#{token}*")
+    end.each do |arr|
+      # remove datasets with "value" dependent variables
+      dataset = arr.find { |ii| !ii.include? "|" }
+      if !dataset.nil? && !arr.include?("#{dataset}|value")
+        arr.delete(dataset)
+      end
     end.flatten
 
     # look up each dimension's metadata
