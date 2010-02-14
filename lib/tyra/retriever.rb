@@ -38,7 +38,7 @@ class Retriever
       end
 
       { "dim" => dim_name,
-        "description" => meta["descr"],
+        "description" => meta["description"],
         "units" => meta["units"][unitskey],
         "default" => meta["default"],
         "url" => meta["url"],
