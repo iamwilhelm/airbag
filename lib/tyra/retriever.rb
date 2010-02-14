@@ -23,8 +23,9 @@ class Retriever
       @search_dw.keys("*#{token}*")
     end.each do |arr|
       # remove datasets with "value" dependent variables
+      # assumes that "value" will always be the only dep var
       dataset = arr.find { |ii| !ii.include? "|" }
-      if !dataset.nil? && !arr.include?("#{dataset}|value")
+      if !dataset.nil? && arr.length > 1
         arr.delete(dataset)
       end
     end.flatten
