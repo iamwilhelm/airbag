@@ -25,8 +25,9 @@ class Tyra
       when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"])
       else raise "unknown command"
       end
-    rescue
-      puts "ERROR: " + $!
+    rescue => e
+      puts "ERROR: #{e.message}"
+      puts "#{e.backtrace}"
     end
   end
 end
