@@ -9,4 +9,13 @@ class Datatable < ActiveRecord::Base
       self.datacolumns.build(datacolumn_attrs)
     end
   end
+
+  def node
+    datasource.document.xpath(xpath).first
+  end
+
+  def rows
+    datacolumns.map { |dc| dc.data }.transpose
+  end
+  
 end

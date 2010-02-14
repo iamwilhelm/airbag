@@ -17,6 +17,9 @@ class TextHtml < Datasource
     response_body(true)
   end
 
+  ########## Nokogiri based table extraction helper methods ##########
+  # TODO need to refactor these methods elsewhere
+  
   def tables
     document.css('table')
   end
@@ -52,14 +55,15 @@ class TextHtml < Datasource
   def extract_column(table, col_num, row_xpath)
     col_num = col_num.to_i
     row_xpath ||= "tr"
-    if !table.xpath("#{row_xpath}[position() > 1]/th").empty?
+    if table.xpath("#{row_xpath}[position() > 1]/th").empty?
+      table.xpath("#{row_xpath}/td[#{col_num}]")
+    else
       if col_num == 1
         table.xpath("#{row_xpath}/th[1]")
       else
         table.xpath("#{row_xpath}/td[#{col_num - 1}]")
       end
-    else
-      table.xpath("#{row_xpath}/td[#{col_num}]")
     end
   end
+
 end

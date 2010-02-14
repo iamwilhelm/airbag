@@ -1,9 +1,10 @@
-%h4 Metadata
-- %w(table_heading descr col_heading row_heading other_dims default_dim published_at units multiplier is_numeric converter).each do |field|
-  %p
-    = f.label field
-    = f.text_field field
-%p
-  = f.label "notes"
-  <br/>
-  = f.text_area "notes", :rows => 5, :cols => 40
+%fieldset 
+  %legend Metadata
+  %ol
+    - %w(table_heading descr col_heading row_heading other_dims default_dim published_at units multiplier is_numeric converter).each do |field|
+      %li
+        = f.label field
+        = f.text_field field
+    %li
+      = f.label "notes"
+      = f.text_area "notes", :rows => 5, :cols => 40
