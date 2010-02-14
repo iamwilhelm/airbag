@@ -1,152 +1,96 @@
+#!/usr/bin/ruby
+
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
+require 'importer'
+require 'retriever'
+
+VER = "0.2.0"
 
 class Tyra
-  # creates the datawarehouse reference
-  def initialize(dbnum = 0, host = "localhost")
-    @search_db = Redis.new(:host => host, :db => dbnum)
-    @data_db = Redis.new(:host => host, :db => dbnum + 1)
+  def initialize(base_db)
+    @base_db = base_db
   end
 
-  # looks up the dbs
-  def lookup(search_str)
-    # get list of dimensions
-    dimensions = search_str.downcase.split.map do |token|
-      @search_db.keys("*#{token}*")
-    end.flatten
-
-    # look up each dimension's metadata
-    dimensions.map do |dim_name|
-      dataset, dim = dim_name.split("|")
-      meta = get_metadata(dataset)
-      
-      # find units.  dim is not plottable if it is the parent of a 'category'
-      # or if it is perpendicular to yaxes with different units
-      # Equivalent code in 2 lines:
-      #   unitskey = to_key(meta["units"][dim] || meta["units"]["default"] ? 'default' : nil)
-      #   next if unitskey.nil?
-      if meta['units'].has_key?(dim)
-        unitskey = to_key(dim)
-      elsif meta['units'].has_key?('default')
-        unitskey = 'default'
-      else
-        next
-      end
-
-      # temporarily only return the first source value
-      sourceval = meta['sources'].values.first
-
-      # TODO change the import script to match up the names, so we
-      # don't have to do a mapping between key names
-      { "dim" => dim_name,
-        "description" => meta["descr"],
-        "units" => meta["units"][unitskey],
-        "default" => meta["default"],
-        "url" => sourceval["url"],
-        "source_name" => sourceval["source"],
-        "publish_date" => sourceval["publishDate"] }
-    end.compact
+  # delegate to the responsible object/method
+  def process(command)
+    cmd = command["cmd"]
+    case cmd
+      when "search" then Retriever.new(@base_db).search(command["search_str"])
+      when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dataset"])
+      when "get_data" then Retriever.new(@base_db).get_data(command["dimension"])
+      when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
+      when "remove" then Importer.new(@base_db).remove(command["dataset"])
+      else puts "Unknown command"
+    end
   end
+end
 
-  # get the data for a dimension
-  def get_data(dimension, xaxis = nil, xaxislabels = [], zaxis = nil)
-    keylist = {}
-    dataset, category = dimension.split("|")
-    keylist["Category"] = category
+# --------- run main ---------
 
-    # get the metadata for the dataset
-    meta = get_metadata(dataset)
+def show_version()
+  puts "tyra.rb v" + VER
+end
 
-    # get xaxis, check default if not passed in
-    xaxis = meta['default'] if xaxis.nil?
-    
-    # get slice indicies
-    if xaxislabels.empty?
-      xaxislabels = meta['dims'][xaxis].reject { |label| label == "Total" }.sort
-    end
+def show_help()
+  puts "usage: tyra.rb [options]"
+  puts "options:"
+  puts "  -i file.csv   import dataset"
+  puts "  -r dataset    remove dataset"
+  puts "  -s searchstr  search for datasets"
+  puts "  -m dataset    get dataset metadata"
+  puts "  -d dimension  get data"
+  puts "  -t            run tests"
+  puts "  -h            help"
+  puts "  -v            show version and exit"
+end
 
-    # get list of sorted dimensions for this dataset
-    dims = meta['dims'].keys.sort
-    
-    # build otherdim key
-    otherDims = dims.map do |dim|
-      [dim, meta["otherDims"].include?(dim) ? xaxislabels : "Total"]
-    end
-    otherDims = Hash[*otherDims.flatten]  # convert array to hash
-    
-    # find sum on all dims other than xaxis
-    dims.each do |dim|
-      keylist[dim] = "Total" if dim != xaxis and (dim != "Category" or category.nil?)
-    end
+def run_tests()
+  tyra = Tyra.new(4)
 
-    # pull the actual data
-    datakeys = []
-    xaxislabels.each do |label|
-      keylist[xaxis] = label
-      datakeys << to_key(dataset + "|" + dims.map { |d| keylist[d] }.join("|"))
-    end
-    data = @data_db.mget(datakeys)
-
-    # find units
-    if meta['units'].has_key?(to_key(category))
-      units = meta['units'][to_key(category)]
-    elsif meta['units']['default']
-      units = nil # this shouldn't happen.  It means the dimension is unplottable
-    end
-
-    # extract sources
-    if !meta['otherDims'].empty?
-      source = []
-      otherdims.each do |dim, type_or_values|
-        if type_or_values == "Total"
-          source += meta['sources'].values.map { |v| v['source'] }
-        else
-          source += meta['sources'].reject { |prop_name, _|
-            type_or_values.includes?(prop_name)
-          }.map { |_, props|
-            props['source']
-          }
-        end
-      end
-    elsif meta['sources']['default']
-      source = [meta['sources']['default']['source']]
-    else
-      source = nil
-    end
-
-    # populate and return hash
-    { "dimension" => dimension,
-      "xaxis" => xaxis,
-      "xaxislabels" => xaxislabels,
-      "data" => data,
-      "units" => units,
-      "source" => source,
-      "ordinals" => dims }
-  end
-
-  # gets the metadata for a dataset
-  def get_metadata(dataset)
-    JSON.parse(@data_db[to_key(dataset)])
-  end
-  
-  private
-  
-  # converts a string into a valid redis key
-  def to_key(str)
-    return nil if str.nil?
-    str.gsub(" ", "_").downcase
-  end
-  
+  p tyra.process( "cmd" => "remove", "dataset" => "peanut_butter" )
+  p "---------"
+  p tyra.process( "cmd" => "import_csv", "fname" => "peanut_butter.csv" )
+  p "---------"
+  p tyra.process( "cmd" => "search", "search_str" => "peanut_butter" )
+  p "---------"
+  p tyra.process( "cmd" => "search", "search_str" => "number_of_banks" )
+  p "---------"
+  p tyra.process( "cmd" => "get_metadata", "dataset" => "peanut_butter" )
+  p "---------"
+  p tyra.process( "cmd" => "get_metadata", "dataset" => "number_of_banks" )
+  p "---------"
+  p tyra.process( "cmd" => "get_data", "dimension" => "peanut_butter|donut" )
+  p "---------"
+  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks" )
 end
 
 if __FILE__ == $0
-  tyra = Tyra.new(0)
+  if ARGV.length == 0
+    show_version
+    show_help
+  end
+  base_db = 4
+  cmd = nil
 
-  p tyra.lookup("beer")
-  p "---------"
-  p tyra.get_metadata("price_of_beverage")
-  p "---------"
-  p tyra.get_data("price_of_beverage")
-  
+  while !ARGV.empty?
+    arg = ARGV.shift
+    case arg
+    when "-h" then show_help; exit 0
+    when "-v" then show_version; exit 0
+    when "-t" then run_tests(); exit 0
+    when "-n" then base_db = ARGV.shift.to_i
+    when "-r" then cmd = {"cmd" => "remove", "dataset" => ARGV.shift}
+    when "-i" then cmd = {"cmd" => "import_csv", "fname" => ARGV.shift}
+    when "-s" then cmd = {"cmd" => "search", "search_str" => ARGV.shift}
+    when "-m" then cmd = {"cmd" => "get_metadata", "dataset" => ARGV.shift}
+    when "-d" then cmd = {"cmd" => "get_data", "dimension" => ARGV.shift}
+    else
+      puts "Unknown option: " + arg
+    end
+  end
+
+  tyra = Tyra.new(base_db)
+  puts tyra.process(cmd).inspect
 end
