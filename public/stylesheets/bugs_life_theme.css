@@ -99,6 +99,18 @@ a:hover {
    -moz-border-radius: 10px;
 }
 
+.included {
+   text-decoration: none;
+   color: #54800C;
+   background-color: #DDEFBF;
+}
+
+.excluded {
+   text-decoration: line-through;
+   color: #B34634;
+   background-color: #F1C7C1;
+}
+
 /* menu stylings */
 ul.menu.top.horizontal {
     font-size: 1.1em;

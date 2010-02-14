@@ -1,0 +1,18 @@
+.container
+  %div.half
+    %h2 And enter the rest of the metadata
+    
+    - form_for [:datasource, @datatable], :url => datasource_datatable_path(@datasource, @datatable), :html => { :class => "cmxform", :method => :put } do |f|
+      = render :partial => "form", :locals => { :f => f }
+      = f.submit "Update"
+  
+  %div.half{ :style => "overflow: scroll; height: 600px" }
+    %h2 Datatable's Data
+    
+    %table{ :border => 1 }
+      - @datatable.datacolumns.each do |datacol|
+        %tr
+          %th= datacol.name
+          - datacol.data.each do |datum|
+            %td= datum
+

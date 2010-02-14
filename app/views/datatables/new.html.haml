@@ -1,0 +1,21 @@
+.container
+  %div.note{ :style => "float: right" }
+    = link_to "See Original Page", @datasource.url, :target => "_blank"
+  %h2 Select Detected HTML Table to Import
+  %p
+    = link_to "&lsaquo; Back to datasource", datasource_path(@datasource)
+
+.container.clear
+  - if flash[:error]
+    %div.error.balloon
+      %span.container= error_messages_for "datatable"
+
+  - @datasource.tables.each do |table|
+    - form_for [:datasource, @datatable], :html => { :class => "headroom legroom" } do |datatable_f|
+      = hidden_field_tag "datatable[xpath]", table.path
+      .license
+        .sidebar{ :style => "width: 130px" }
+          = datatable_f.submit "Add as datatable &rsaquo;"
+        .details
+          = render :partial => "selection_form", :locals => { :datatable_f => datatable_f, :table => table }
+
