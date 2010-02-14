@@ -1,0 +1,30 @@
+name, Cars
+description, Used Car Lot
+source, fake
+url, http://www.graphbug.com/fakedata_cars.csv
+license, Public Domain
+publish_date, Tue Jan 01 00:00:00 -0500 2008
+default, Price
+
+Make, Model, Year, Color, Odometer (Miles), Price ($)
+Honda, Accord, 2001, Silver, 125020, 5000
+Honda, Accord, 2005, Gray, 100120, 4300
+Honda, Civic, 2002, Black, 80002, 2100
+Honda, Civic, 1998, Blue, 120001, 4200
+Honda, Civic, 1996, Silver, 50123, 4300
+Honda, Element, 2001, Red, 60030, 5200
+Toyota, Camry, 2000, Silver, 20500, 3100
+Toyota, Camry, 2000, Gold, 50560, 3100
+Toyota, Camry, 2000, Green, 66460, 3100
+Toyota, Prius, 2003, Red, 73450, 3100
+Toyota, Prius, 2005, Blue, 60540, 3100
+Toyota, Prius, 2007, Black, 50123, 3100
+Nissan, Sentra, 2001, Black, 120023, 1200
+Nissan, Sentra, 1995, Blue, 140223, 800
+Ford, Fusion, 2001, Silver, 34034, 3200
+Ford, Fusion, 2002, Silver, 23022, 4200
+Ford, Fusion, 2002, Blue, 45231, 2800
+Jeep, Cherokee, 1992, Blue, 120321, 5300
+Jeep, Cherokee, 1994, Blue, 112235, 5200
+Jeep, Cherokee, 2001, Red,  90214, 4900
+Jeep, Cherokee, 2003, Green, 76550, 4500
