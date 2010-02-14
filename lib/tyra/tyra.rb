@@ -22,7 +22,7 @@ class Tyra
       when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
       when "search" then Retriever.new(@base_db).search(command["search_str"])
       when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dataset"])
-      when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"])
+      when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"], command["op"])
       else raise "unknown command"
       end
     rescue => e
@@ -47,6 +47,7 @@ def show_help()
   puts "  -s search_str search for dimensions"
   puts "  -m dataset    get dataset metadata"
   puts "  -x xaxis      set xaxis for get data call"
+  puts "  -o op         set op for aggregating data"
   puts "  -d dimension  get data"
   puts "  -t            run tests"
   puts "  -h            help"
@@ -82,7 +83,7 @@ if __FILE__ == $0
   end
   base_db = 4
   cmd = nil
-  xaxis = nil
+  params = { "xaxis" => nil, "op" => nil }
 
   while !ARGV.empty?
     arg = ARGV.shift
@@ -95,14 +96,15 @@ if __FILE__ == $0
     when "-i" then cmd = {"cmd" => "import_csv", "fname" => ARGV.shift}
     when "-s" then cmd = {"cmd" => "search", "search_str" => ARGV.shift}
     when "-m" then cmd = {"cmd" => "get_metadata", "dataset" => ARGV.shift}
-    when "-x" then xaxis = ARGV.shift
+    when "-x" then params["xaxis"] = ARGV.shift
+    when "-o" then params["op"] = ARGV.shift
     when "-d" then cmd = {"cmd" => "get_data", "dimension" => ARGV.shift}
     else
       puts "Unknown option: " + arg
       exit 0
     end
   end
-  cmd["xaxis"] = xaxis
+  cmd.merge!(params)
 
   tyra = Tyra.new(base_db)
   puts tyra.process(cmd).inspect

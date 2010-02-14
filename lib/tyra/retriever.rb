@@ -56,7 +56,9 @@ class Retriever
   # get the data for a dimension
   # TODO implement xaxislabels and zaxis
   # op can be sum, mean, or count
-  def get_data(dimension, xaxis = nil, op = "mean", xaxislabels = nil, zaxis = nil)
+  def get_data(dimension, xaxis = nil, op = nil, xaxislabels = nil, zaxis = nil)
+    op = "mean" if op.nil?
+
     # if no depvar, default to "value"
     if !dimension.include? "|"
       dimension += "|value"
