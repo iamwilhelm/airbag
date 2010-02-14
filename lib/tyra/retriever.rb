@@ -114,7 +114,7 @@ class Retriever
 
   # calculate a sum
   def sum(vals)
-    vals.reduce(0) do |total, valp| 
+    vals.reduce(0) do |total, val|
       if numeric? val
         val.to_f + total
       else
