@@ -89,7 +89,9 @@ class Retriever
 
   # gets the metadata for the specified dataset
   def get_metadata(dataset)
-    JSON.parse(@search_dw[to_r(dataset)])
+    jsonmeta = @search_dw[to_r(dataset)]
+    raise "dataset not found" if jsonmeta.nil?
+    JSON.parse(jsonmeta)
   end
 
   private

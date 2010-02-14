@@ -17,8 +17,7 @@ class Importer
   # read csv file into import datastructure
   def import_csv(fname)
     if !File.exists? fname
-      puts "File not found: #{fname}"
-      return false
+      raise "file not found"
     end
     puts "Reading #{fname}"
 

@@ -15,14 +15,18 @@ class Tyra
 
   # delegate to the responsible object/method
   def process(command)
-    cmd = command["cmd"]
-    case cmd
+    begin
+      cmd = command["cmd"]
+      case cmd
       when "remove" then Importer.new(@base_db).remove(command["dataset"])
       when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
       when "search" then Retriever.new(@base_db).search(command["search_str"])
       when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dataset"])
       when "get_data" then Retriever.new(@base_db).get_data(command["dimension"])
-      else puts "Unknown command"
+      else raise "unknown command"
+      end
+    rescue
+      puts "ERROR: " + $!
     end
   end
 end
@@ -48,11 +52,11 @@ def show_help()
 end
 
 def run_tests()
-  tyra = Tyra.new(4)
+  tyra = Tyra.new(2)
 
   p tyra.process( "cmd" => "remove", "dataset" => "peanut_butter" )
   p "---------"
-  p tyra.process( "cmd" => "import_csv", "fname" => "peanut_butter.csv" )
+  p tyra.process( "cmd" => "import_csv", "fname" => "test/test_data/peanut_butter.csv" )
   p "---------"
   p tyra.process( "cmd" => "search", "search_str" => "peanut_butter" )
   p "---------"
