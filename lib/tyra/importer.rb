@@ -16,6 +16,12 @@ class Importer
 
   # read csv file into import datastructure
   def import_csv(fname)
+    if !File.exists? fname
+      puts "File not found: #{fname}"
+      return false
+    end
+    puts "Reading #{fname}"
+
     data = {}
     meta = {}
     meta["units"] = {}
@@ -64,9 +70,11 @@ class Importer
     meta = dataset["meta"]
     data = dataset["data"]
 
-    remove(meta["name"])
+    # remove any traces of an existing dataset with the same name
+    remove(meta["name"], true)
 
     # set lookup key and metadata
+    puts "Importing #{meta['name']}"
     colnames = data.keys
     @search_dw.set to_r(meta["name"]), JSON.generate(meta) 
     meta["depvars"].each do |nn|
@@ -80,18 +88,25 @@ class Importer
         @data_dw.rpush key, val
       end
     end
+    true
   end
 
   # remove a dataset from redis
-  def remove(datasetname)
+  def remove(dataset, for_import=false)
+    exists = @search_dw.exists to_r(dataset)
+
+    return false if !for_import && !exists
+    puts "Removing #{dataset}" if for_import && exists
+
     # del meta
-    @search_dw.del to_r(datasetname)
-    keys = @search_dw.keys(to_r(datasetname + "|*"))
+    @search_dw.del to_r(dataset)
+    keys = @search_dw.keys(to_r(dataset + "|*"))
     keys.each{ |kk| @search_dw.del to_r(kk) }
 
     # del data
-    keys = @data_dw.keys(to_r(datasetname + "|*"))
+    keys = @data_dw.keys(to_r(dataset + "|*"))
     keys.each{ |kk| @data_dw.del to_r(kk) }
+    true
   end
 
   private
