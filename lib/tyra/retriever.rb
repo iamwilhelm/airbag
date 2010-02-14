@@ -3,11 +3,13 @@
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
-require 'utils'
+require 'misc_utils'
 
 # retriever
 # search or retrieve data from datawarehouse
 class Retriever
+  include MiscUtils
+
   # creates the datawarehouse reference
   def initialize(base_db = 0, host = "localhost")
     @search_dw = Redis.new(:host => host, :db => base_db)
@@ -25,7 +27,7 @@ class Retriever
     dimensions.map do |dim_name|
       dataset, dim = dim_name.split("|")
       meta = get_metadata(dataset)
-      
+
       # find units
       if meta['units'].has_key?(dim)
         unitskey = to_r(dim)
@@ -47,6 +49,7 @@ class Retriever
 
   # get the data for a dimension
   # TODO implement xaxislabels and zaxis
+  # op can be sum, mean, or count
   def get_data(dimension, xaxis = nil, op = "mean", xaxislabels = nil, zaxis = nil)
     # if no depvar, default to "value"
     if !dimension.include? "|"
@@ -125,5 +128,10 @@ class Retriever
       end
     end
     sum / count
+  end
+
+  # return the number of values
+  def count(vals)
+    vals.length
   end
 end
