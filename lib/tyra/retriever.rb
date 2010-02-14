@@ -30,16 +30,16 @@ class Retriever
 
       # find units
       if meta['units'].has_key?(dim)
-        unitskey = to_r(dim)
+        units = meta['units'][dim]
       elsif meta['units'].has_key?('value')
-        unitskey = 'value'
+        units = meta['units']['value']
       else
-        next
+        units = nil
       end
 
       { "dim" => dim_name,
         "description" => meta["description"],
-        "units" => meta["units"][unitskey],
+        "units" => units,
         "default" => meta["default"],
         "url" => meta["url"],
         "source_name" => meta["source"],
