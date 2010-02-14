@@ -2,6 +2,8 @@
 
 VER = "0.0.1"
 
+require "string_utils"
+
 # expand an n-dimensional table into many two dimensional tables
 # given 2 independent variables, create a table for each dependent variable
 
