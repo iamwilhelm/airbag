@@ -93,6 +93,7 @@ if __FILE__ == $0
     when "-d" then cmd = {"cmd" => "get_data", "dimension" => ARGV.shift}
     else
       puts "Unknown option: " + arg
+      exit 0
     end
   end
 
