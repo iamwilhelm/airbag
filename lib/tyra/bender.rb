@@ -2,6 +2,8 @@
 
 VER = "0.0.2"
 
+require "string_utils"
+
 # bender
 # bends source data into a format the importer understands
 #
