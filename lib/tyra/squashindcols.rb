@@ -4,7 +4,7 @@
 # done when col headers are the values of an independent variable.
 
 # -- stuff that should be in a config file
-indcolnames = ["State"]
+indcolnames = ["Country"]
 collabel = "Year"
 # --
 
@@ -44,7 +44,7 @@ puts "reading " + fname
 
 File.open(fname, "r") do |fin|
   # skip file header
-  while str = fin.gets.strip != ""; end
+  while (str = fin.gets.strip) != ""; end
 
   # read col headers
   cols = fin.gets.split(",").map{ |ii| ii.strip }
