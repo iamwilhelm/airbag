@@ -55,5 +55,13 @@ class DatatablesControllerTest < ActionController::TestCase
     end
     assert_redirected_to datasource_path(@texthtml_datasource)
   end
+
+  test "can delete a datatable" do
+    @datatable = @datatables.first
+    assert_destroyed(:datatable) do
+      delete :destroy, :datasource_id => @texthtml_datasource, :id => @datatable
+    end
+    assert_redirected_to datasource_path(@texthtml_datasource)
+  end
   
 end

@@ -31,5 +31,17 @@ class DatatablesController < ApplicationController
     flash[:error] = "Could not update datatable"
     render :template => "datatables/edit"
   end
+
+  #--
+  # NOTE we find a datatable through data source first, so that
+  # people can't just delete any table willy-nilly
+  def destroy
+    @datasource = Datasource.find(params[:datasource_id])
+    @datatable = @datasource.datatables.find(params[:id])
+    @datatable.destroy
+
+    redirect_to datasource_path(@datasource)
+    
+  end
   
 end

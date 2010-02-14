@@ -4,6 +4,8 @@
     - @datasource.datatables.each do |dt|
       %li
         = link_to "#{dt.is_numeric}::#{dt.table_heading} (#{dt.units})", edit_datasource_datatable_path(@datasource, dt)
+        |
+        = link_to "Delete", datasource_datatable_path(@datasource, dt), :method => :delete,:confirm => "Delete?"
   - else
     %li There are currently no datatables imported
 
