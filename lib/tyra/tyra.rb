@@ -17,11 +17,11 @@ class Tyra
   def process(command)
     cmd = command["cmd"]
     case cmd
+      when "remove" then Importer.new(@base_db).remove(command["dataset"])
+      when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
       when "search" then Retriever.new(@base_db).search(command["search_str"])
       when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dataset"])
       when "get_data" then Retriever.new(@base_db).get_data(command["dimension"])
-      when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
-      when "remove" then Importer.new(@base_db).remove(command["dataset"])
       else puts "Unknown command"
     end
   end
@@ -34,11 +34,12 @@ def show_version()
 end
 
 def show_help()
-  puts "usage: tyra.rb [options]"
-  puts "options:"
-  puts "  -i file.csv   import dataset"
+  puts "Usage: tyra.rb [options]"
+  puts "Options:"
+  puts "  -n dbnum      base db number"
   puts "  -r dataset    remove dataset"
-  puts "  -s searchstr  search for datasets"
+  puts "  -i file.csv   import dataset"
+  puts "  -s search_str search for dimensions"
   puts "  -m dataset    get dataset metadata"
   puts "  -d dimension  get data"
   puts "  -t            run tests"
