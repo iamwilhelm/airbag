@@ -3,11 +3,15 @@
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
-require 'utils'
+require 'misc_utils'
+require 'string_utils'
 
 # importer
 # import or remove datasets into datawarehouse
 class Importer
+  include MiscUtils
+  include StringUtils
+
   # creates the datawarehouse reference
   def initialize(base_db = 0, host = "localhost")
     @search_dw = Redis.new(:host => host, :db => base_db)
@@ -115,7 +119,7 @@ class Importer
     if param[0] == "indvars"
       param[1..-1]
     else
-      param[1].to_s
+      remove_quotes(param[1].to_s)
     end
   end
 end
