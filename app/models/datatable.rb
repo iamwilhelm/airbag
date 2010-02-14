@@ -15,7 +15,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def rows
-    datacolumns.map { |dc| dc.data }.transpose
+    datacolumns.map { |dc| dc.data }
   end
   
 end

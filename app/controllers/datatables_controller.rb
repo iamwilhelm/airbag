@@ -8,8 +8,7 @@ class DatatablesController < ApplicationController
   
   def create
     @datasource = Datasource.find(params[:datasource_id])
-    @datatable = @datasource.datatables.create(params[:datatable])
-    raise ActiveRecord::RecordNotSaved.new unless @datatable.valid?
+    @datatable = @datasource.datatables.create!(params[:datatable])
 
     redirect_to edit_datasource_datatable_url(@datasource.id, @datatable.id)
   rescue ActiveRecord::RecordNotSaved => e
@@ -20,6 +19,17 @@ class DatatablesController < ApplicationController
   def edit
     @datasource = Datasource.find(params[:datasource_id])
     @datatable = @datasource.datatables.find(params[:id])
+  end
+
+  def update
+    @datasource = Datasource.find(params[:datasource_id])
+    @datatable = @datasource.datatables.find(params[:id])
+    @datatable.update_attributes!(params[:datatable])
+
+    redirect_to datasource_path(@datasource)
+  rescue ActiveRecord::RecordNotSaved => e
+    flash[:error] = "Could not update datatable"
+    render :template => "datatables/edit"
   end
   
 end

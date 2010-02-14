@@ -9,12 +9,10 @@
   %div.half{ :style => "overflow: scroll; height: 600px" }
     %h2 Datatable's Data
     
-    %table
-      %tr
+    %table{ :border => 1 }
       - @datatable.datacolumns.each do |datacol|
-        %th= datacol.name
-
-      - @datatable.rows.each do |row|
         %tr
-          - row.each do |cell|
-            %td= cell
+          %th= datacol.name
+          - datacol.data.each do |datum|
+            %td= datum
+
