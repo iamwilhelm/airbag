@@ -34,11 +34,11 @@ end
 
 # --------- run main ---------
 
-def show_version()
+def show_version
   puts "tyra.rb v" + VER
 end
 
-def show_help()
+def show_help
   puts "Usage: tyra.rb [options]"
   puts "Options:"
   puts "  -n dbnum      base db number"
@@ -54,7 +54,7 @@ def show_help()
   puts "  -v            show version and exit"
 end
 
-def run_tests()
+def run_tests
   tyra = Tyra.new(2)
 
   p tyra.process( "cmd" => "remove", "dataset" => "peanut_butter" )
