@@ -21,30 +21,36 @@ class Retriever
     # get list of dimensions
     dimensions = search_str.downcase.split.map do |token|
       @search_dw.keys("*#{token}*")
-    end.each do |arr|
+    end.each do |search_result|
       # remove datasets with "value" dependent variables
       # assumes that "value" will always be the only dep var
-      dataset = arr.find { |ii| !ii.include? "|" }
-      if !dataset.nil? && arr.length > 1
-        arr.delete(dataset)
+      dataset = search_result.find { |ii| !ii.include? "|" }
+      if !dataset.nil? && search_result.length > 1
+        search_result.delete(dataset)
       end
     end.flatten
 
     # look up each dimension's metadata
-    dimensions.map do |dim_name|
-      dataset, dim = dim_name.split("|")
+    dimensions.map do |dim_key|
+      dataset, dim = dim_key.split("|")
       meta = get_metadata(dataset)
 
-      # find units
-      if meta['units'].has_key?(dim)
-        units = meta['units'][dim]
-      elsif meta['units'].has_key?('value')
-        units = meta['units']['value']
-      else
-        units = nil
-      end
+      units = if meta['units'].has_key?(dim)
+                meta['units'][dim]
+              elsif meta['units'].has_key?('value')
+                meta['units']['value']
+              else
+                nil
+              end
 
-      { "dim" => dim_name,
+      dim_name = if dim_key.include? "|"
+                   meta['name'] + "|" + meta['depvars'].find{ |depvar| to_r(depvar)==dim }
+                 else
+                   meta['name']
+                 end
+
+      { "dim_key" => dim_key,
+        "dim_name" => dim_name,
         "description" => meta["description"],
         "units" => units,
         "default" => meta["default"],
@@ -66,13 +72,9 @@ class Retriever
     end
     dataset, dim = dimension.split "|"
 
-    # get the metadata for the dataset
+    # pull whats needed from dw
     meta = get_metadata(dataset)
-
-    # get xaxis, check default if not passed in
     xaxis = meta['default'] if xaxis.nil?
-
-    # get labels and data from dw
     xaxislabels = getcol "#{dataset}|#{xaxis}"
     data = getcol dimension
 
@@ -99,8 +101,9 @@ class Retriever
       "data" => data }
   end
 
-  # gets the metadata for the specified dataset
-  def get_metadata(dataset)
+  # gets the metadata for the specified dimension
+  def get_metadata(dimension)
+    dataset, dim = dimension.split "|"
     jsonmeta = @search_dw[to_r(dataset)]
     raise "dataset not found" if jsonmeta.nil?
     JSON.parse(jsonmeta)
