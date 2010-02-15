@@ -1,7 +1,7 @@
 <li class="license">
   <div class="sidebar">
     <%= image_tag "icons/sparkline.png" %>
-    <%= link_to "Overlay", viz_path(:id => @dimension['dim']), :"data-remote" => true, :"data-update-success" => "overlayGraph" %>
+    <%= link_to "Overlay", viz_path(:id => @dimension['dim_key']), :"data-remote" => true, :"data-update-success" => "overlayGraph" %>
   </div>
   <div class="details">
     <p class="shrink fade">
@@ -10,7 +10,7 @@
         <%= link_to "source", @dimension['url'] -%>
       </span>
     </p>
-    <h3><a href="<%= viz_path(:id => @dimension['dim']) -%>" 
+    <h3><a href="<%= viz_path(:id => @dimension['dim_key']) -%>" 
            data-remote="true" data-update-success="drawGraph">
         <%= humanized_dimension(@dimension) %>
     </a></h3>

@@ -14,12 +14,12 @@ class VizController < ApplicationController
   # TODO We don't overload index because index and search need two
   # different templates for html.
   def search
-    @dimensions = @tyra.lookup(params[:q])
+    @dimensions = @tyra.search(params[:q])
     render :layout => false
   end
 
   def show
-    @dimension_key = params[:id] || "price_of_beverage"
+    @dimension_key = params[:id] || "us_population"
     @datapack = @tyra.get_data(@dimension_key)
     
     @ordinal_pack = extract_ordinal_pack(@datapack)
