@@ -6,7 +6,7 @@ require 'json/add/core'
 require 'importer'
 require 'retriever'
 
-VER = "0.2.0"
+VER = "0.2.1"
 
 class Tyra
   def initialize(base_db)
@@ -28,7 +28,22 @@ class Tyra
     rescue => e
       puts "ERROR: #{e.message}"
       puts "#{e.backtrace}"
+      nil
     end
+  end
+
+  # shortcuts for convenience
+
+  def search(search_str)
+    process( {"cmd" => "search", "search_str" => search_str} )
+  end
+
+  def get_metadata(dataset)
+    process( {"cmd" => "get_metadata", "dataset" => dataset} )
+  end
+
+  def get_data(dimension, xaxis=nil, op=nil)
+    process( {"cmd" => "get_data", "dimension" => dimension, "xaxis" => xaxis, "op" => op} )
   end
 end
 
@@ -74,6 +89,8 @@ def run_tests
   p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks" )
   p "---------"
   p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks", "xaxis" => "State" )
+  p "---------"
+  p tyra.search("butter bank")
 end
 
 if __FILE__ == $0
