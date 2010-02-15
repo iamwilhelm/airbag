@@ -39,12 +39,11 @@ class Importer
 
       # read col headers, extract units
       headers = fin.gets.split(",").map{ |ii| ii.strip }
-      pat = /(.*)\((.*)\)/
       for ii in 0...headers.length do
-        match = pat.match(headers[ii])
-        if !match.nil?
-          headers[ii] = match[1].strip
-          meta["units"][to_r(headers[ii])] = match[2].strip
+        hdr_with_units = /(.*)\((.*)\)/.match(headers[ii])
+        if !hdr_with_units.nil?
+          headers[ii] = hdr_with_units[1].strip
+          meta["units"][to_r(headers[ii])] = hdr_with_units[2].strip
         end
         data[headers[ii]] = []
       end
@@ -103,12 +102,14 @@ class Importer
 
     # del meta
     @search_dw.del to_r(dataset)
-    keys = @search_dw.keys(to_r(dataset + "|*"))
-    keys.each{ |kk| @search_dw.del to_r(kk) }
+    @search_dw.keys(to_r("#{dataset}|*")).each do |key|
+      @search_dw.del to_r(key)
+    end
 
     # del data
-    keys = @data_dw.keys(to_r(dataset + "|*"))
-    keys.each{ |kk| @data_dw.del to_r(kk) }
+    @data_dw.keys(to_r("#{dataset}|*")).each do |key|
+      @data_dw.del to_r(key)
+    end
     true
   end
 
