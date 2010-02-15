@@ -18,17 +18,17 @@ var transify_t = function(default_value) {
         };
     };
 };
-    transify_t.zeroify = transify_t(0)(0);
-    transify_t.nanify = transify_t("nan")(null);
-    transify_t.noneify = transify_t("none")(null);
+transify_t.zeroify = transify_t(0)(0);
+transify_t.nanify = transify_t("nan")(null);
+transify_t.noneify = transify_t("none")(null);
 
 var nullify_t = function(test_value) {
     return function(x) {
         return ( x === test_value ) ? null : x;
     };
 };
-    nullify_t.nan = nullify_t("nan");
-    nullify_t.none = nullify_t("none");
+nullify_t.nan = nullify_t("nan");
+nullify_t.none = nullify_t("none");
 
 var Tuftee = 
 (function() {

@@ -8,7 +8,7 @@
     tuft = Tuftee('graph', 620, 400)
              .byBar()
              .add(<%= @ordinal_pack.inspect %>, <%= @cardinal_pack.inspect %>)
-             .addLinkKeys(<%= @datapack["ordinals"].inspect %>, <%= @datapack["dimension"].inspect %>)
+             //.addLinkKeys(<%= @datapack["depvars"].inspect %>, <%= @datapack["dimension"].inspect %>)
              .render(true);
 
     // interface handlers
