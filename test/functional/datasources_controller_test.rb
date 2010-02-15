@@ -13,11 +13,12 @@ class DatasourcesControllerTest < ActionController::TestCase
 
   test "can create datasource" do
     @url = "http://www.worldatlas.com/aatlas/populations/usapopa.htm"
-    assert_created(:datasource) do
-      @attributes = { :url => @url }
+    @attributes = { :url => @url }
+    assert_created(:datasource, 1) do
       post :create, :datasource => @attributes
-      assert_contains(:datasource, @attributes)
     end
+    assert_contains(:datasource, @attributes)
+    assert_redirected_to datasource_url(assigns(:datasource))
   end
 
   test "can show specific datasource" do
@@ -38,8 +39,9 @@ class DatasourcesControllerTest < ActionController::TestCase
     assert_updated(:datasource) do
       @attributes = { :url => @url }
       put :update, :id => @datasource, :datasource => @attributes
-      assert_contains(:datasource, @attributes)
     end
+    assert_contains(:datasource, @attributes)
+    assert_redirected_to datasource_url(assigns(:datasource))
   end
 
   test "can destroy a specific datasource" do
@@ -47,6 +49,7 @@ class DatasourcesControllerTest < ActionController::TestCase
     assert_destroyed(:datasource) do
       delete :destroy, :id => @datasource
     end
+    assert_redirected_to datasources_url
   end
   
 end

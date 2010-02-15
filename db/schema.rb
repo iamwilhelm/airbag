@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100207234904) do
+ActiveRecord::Schema.define(:version => 20100212081115) do
+
+  create_table "datacolumns", :force => true do |t|
+    t.integer  "datatable_id", :null => false
+    t.string   "xpath",        :null => false
+    t.integer  "length"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "datasources", :force => true do |t|
     t.string   "title",                           :default => "Untitled Datasource"
@@ -19,6 +27,25 @@ ActiveRecord::Schema.define(:version => 20100207234904) do
     t.datetime "last_changed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "datatables", :force => true do |t|
+    t.integer  "datasource_id",                  :null => false
+    t.string   "descr"
+    t.text     "notes"
+    t.string   "table_heading"
+    t.string   "col_heading"
+    t.string   "row_heading"
+    t.string   "other_dims"
+    t.string   "default_dim",   :default => ""
+    t.string   "is_numeric",    :default => "1"
+    t.string   "units"
+    t.string   "multiplier",    :default => "1"
+    t.string   "converter"
+    t.datetime "published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "xpath",                          :null => false
   end
 
 end
