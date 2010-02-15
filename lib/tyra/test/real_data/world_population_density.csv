@@ -3,7 +3,7 @@ description,Total Midyear Population for Region Summary
 source,US Census Bureau
 license,Public Domain
 url,http://www.census.gov/ipc/www/idb/worldpop.php
-publishDate,"December 2009"
+publishDate,Tue Dec 01 00:00:00 -0500 2009
 default,Year
 indvars,Country,Year
 

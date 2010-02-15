@@ -3,7 +3,7 @@ description,"Total Midyear Population of the World"
 source,US Census Bureau
 license,Public Domain
 url,http:http://www.census.gov/ipc/www/idb/worldpop.php
-publish_date,"December 2009"
+publish_date,Tue Dec 01 00:00:00 -0500 2009
 default,Year
 indvars,Year
 

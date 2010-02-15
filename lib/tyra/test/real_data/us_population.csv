@@ -3,7 +3,7 @@ description,"Annual Estimates of the Resident Population for the United States"
 source,US Census Bureau
 license,Public Domain
 url,http://www.census.gov/popest/states/states.html
-publish_date,"22/12/2008"
+publish_date,Mon Dec 01 00:00:00 -0500 2008
 default,State
 indvars,State,Year
 
