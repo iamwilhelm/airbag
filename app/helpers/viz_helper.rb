@@ -10,7 +10,7 @@ module VizHelper
   end
 
   def htmlized_dimension(dimension)
-    dimension.dim_name.gsub("[\|`]", "_")
+    dimension.dim_key.gsub(/[\|`]/, "_")
   end
 
 end
