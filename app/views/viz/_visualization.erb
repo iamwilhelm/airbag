@@ -3,9 +3,11 @@
   </ul>
 </div>
 
-<script type="text/javascript+protovis">
+<div id="visualization"></div>
+
+<script type="text/javascript">
   $(document).ready(function() {
-    tuft = Tuftee('graph', 620, 400)
+    tuft = Tuftee('visualization', 620, 400)
              .byBar()
              .add(<%= @ordinal_pack.inspect %>, <%= @cardinal_pack.inspect %>)
              //.addLinkKeys(<%= @datapack["depvars"].inspect %>, <%= @datapack["dimension"].inspect %>)
@@ -52,8 +54,6 @@
 
   });
 </script>
-
-<div id="visualization"></div>
 
 <div style="padding-left: 25px;">
   <ul id="ordinal" class="menu horizontal legend buttoned">

@@ -63,7 +63,8 @@ var Tuftee =
             this.bandRatio = 0.9;
             
             // Things that change when updating graph    
-            this.vis = new pv.Panel(dom_id)
+            this.vis = new pv.Panel()
+                .canvas("visualization")
                 .width(this.canvasWidth)
                 .height(this.canvasHeight)
                 .bottom(this.axisHeight)
