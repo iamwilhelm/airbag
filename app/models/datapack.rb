@@ -1,4 +1,5 @@
-
+# A wrapper class around a raw datapack returned from tyra.
+# TODO this might belong in tyra instead
 class Datapack
 
   def initialize(raw_datapack_hash)
@@ -6,7 +7,6 @@ class Datapack
       instance_variable_set("@#{name}", value)
       self.class.class_exec { attr_reader name }
     end
-    return true
   end
 
   def ordinal_pack
