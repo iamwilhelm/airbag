@@ -7,7 +7,7 @@ publish_date,Mon Dec 01 00:00:00 -0500 2008
 default,State
 indvars,State,Year
 
-State,Year,Value (People)
+State,Year,US Population (People)
 AK,1900,
 AL,1900,1830000.0
 AR,1900,1314000.0

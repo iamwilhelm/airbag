@@ -82,13 +82,13 @@ def run_tests
   p "---------"
   p tyra.process( "cmd" => "get_metadata", "dimension" => "peanut_butter|donut" )
   p "---------"
-  p tyra.process( "cmd" => "get_metadata", "dimension" => "number_of_banks" )
+  p tyra.process( "cmd" => "get_metadata", "dimension" => "number_of_banks|number_of_banks" )
   p "---------"
   p tyra.process( "cmd" => "get_data", "dimension" => "peanut_butter|donut" )
   p "---------"
-  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks" )
+  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks|number_of_banks" )
   p "---------"
-  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks", "xaxis" => "State" )
+  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks|number_of_banks", "xaxis" => "State" )
   p "---------"
   p tyra.search("butter bank")
 end

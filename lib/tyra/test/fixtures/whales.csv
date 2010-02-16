@@ -7,7 +7,7 @@ publish_date, Tue Jan 01 00:00:00 -0500 1985
 default, State
 indvars, State, Species
 
-State,Species,Value (whales)
+State,Species,Whales (whales)
 Alabama,Humpback,2.04494633e+02
 Alaska,Humpback,2.01366761e+02
 Arizona,Humpback,2.02077637e+02

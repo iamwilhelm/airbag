@@ -58,7 +58,7 @@ class Importer
     # rearrange stuff
     colnames = data.keys
     indvarnames = meta["indvars"] || []
-    depvarnames = colnames - ["Value"] - indvarnames
+    depvarnames = colnames - indvarnames
     meta["depvars"] = depvarnames
 
     import({

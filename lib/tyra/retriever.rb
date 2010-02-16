@@ -21,13 +21,9 @@ class Retriever
     # get list of dimensions
     dimensions = search_str.downcase.split.map do |token|
       @search_dw.keys("*#{token}*")
-    end.each do |search_result|
-      # remove datasets with "value" dependent variables
-      # assumes that "value" will always be the only dep var
-      dataset = search_result.find { |ii| !ii.include? "|" }
-      if !dataset.nil? && search_result.length > 1
-        search_result.delete(dataset)
-      end
+    end.each do |result_arr|
+      # remove datasets, allow dimensions
+      result_arr.reject! { |ii| !ii.include? "|" }
     end.flatten
 
     # look up each dimension's metadata
@@ -37,8 +33,6 @@ class Retriever
 
       units = if meta['units'].has_key?(dim)
                 meta['units'][dim]
-              elsif meta['units'].has_key?('value')
-                meta['units']['value']
               else
                 nil
               end
@@ -66,10 +60,6 @@ class Retriever
   def get_data(dimension, xaxis = nil, op = nil, xaxislabels = nil, zaxis = nil)
     op = "mean" if op.nil?
 
-    # if no depvar, default to "value"
-    if !dimension.include? "|"
-      dimension += "|value"
-    end
     dataset, dim = dimension.split "|"
 
     # pull whats needed from dw

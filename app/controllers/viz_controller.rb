@@ -19,7 +19,7 @@ class VizController < ApplicationController
   end
 
   def show
-    @dimension_key = params[:id] || "us_population"
+    @dimension_key = params[:id] || "us_population|us_population"
     @datapack = @tyra.get_data(@dimension_key)
 
     @ordinal_pack = extract_ordinal_pack(@datapack)
