@@ -35,7 +35,7 @@
         </td>
         <td style="text-align: right">
           <span class="shrink fade">
-            Published <%= @dimension.publish_date.strftime("%d %b %Y") %>
+            published <%= time_ago_in_words(@dimension.publish_date) %> ago
           </span>
         </td>
       </tr>

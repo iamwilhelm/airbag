@@ -22,6 +22,7 @@ class Dimension
 
   def instance_varize_as_time(varname, raw_dimension_hash)
     date_str = raw_dimension_hash.delete(varname.to_s)
-    instance_variable_set("@#{varname}", Time.parse(date_str))
+    datetime = Time.parse(date_str) rescue Time.now
+    instance_variable_set("@#{varname}", datetime)
   end
 end
