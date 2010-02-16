@@ -117,6 +117,7 @@ var Tuftee =
                   })
                   .fillStyle(pv.Colors.category20().by(pv.index));
             
+	    /*
             bar.anchor("top").add(pv.Label)
                 .textStyle("#777")
                 .textBaseline("bottom")
@@ -125,6 +126,7 @@ var Tuftee =
                         return l || "";
                     }, this);
                 });
+	    */
             
             this.xlabels = this.vis.add(pv.Label)
                 .data(function() {
