@@ -7,7 +7,7 @@
     <p class="shrink fade">
       <%= truncate(@dimension.source_name, :length => 30) %>
       <span style="float: right">
-        <%= link_to "source", @dimension.url -%>
+        <%= link_to "source", @dimension.url, "target" => "_blank" -%>
       </span>
     </p>
     <h3><a href="<%= viz_path(:id => @dimension.dim_key) -%>" 
