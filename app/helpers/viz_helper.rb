@@ -1,14 +1,12 @@
 module VizHelper
 
   def humanized_dimension(dimension)
-    dims = dimension['dim_name'].split(/\|+/)
-    datasource_name = dims.shift
-    key_parts = if dims.empty?
-                  "Totals"
-                else
-                  dims.join(" by ")
-                end
-    return "#{datasource_name} #{key_parts}"
+    datasource_name, dimension_name = dimension['dim_name'].split(/\|+/)
+    if datasource_name == dimension_name
+      datasource_name
+    else
+      "#{datasource_name}: #{dimension_name}"
+    end
   end
 
   def htmlized_dimension(dimension)
