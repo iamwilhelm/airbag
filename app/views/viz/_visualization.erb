@@ -10,7 +10,7 @@
     tuft = Tuftee('visualization', 620, 400)
              .byBar()
              .add(<%= @ordinal_pack.inspect %>, <%= @cardinal_pack.inspect %>)
-             //.addLinkKeys(<%= @datapack["depvars"].inspect %>, <%= @datapack["dimension"].inspect %>)
+             //.addLinkKeys(<%= @datapack.depvars.inspect %>, <%= @datapack.dimension.inspect %>)
              .render(true);
 
     // interface handlers
@@ -58,8 +58,8 @@
 <div style="padding-left: 25px;">
   <ul id="ordinal" class="menu horizontal legend buttoned">
     <li>
-      <a href="<%= viz_path(:id => @datapack['dimension']) %>" 
-         data-remote="true" data-update="overwriteData"><%= @datapack['xaxis'] %></a>
+      <a href="<%= viz_path(:id => @datapack.dimension) %>" 
+         data-remote="true" data-update="overwriteData"><%= @datapack.xaxis %></a>
     </li>
   </ul>
 </div>

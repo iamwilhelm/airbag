@@ -36,7 +36,6 @@
         </td>
         <td style="text-align: right">
           <span class="shrink fade">
-	  <!-- not sure why @dimension['publish_date'] must be converted to a string-->
             Published <%= Time.parse(@dimension['publish_date'].to_s).strftime("%d %b %Y") %>
           </span>
         </td>

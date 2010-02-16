@@ -20,10 +20,10 @@ class VizController < ApplicationController
 
   def show
     @dimension_key = params[:id] || "us_population|us_population"
-    @datapack = @tyra.get_data(@dimension_key)
-
-    @ordinal_pack = extract_ordinal_pack(@datapack)
-    @cardinal_pack = extract_cardinal_pack(@datapack)
+    @datapack = Datapack.new(@tyra.get_data(@dimension_key))
+    
+    @ordinal_pack = @datapack.ordinal_pack
+    @cardinal_pack = @datapack.cardinal_pack
     
     # temp: only used for debugging
     @metadata = @tyra.get_metadata(to_dataset_name(@dimension_key))
@@ -38,15 +38,6 @@ class VizController < ApplicationController
 
   # TODO these private functions all need to go into a model of some sort
   
-  def extract_ordinal_pack(datapack)
-    return [[], []] if datapack.nil?
-    return [datapack['xaxis'], datapack['xaxislabels']]
-  end  
-
-  def extract_cardinal_pack(datapack)
-    return [[], []] if datapack.nil?
-    return [datapack['dimension'], datapack['data']]
-  end  
 
   # temporarily converts dimension name to dataset name
   def to_dataset_name(dimension_key)
