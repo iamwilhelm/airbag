@@ -1,3 +1,4 @@
+<% require 'time' %> <!-- not sure if this is the best place for this -->
 <li class="license">
   <div class="sidebar">
     <%= image_tag "icons/sparkline.png" %>
@@ -35,7 +36,8 @@
         </td>
         <td style="text-align: right">
           <span class="shrink fade">
-            Published <%= @dimension['publish_date'] %>
+	  <!-- not sure why @dimension['publish_date'] must be converted to a string-->
+            Published <%= Time.parse(@dimension['publish_date'].to_s).strftime("%d %b %Y") %>
           </span>
         </td>
       </tr>
