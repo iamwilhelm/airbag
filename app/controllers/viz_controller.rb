@@ -14,7 +14,9 @@ class VizController < ApplicationController
   # TODO We don't overload index because index and search need two
   # different templates for html.
   def search
-    @dimensions = @tyra.search(params[:q])
+    raw_dimensions = @tyra.search(params[:q])
+    @dimensions = map_to_dimensions(raw_dimensions)
+
     render :layout => false
   end
 
@@ -37,7 +39,9 @@ class VizController < ApplicationController
   private
 
   # TODO these private functions all need to go into a model of some sort
-  
+  def map_to_dimensions(raw_dimensions)
+    raw_dimensions.map { |dim| Dimension.new(dim) }
+  end
 
   # temporarily converts dimension name to dataset name
   def to_dataset_name(dimension_key)

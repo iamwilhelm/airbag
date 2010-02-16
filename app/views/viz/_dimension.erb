@@ -1,30 +1,29 @@
-<% require 'time' %> <!-- not sure if this is the best place for this -->
 <li class="license">
   <div class="sidebar">
     <%= image_tag "icons/sparkline.png" %>
-    <%= link_to "Overlay", viz_path(:id => @dimension['dim_key']), :"data-remote" => true, :"data-update-success" => "overlayGraph" %>
+    <%= link_to "Overlay", viz_path(:id => @dimension.dim_key), :"data-remote" => true, :"data-update-success" => "overlayGraph" %>
   </div>
   <div class="details">
     <p class="shrink fade">
-      <%= truncate(@dimension['source_name'], :length => 30) %>
+      <%= truncate(@dimension.source_name, :length => 30) %>
       <span style="float: right">
-        <%= link_to "source", @dimension['url'] -%>
+        <%= link_to "source", @dimension.url -%>
       </span>
     </p>
-    <h3><a href="<%= viz_path(:id => @dimension['dim_key']) -%>" 
+    <h3><a href="<%= viz_path(:id => @dimension.dim_key) -%>" 
            data-remote="true" data-update-success="drawGraph">
         <%= humanized_dimension(@dimension) %>
     </a></h3>
     <p class="shrink">
-      default xaxis by <%= @dimension['default'] %>
+      default xaxis by <%= @dimension.default %>
     </p>
     
     <div>
       <a href="" data-remote="false" data-update="<%= htmlized_dimension(@dimension) %>_description">
-        <%= truncate(@dimension['description'], :length => 30) %>
+        <%= truncate(@dimension.description, :length => 30) %>
       </a>
       <p id="<%= htmlized_dimension(@dimension) %>_description" class="hidden">
-        <%= @dimension['description'] %>
+        <%= @dimension.description %>
       </p>
     </div>
 
@@ -36,7 +35,7 @@
         </td>
         <td style="text-align: right">
           <span class="shrink fade">
-            Published <%= Time.parse(@dimension['publish_date'].to_s).strftime("%d %b %Y") %>
+            Published <%= @dimension.publish_date.strftime("%d %b %Y") %>
           </span>
         </td>
       </tr>
