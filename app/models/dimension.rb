@@ -1,4 +1,5 @@
 require 'time'
+require 'tyra/tyra'
 
 # a data dimension
 class Dimension

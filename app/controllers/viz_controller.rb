@@ -1,5 +1,3 @@
-require 'tyra/tyra'
-
 class VizController < ApplicationController
   layout "visualization"
   helper :viz
