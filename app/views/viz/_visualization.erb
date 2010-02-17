@@ -10,7 +10,7 @@
     tuft = Tuftee('visualization', 620, 400)
              .byBar()
              .add(<%= @ordinal_pack.inspect %>, <%= @cardinal_pack.inspect %>)
-             //.addLinkKeys(<%= @datapack.depvars.inspect %>, <%= @datapack.dimension.inspect %>)
+             .addLinkKeys(<%= @datapack.indvars.inspect %>, <%= @datapack.dimension.inspect %>)
              .render(true);
 
     // interface handlers
@@ -18,7 +18,7 @@
         // console.log("drawGraph: " + js_dp);
         tuft.clear()
             .add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
-            // .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+            .addLinkKeys(js_dp.indvars, js_dp.dimension)
             .render()
      };
     
