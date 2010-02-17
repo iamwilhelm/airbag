@@ -1,0 +1,61 @@
+%div{ :style => "padding-left: 25px;" }
+  %ul#cardinal.menu.horizontal.legend.buttoned
+
+%div#visualization
+
+%div
+  :javascript
+    $(document).ready(
+      function() {
+        tuft = Tuftee('visualization', 620, 400)
+                 .byBar()
+                 .add(#{@ordinal_pack.inspect}, #{@cardinal_pack.inspect})
+                 .addLinkKeys(#{@datapack.indvars.inspect}, #{@datapack.dimension.inspect})
+                 .render(true);
+
+        // interface handlers
+        drawGraph = function(js_dp, textStatus) {
+            // console.log("drawGraph: " + js_dp);
+            tuft.clear()
+                .add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
+                .addLinkKeys(js_dp.indvars, js_dp.dimension)
+                .render();
+        };
+        
+        overlayGraph = function(js_dp, textStatus) {
+            // console.log(js_dp);
+            // console.log(tuft.legend.names);
+            tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
+                .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+                .render();
+        };
+        
+        removeGraph = function(cardinalKey) {
+            tuft.remove(cardinalKey)
+                .removeLinkKeys(cardinalKey)
+                .render();
+        };
+        
+        changeOrdinal = function(ordinalKey, cardinalKeys) {
+            tuft.clear();
+            _.each(cardinalKeys, function(cardinalKey) {
+                       $.get("/viz", { id: cardinalKey, xaxis: ordinalKey },
+                             function(js_dp) {
+                                 tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
+                                     .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+                                     .render();
+                             }, "json");
+                   });
+        };
+        
+        deactivateGraph = function(dataset_name) {
+            alert("deactivate " + dataset_name);
+        };
+        
+    });
+
+%div{ :style => "padding-left: 25px;" }
+  %ul#ordinal.menu.horizontal.legend.buttoned
+    %li
+      = link_to @datapack.axis, viz_path(:id => @datapack.dimension), :"data-remote" =>"true", :"data-update" => "overwriteData"
+

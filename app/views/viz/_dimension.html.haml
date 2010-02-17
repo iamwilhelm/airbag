@@ -1,0 +1,34 @@
+%li.license
+  .sidebar
+    = image_tag "icons/sparkline.png"
+    = link_to "Overlay", viz_path(:id => @dimension.dim_key), :"data-remote" => true, :"data-update-success" => "overlayGraph"
+
+  .details
+    %p.shrink.fade
+      = truncate(@dimension.source_name, :length => 30)
+      %span{ :style => "float: right" }
+        = link_to "source", @dimension.url, "target" => "_blank"
+
+    %h3
+      %a{ :href => "#{viz_path(:id => @dimension.dim_key)}", :"data-remote" => "true", :"data-update-success" => "drawGraph" }
+        = humanized_dimension(@dimension)
+
+    %p.shrink
+      default xaxis by 
+      = @dimension.default
+    
+    %div
+      %a{ :href => "", :"data-remote" => "false", :"data-update" => "#{htmlized_dimension(@dimension)}_description" }
+        = truncate(@dimension.description, :length => 30)
+
+      %p.hidden{ :id => "#{htmlized_dimension(@dimension)}_description" }
+        = @dimension.description
+    
+    %table{ :width => "100%", :style => "font-size: 14px" }
+      %tr
+        %td
+          - 5.times { image_tag "icons/star_empty.png" }
+        %td{ :style => "text-align: right" }
+          %span.shrink.fade
+            = "published #{time_ago_in_words(@dimension.publish_date)} ago"
+

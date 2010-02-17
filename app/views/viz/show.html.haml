@@ -1,0 +1,22 @@
+.container.clear
+  .one_third
+    #search_controls
+      - form_tag(search_viz_path, :method => :get, :"data-remote" => "true", :"data-update" => "search_results") do
+        = text_field_tag :q, nil, :class => "search", :style => "width: 90%"
+
+    #search_results
+      = render :partial => "suggestions"
+
+  .two_third
+    #graph
+      - if @datapack
+        = render :partial => "visualization"
+
+.container.clear
+  = link_to "Debug info", "", :"data-remote" => false, :"data-update" => "debug"
+  #debug.hidden
+    = @dimension_key
+    = debug @metadata
+    = debug @datapack
+
+
