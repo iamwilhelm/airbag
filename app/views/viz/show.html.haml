@@ -13,8 +13,8 @@
         = render :partial => "visualization"
 
 .container.clear
-  = link_to "Debug info", "", :"data-remote" => false, :"data-update" => "debug"
-  #debug.hidden
+  = link_to "Debug info", "", :"data-remote" => false, :"data-update" => "mydebug"
+  #mydebug.hidden
     = @dimension_key
     = debug @metadata
     = debug @datapack
