@@ -14,6 +14,7 @@ class Tyra
   end
 
   # delegate to the responsible object/method
+  # FIXME Why don't you call it delegate then?  Ruby has a delegate module.
   def process(command)
     begin
       cmd = command["cmd"]
