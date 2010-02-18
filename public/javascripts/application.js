@@ -17,6 +17,12 @@ $(document).ready(function() {
             $(".query_results").slideDown("slow");
         });
 
+        $(".query_control input.search").focus(function() {
+            if ($(this).val() != "") {
+                $(".query_results").slideDown("slow");
+            }
+        });
+
         $("a.draw_dimension").live("click", function() {
             $(".query_results").slideUp("slow");
         });
