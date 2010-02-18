@@ -145,7 +145,7 @@ var Tuftee =
                     return inst.dataMatrix.activeOrdinalValues()[this.index]; 
                 });
             
-            this.vis.add(pv.Rule)
+            this.ylabels = this.vis.add(pv.Rule)
                 .data(function() { 
                     return inst.yAxis.ticks(); 
                 })
@@ -175,6 +175,7 @@ var Tuftee =
                            .range(0, this.canvasHeight);
             
             this._adjustXaxis();
+            this._adjustYaxis();
             
             (enable === true) ? this.vis.render() : this.debugging();
             
@@ -259,6 +260,13 @@ var Tuftee =
                     .textBaseline("center");
                 this.vis.bottom(this.axisHeight);
             }
+        },
+
+        /* Adjust yAxis width to contain the entire label */
+        _adjustYaxis: function() {
+            // assumed 7px per character
+            this.axisWidth = Math.round(Math.log(pv.max(this.yAxis.ticks())) / Math.LN10 * 7);
+            this.vis.left(this.axisWidth);
         }
         
     };
