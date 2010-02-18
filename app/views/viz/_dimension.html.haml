@@ -10,7 +10,7 @@
         = link_to "source", @dimension.url, "target" => "_blank"
 
     %h3
-      %a{ :href => "#{viz_path(:id => @dimension.dim_key)}", :"data-remote" => "true", :"data-update-success" => "drawGraph" }
+      %a.draw_dimension{ :href => "#{viz_path(:id => @dimension.dim_key)}", :"data-remote" => "true", :"data-update-success" => "drawGraph" }
         = humanized_dimension(@dimension)
 
     %p.shrink

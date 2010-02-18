@@ -152,15 +152,19 @@ ul.menu.legend.buttoned li:hover {
 /* form stylings */
 
 input.search {
-    background-image: url('/images/icons/search.png');
-    Background-position: 4px 4px;
-    background-repeat: none;
-    padding: 4px 0px 4px 22px;
+   background-image: url('/images/icons/search.png');
+   Background-position: 4px 4px;
+   background-repeat: none;
+   padding: 4px 0px 4px 22px;
 }
 
-/* result stylings */
+/* search result stylings */
 
-#search_results {
-    height: 450px;
-    overflow: scroll;
+.query_results {
+   position: absolute;
+   background-color: white;
+   overflow: scroll;
+   height: 450px;
+   width: 450px;
 }
+

@@ -241,14 +241,14 @@ var Tuftee =
         _adjustXaxis: function() {
             // for now, we hard code it at 10 bars before we rotate
             if ( this.dataMatrix.maxDataLength() < 10 ) {
-                this.axisHeight = 40;
+                this.axisHeight = 30;
                 this.xlabels
                     .textAlign("center")
                     .textAngle(0)
                     .textBaseline("top");
                 this.vis.bottom(this.axisHeight);
             } else {
-                this.axisHeight = 100;
+                this.axisHeight = 50; // this need to ajdust to labelWidth
                 var labelWidth = 10;
                 var barWidth = this.axisWidth / this.dataMatrix.maxDataLength();
                 var labelAngle = Math.acos(barWidth / labelWidth);

@@ -1,22 +1,31 @@
-.container.clear
-  .one_third
-    #search_controls
-      - form_tag(search_viz_path, :method => :get, :"data-remote" => "true", :"data-update" => "search_results") do
-        = text_field_tag :q, nil, :class => "search", :style => "width: 90%"
-
-    #search_results
+.container.clear{ :style => "background-color: red;" }
+  .half
+    .query_control
+      - form_tag(search_viz_path, :method => :get, :"data-remote" => "true", :"data-update" => "dimension_results") do
+        = text_field_tag :q, nil, :class => "search", :style => "width: 300px"
+        = link_to "Browse"
+    #dimension_results.query_results.hidden
       = render :partial => "suggestions"
 
-  .two_third
-    #graph
-      - if @datapack
-        = render :partial => "visualization"
+  .half{ :style => "text-align: right" }
+    = image_tag "", :class => "lorem", :"data-size" => "16x16"
+    = "Print | "
+    = image_tag "", :class => "lorem", :"data-size" => "16x16"
+    = "Send | "
+    = image_tag "", :class => "lorem", :"data-size" => "16x16"
+    = "Link"
+    
+.container
+  #graph
+    - if @datapack
+      = render :partial => "visualization"
 
-.container.clear
-  = link_to "Debug info", "", :"data-remote" => false, :"data-update" => "mydebug"
-  #mydebug.hidden
-    = @dimension_key
-    = debug @metadata
-    = debug @datapack
+- if RAILS_ENV == "development"
+  .container.clear
+    = link_to "Debug info", "", :"data-remote" => false, :"data-update" => "mydebug"
+    #mydebug.hidden
+      = @dimension_key
+      = debug @metadata
+      = debug @datapack
 
 
