@@ -335,7 +335,10 @@ var Tuftee =
         return T.Dimension.transformer("_")(dimKey);
     };
     T.Dimension.toName = function(dimKey) {
-        return T.Dimension.transformer(" ")(dimKey);
+        keyParts = dimKey.split(/\|+/);
+        datasourceName = keyParts[0];
+        dimensionName = keyParts[1].replace(/_/, " ");
+        return dimensionName;
     };
     
     /* Stores the matrix of datasets that are currently visualized */
