@@ -1,7 +1,7 @@
 %li.license
   .sidebar
     = image_tag "icons/sparkline.png"
-    = link_to "Overlay", viz_path(:id => @dimension.dim_key), :"data-remote" => true, :"data-update-success" => "overlayGraph"
+    = link_to "Overlay", viz_path(:id => @dimension.dim_key), :class => "draw_dimension", :"data-remote" => true, :"data-update-success" => "overlayGraph"
 
   .details
     %p.shrink.fade
