@@ -14,18 +14,28 @@ $(document).ready(function() {
     
     var searchResultMechanics = function() {
         $(".query_control form").submit(function() {
-            $(".query_results").slideDown("slow");
+            $(".query_results").slideDown("fast");
         });
 
         $(".query_control input.search").focus(function() {
             if ($(this).val() != "") {
-                $(".query_results").slideDown("slow");
+                $(".query_results").slideDown("fast");
             }
         });
 
-        $("a.draw_dimension").live("click", function() {
-            $(".query_results").slideUp("slow");
+        $(".query_control a#close_query").click(function() {
+            $(".query_results").slideUp("fast");
+            return false;
         });
+
+        // $(".query_control input.search").blur(function() {
+        //     $(".query_results").slideUp("fast")
+        // });
+
+        // // FIXME live doesn't catch clicks in FF or Safari
+        // $("a.draw_dimension").live("click", function() {
+        //     $(".query_results").slideUp("fast");
+        // });
     };
     searchResultMechanics();
 

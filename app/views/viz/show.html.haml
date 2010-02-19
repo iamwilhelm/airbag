@@ -3,6 +3,7 @@
     .query_control
       - form_tag(search_viz_path, :method => :get, :"data-remote" => "true", :"data-update" => "dimension_results") do
         = text_field_tag :q, nil, :class => "search", :style => "width: 300px"
+        = link_to "Close", "", :id => "close_query"
         = " Browse"
     #dimension_results.query_results.hidden
       = render :partial => "suggestions"
