@@ -16,8 +16,9 @@ class VizController < ApplicationController
 
   def show
     @dimension_key = params[:id] || "us_population|us_population"
+    @xaxis = params[:xaxis] || nil
     
-    @datapack = Dimension.get_data(@dimension_key)
+    @datapack = Dimension.get_data(@dimension_key, @xaxis)
     
     @ordinal_pack = @datapack.ordinal_pack
     @cardinal_pack = @datapack.cardinal_pack

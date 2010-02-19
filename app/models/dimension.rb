@@ -14,12 +14,12 @@ class Dimension
     end
 
     # returns a datapack with its metadata
-    def get_data(dimension_key)
+    def get_data(dimension_key, xaxis = nil)
       # TODO needs to be done more automatically
       connect_tyra
       
       metadata = @tyra.get_metadata(to_dataset_name(dimension_key))
-      data = @tyra.get_data(dimension_key)
+      data = @tyra.get_data(dimension_key, xaxis)
       Datapack.new(data.merge(metadata))
     end
 

@@ -27,7 +27,7 @@
             // console.log(js_dp);
             // console.log(tuft.legend.names);
             tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
-                .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+                .addLinkKeys(js_dp.indvars, js_dp.dimension)
                 .render();
 
             $("#mydebug").append("<p>" + JSON.stringify(js_dp) + "</p>");
@@ -45,7 +45,7 @@
                        $.get("/viz", { id: cardinalKey, xaxis: ordinalKey },
                              function(js_dp) {
                                  tuft.add([js_dp.xaxis, js_dp.xaxislabels], [js_dp.dimension, js_dp.data])
-                                     .addLinkKeys(js_dp.ordinals, js_dp.dimension)
+                                     .addLinkKeys(js_dp.indvars, js_dp.dimension)
                                      .render();
                              }, "json");
                    });
