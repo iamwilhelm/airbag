@@ -12,6 +12,7 @@ $(document).ready(function() {
     };
     datacolumnHighlighter();
     
+    // the mechanics of UI for searching
     var searchResultMechanics = function() {
         $(".query_control form").submit(function() {
             $(".query_results").slideDown("fast");
