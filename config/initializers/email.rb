@@ -1,13 +1,22 @@
 ActionMailer::Base.delivery_method = :smtp
 
-if RAILS_ENV == "production" || RAILS_ENV == "development"
+case RAILS_ENV
+when "development"
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.emailsrvr.com",
-    :port => "25",
+    :port => "2525",
     :domain => "graphbug.com",
     :user_name => "graphbug@graphbug.com",
     :password => "tho3ez5Z",
-    :authentication => :plain,
-    :enable_starttls_auto => false
+    :authentication => :cram_md5,
+  }
+when "production"
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.emailsrvr.com",
+    :port => "2525",
+    :domain => "graphbug.com",
+    :user_name => "graphbug@graphbug.com",
+    :password => "tho3ez5Z",
+    :authentication => :cram_md5,
   }
 end
