@@ -41,12 +41,12 @@ class Merge
     for ff in @datafiles do
       File.open(ff, "r") do |fin|
         # parse header, track dependent variables
-        header = fin.gets.split(",").map { |x| x.strip }
+        header = to_fields(fin.gets)
         header.each { |hh| @depcols.push(hh) if !@indcols.include?(hh) }
 
         # parse each record
         while record = fin.gets
-          fields = record.split(",").map { |x| x.strip }
+          fields = to_fields(record)
           key = fields[0] # hard coded ind col
 
           # add each dependent variable to the dataset

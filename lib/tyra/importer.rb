@@ -33,12 +33,12 @@ class Importer
       # read meta data
       while str = fin.gets.strip
         break if str == ""
-        fields = str.split(",").map{ |ii| ii.strip }
-        meta[fields[0]] = get_paramval(fields)
+        fields = to_fields(str)
+        meta[fields.first] = get_paramval(fields)
       end
 
       # read col headers, extract units
-      headers = fin.gets.split(",").map{ |ii| ii.strip }
+      headers = to_fields(fin.gets)
       for ii in 0...headers.length do
         hdr_with_units = /(.*)\((.*)\)/.match(headers[ii])
         if !hdr_with_units.nil?
@@ -50,12 +50,12 @@ class Importer
 
       # read row data
       while str = fin.gets
-        fields = headers.zip(str.split(",").map{ |ii| ii.strip })
         fields.each{ |ff| data[ff[0]].push ff[1] }
+        fields = headers.zip(to_fields(str))
       end
     end
 
-    # rearrange stuff
+    # find dependent variables
     colnames = data.keys
     indvarnames = meta["indvars"] || []
     depvarnames = colnames - indvarnames

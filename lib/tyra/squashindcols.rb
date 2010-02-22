@@ -47,7 +47,7 @@ File.open(fname, "r") do |fin|
   while (str = fin.gets.strip) != ""; end
 
   # read col headers
-  cols = fin.gets.split(",").map{ |ii| ii.strip }
+  cols = to_fields(fin.gets)
 
   # save ind col indices, and list of data cols
   indcolnames.each{ |ii| indcols[ii] = [] }
@@ -55,7 +55,7 @@ File.open(fname, "r") do |fin|
 
   # parse each row
   while str = fin.gets
-    fields = str.split(",").map{ |ii| ii.strip }
+    fields = to_fields(str)
 
     # store independent col values
     indcolnames.each{ |ii| indcols[ii].push(fields[cols.index(ii)]) }
