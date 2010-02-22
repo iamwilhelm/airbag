@@ -37,13 +37,7 @@ class Bender
       command, *fields = commandline.split(' ')
 
       # convert fields to numbers if they're a number
-      fields.map! do |field| 
-        if numeric?(field)
-          field.to_i
-        else
-          field
-        end
-      end
+      fields.map! { |field| trynumber field }
 
       # dynamically call method based on command name
       self.send("#{command}_cmd", *fields)
@@ -55,6 +49,16 @@ class Bender
 
   private  # ---- the rest are private methods ----
 
+  # try to conver to number
+  def trynumber(obj)
+    if numeric?(obj)
+      obj.to_i
+    else
+      obj
+    end
+  end
+
+  # tell if its a number
   def numeric?(obj)
     true if Float(obj) rescue false
   end
