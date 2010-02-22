@@ -3,6 +3,7 @@
 VER = "0.0.2"
 
 require "string_utils"
+require "misc_utils"
 
 # bender
 # bends source data into a format the importer understands
@@ -14,6 +15,7 @@ require "string_utils"
 
 class Bender
   include StringUtils
+  include MiscUtils
   
   def initialize()
     @config = nil
@@ -48,11 +50,7 @@ class Bender
   end
 
   private  # ---- the rest are private methods ----
-
-  def numeric?(obj)
-    true if Float(obj) rescue false
-  end
-
+  
   def each_line_in_range(linenum_start, linenum_end)
     (linenum_start..linenum_end).reject do |line|
       @droppedlines.include? line
