@@ -4,8 +4,5 @@
   %div
     = link_to "Back to Datasources", datasources_path
 
-  %div
-    #table_info.half
-      = render :partial => "datatables/index"
-
-    #remote_page.half
+  #table_info
+    = render :partial => "datatables/index"
