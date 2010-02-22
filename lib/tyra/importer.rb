@@ -50,8 +50,8 @@ class Importer
 
       # read row data
       while str = fin.gets
-        fields.each{ |ff| data[ff[0]].push ff[1] }
         fields = headers.zip(to_fields(str))
+        fields.each { |name, value| data[name].push(value) }
       end
     end
 
