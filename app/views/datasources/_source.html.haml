@@ -4,6 +4,6 @@
     %span
       = link_to "Edit", edit_datasource_path(@datasource), :"data-remote" => "true", :"data-update" => "datasource_info"
   
-  %h3= @datasource.url
+  %h3= link_to @datasource.url, @datasource.url, :target => "_blank"
   %p= @datasource.last_crawled_at
 
