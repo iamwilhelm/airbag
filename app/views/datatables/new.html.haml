@@ -1,9 +1,8 @@
 .container
   %div.note{ :style => "float: right" }
-    = link_to "See Original Page", @datasource.url, :target => "_blank"
-  %h2 Select Detected HTML Table to Import
-  %p
     = link_to "&lsaquo; Back to datasource", datasource_path(@datasource)
+  %h2 Select Detected HTML Table to Import
+  %p= link_to "See Original Page", @datasource.url, :target => "_blank"
 
 .container.clear
   - if flash[:error]
