@@ -2,7 +2,21 @@
   %div.note{ :style => "float: right" }
     = link_to "&lsaquo;&lsaquo; Back to Datasources", datasources_path
 
-  = render :partial => "source"
+  #datasource_info
+    %h1
+      = truncate(@datasource.title, :length => 40)
+      %span
+        = link_to "Edit", edit_datasource_path(@datasource), :"data-remote" => "true", :"data-update" => "datasource_info"
+
+    %table.listing
+      %tr
+        %th URL
+        %th # of Datatables
+        %th Last crawled at
+      %tr
+        %td= link_to "See Original Page", @datasource.url, :target => "_blank"
+        %td= @datasource.datatables.count
+        %td= time_ago_in_words(@datasource.last_crawled_at) if @datasource.last_crawled_at
 
 .container
   #table_info
