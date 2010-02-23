@@ -3,7 +3,8 @@
     = truncate(@datasource.title, :length => 40)
     %span
       = link_to "Edit", edit_datasource_path(@datasource), :"data-remote" => "true", :"data-update" => "datasource_info"
+      |
+      = link_to "See Original Page", @datasource.url, :target => "_blank"
   
-  %h3= link_to @datasource.url, @datasource.url, :target => "_blank"
   %p= @datasource.last_crawled_at
 
