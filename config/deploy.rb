@@ -60,6 +60,7 @@ namespace :deploy do
   desc "tasks to do after updating the code"
   task :after_update_code, :roles => :app do
     copy_config_file("database.yml")
+    copy_config_file("email.yml")
   end
   
   task :after_deploy, :roles => :app do
