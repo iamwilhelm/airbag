@@ -1,11 +1,23 @@
 .container
-  = render :partial => "source"
+  %div.note{ :style => "float: right" }
+    = link_to "&lsaquo;&lsaquo; Back to Datasources", datasources_path
 
-  %div
-    = link_to "Back to Datasources", datasources_path
+  #datasource_info
+    %h1
+      = truncate(@datasource.title, :length => 40)
+      %span
+        = link_to "Edit", edit_datasource_path(@datasource), :"data-remote" => "true", :"data-update" => "datasource_info"
 
-  %div
-    #table_info.half
-      = render :partial => "datatables/index"
+    %table.listing
+      %tr
+        %th URL
+        %th # of Datatables
+        %th Last crawled at
+      %tr
+        %td= link_to "See Original Page", @datasource.url, :target => "_blank"
+        %td= @datasource.datatables.count
+        %td= time_ago_in_words(@datasource.last_crawled_at) if @datasource.last_crawled_at
 
-    #remote_page.half
+.container
+  #table_info
+    = render :partial => "datatables/index"

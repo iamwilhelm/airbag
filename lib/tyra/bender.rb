@@ -148,7 +148,7 @@ class Bender
     stateabbrev = []
     File.open("states.txt", "r") do |fin|
       fin.each_line do |ll|
-        stateabbrev.push ll.split(",").map{ |x| x.strip }
+        stateabbrev.push to_fields(ll)
       end
     end
     @datafile.each do |ll|

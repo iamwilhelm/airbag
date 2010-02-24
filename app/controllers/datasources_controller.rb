@@ -20,7 +20,8 @@ class DatasourcesController < ApplicationController
       end
       @datasource.save!
     end
-    
+
+    flash[:notice] = "Created new datasource"
     redirect_to datasource_path(:id => @datasource)
   end
 
@@ -41,6 +42,8 @@ class DatasourcesController < ApplicationController
   def update
     @datasource = Datasource.find(params[:id])
     @datasource.update_attributes!(params[:datasource])
+
+    flash[:notice] = "Updated datasource properties"
     redirect_to datasource_path(:id => @datasource)
   end
 
@@ -48,6 +51,8 @@ class DatasourcesController < ApplicationController
   def destroy
     @datasource = Datasource.find(params[:id])
     @datasource.destroy
+
+    flash[:notice] = "Destroyed datasource"
     redirect_to datasources_path
   end
 

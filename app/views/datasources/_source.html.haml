@@ -1,9 +1,0 @@
-#datasource_info
-  %h1
-    = truncate(@datasource.title, :length => 40)
-    %span
-      = link_to "Edit", edit_datasource_path(@datasource), :"data-remote" => "true", :"data-update" => "datasource_info"
-  
-  %h3= @datasource.url
-  %p= @datasource.last_crawled_at
-
