@@ -2,10 +2,10 @@
 
 %table.listing
   %tr
-    %td Name
-    %td Units
-    %td Import
-    %td Delete
+    %th Name
+    %th Units
+    %th Import
+    %th Delete
   - unless @datasource.datatables.empty?
     - @datasource.datatables.each do |dt|
       %tr{ :class => cycle("even", "odd") }

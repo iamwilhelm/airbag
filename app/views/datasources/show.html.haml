@@ -10,13 +10,13 @@
 
     %table.listing
       %tr
-        %th URL
         %th # of Datatables
         %th Last crawled at
+        %th URL
       %tr
-        %td= link_to "See Original Page", @datasource.url, :target => "_blank"
         %td= @datasource.datatables.count
         %td= time_ago_in_words(@datasource.last_crawled_at) if @datasource.last_crawled_at
+        %td= link_to "See Original Page", @datasource.url, :target => "_blank"
 
 .container
   #table_info
