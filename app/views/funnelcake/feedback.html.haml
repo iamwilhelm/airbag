@@ -1,0 +1,15 @@
+.half
+  .container
+    %h1 Give us feedback
+    %p
+      %ul
+        %li{ :style => "font-size: 18px" }
+          :plain
+            Please 
+            #{mail_to "wil@graphbug.com", "email us", :subject => "[graphbug] Hello, here's my feedback", :encode => "hex", :replace_at => " at ", :replace_dot => " dot "}
+            if you have any questions.  We write back.
+
+.half
+  .container
+    %p
+      = image_tag "decor/screenshot_closeup.png"

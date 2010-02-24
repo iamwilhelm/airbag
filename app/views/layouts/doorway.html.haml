@@ -1,0 +1,63 @@
+<!doctype html>
+%html{ :lang => "en"}
+  %head
+    %meta{ :charset => "utf-8" }
+    %title Graphbug - Visualize Data
+
+    = stylesheet_link_tag "css_commons/reset-fonts-grids.css"
+    = stylesheet_link_tag "css_commons/three_column_fixed_layout.css"
+    = stylesheet_link_tag "css_commons/widgets.css"
+    = stylesheet_link_tag "bugs_life_theme.css"
+
+    = javascript_include_tag "jquery-1.3.2.min.js"
+    = javascript_include_tag "french_maid.js"
+
+  %body
+    #spacer{ :style => "height: 40px;" }
+      &nbsp; <!-- This is a hack to get some top spacing -->
+
+    .frame
+      .header
+        .container{ :style => "float: left" }
+          %h1 Graphbug
+
+        .nav.container{ :style => "float: right" }
+          %ul.menu.horizontal.top
+            %li= link_to "home", root_path
+            %li= link_to "benefits", benefits_funnelcake_path
+            <!-- <li><a href="#">help</a></li> -->
+            <!-- <li><a href="#">login</a></li> -->
+          &nbsp;
+      
+      = render :partial => "layouts/app_notification"
+      
+      = yield :splash
+
+      #content.section
+        = yield
+      
+      .footer.section
+        .container
+          %ul.menu.horizontal
+            %li= link_to "About", about_funnelcake_path
+            %li= link_to "Feedback", feedback_funnelcake_path
+            <!-- <li><a href="http://blog.graphbug.com">News</a></li> -->
+            %li= link_to "Status", "http://twitter.com/graphbug"
+            <!-- <li><a href="#">Developers</a></li> -->
+
+        .half
+          .container
+            Graphbug &#169; 2009, 2010
+
+        .half{ :style => "text-align: right" }
+          .container
+            = render :partial => "layouts/analytics"
+            %a(href="" data-remote="false" data-update="search" style="color: black; text-decoration: none;")
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        #search.container.hidden.clear
+          - form_tag(search_viz_path, :method => :get) do
+            = text_field_tag :q, nil, :class => "search", :style => "width: 90%"
+
+        .container.clear
+          &nbsp;

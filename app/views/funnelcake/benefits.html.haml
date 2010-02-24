@@ -1,33 +1,27 @@
-<div class="full">
-  <div class="container">
-    <h1>Benefits</h1>
-  </div>
-</div>
-<div class="half">
-  <div class="container">
-    <h2>Easy access to public data</h2>
-    <p>
+.full
+  .container
+    %h1 Benefits
+
+.half
+  .container
+    %h2 Easy access to public data
+    %p
       Public data is available but hard to find, parse, clean, and graph.  
       We make it easy to get public data just by filling in a text field.
-    </p>
     
-    <h2>Visually compare data</h2>
-    <p>
+    %h2 Visually compare data
+    %p
       Relationships between raw datasets are hard to understand.  
       Our visualizations make it easy to compare different datasets 
       and understand them.
-    </p>
 
-    <h2>Explore data</h2>
-    <p>
+    %h2 Explore data
+    %p
       Datasets are frozen in graphs and charts from the print era.  
       We make it easy to manipulate and combine datasets, so you can 
       explore and fly through data.
-    </p>
-  </div>
-</div>
-<div class="half">
-  <div class="container">
-    <%= image_tag "decor/screenshot.png" %>
-  </div>
-</div>
+
+.half
+  .container
+    = image_tag "decor/screenshot.png"
+
