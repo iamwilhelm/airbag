@@ -35,6 +35,10 @@ class Tyra
 
   # shortcuts for convenience
 
+  def import(dataset)
+    process( {"cmd" => "import", "dataset" => dataset} )
+  end
+
   def search(search_str)
     process( {"cmd" => "search", "search_str" => search_str} )
   end
@@ -46,6 +50,7 @@ class Tyra
   def get_data(dimension, xaxis=nil, op=nil)
     process( {"cmd" => "get_data", "dimension" => dimension, "xaxis" => xaxis, "op" => op} )
   end
+
 end
 
 # --------- run main ---------

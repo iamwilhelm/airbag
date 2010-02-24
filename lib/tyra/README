@@ -1,0 +1,8 @@
+tyra: wrapper for importing and retrieving data from the datawarehouse (dw)
+
+importer: imports data into the dw.  can read a preformatted csv or
+  accept a datastructure.
+
+retriever: retrieves from the dw.  can search for datasets or retrieve data.
+
+bender: manipulate txt or csv files using instructions from and config file.
