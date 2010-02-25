@@ -28,10 +28,25 @@ class FunnelcakeController < ApplicationController
 
   # POST
   # signs up to be notified when we launch
-  def launch_notify
+  def notify_launch
     SalesMailer.deliver_notify_when_launch_email(params[:email])
     flash[:notice] = "Thanks for being interested!  We'll contact you when we have something up."
     redirect_to root_path
   end
 
+  # POST
+  # tells us what sorts of datasets people would be interested in
+  def suggest_dataset
+    @body = params[:suggestion][:body]
+    @email = params[:suggestion][:email]
+    raise Exception.new("No email address") if @email.blank?
+    
+    SalesMailer.deliver_suggest_dataset_email(params[:suggestion])
+    flash[:notice] = "Thanks for letting us know!  We'll try find those datasets"
+    redirect_to root_path
+  rescue Exception => e
+    flash[:error] = "Please leave your email address, so we can tell you when we got what you want"
+    render :action => "index"
+  end
+  
 end

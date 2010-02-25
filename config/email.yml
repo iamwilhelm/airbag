@@ -1,0 +1,17 @@
+# settings for email
+development:
+  delivery_method: :test
+
+test:
+  delivery_method: :test
+
+# sample production settings.  Actual production settings reside on server and 
+# are copied over when deployed
+production:
+  delivery_method: "smtp"
+  address: "smtp.emailsrvr.com"
+  port: "2525"
+  domain: "graphbug.com"
+  user_name: "graphbug@graphbug.com"
+  password: "somepassword"
+  authentication: "cram_md5"
