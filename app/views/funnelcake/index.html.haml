@@ -2,11 +2,18 @@
   .section.splash
     .half
       .container
-        %h2 Easily Find and Visualize Public Data
+        %h2 Easily Visualize Public Data
         %p
           There's lots of public data out there, but there's <br/>
           no quick way to visually explore that data.
-        %p We're here to help.
+        %p 
+          We'd like to help.
+        %div
+          - form_tag(launch_notify_funnelcake_path, :method => :post) do
+            .headroom.legroom
+              = text_field_tag("email", nil, :class => "balloon", :style => "width: 300px", :placeholder => "Leave your email here.")
+            = submit_tag "Notify me when you launch", :class => "balloon", :style => "font-size: 1.2em; width: 300px"
+
 
 .half
   .container
@@ -18,15 +25,9 @@
     %h2 How do I do that?
     %p
       You look for a set of data, we pull it up and graph it for you.  You can 
-      also overlay different datasets.  You can also submit new datasets for us 
-      to process.
+      also overlay different datasets.  If we don't have the data you're looking for,
+      tell us and we'll try to go find it.
     
-    %h2 What datasets?
-    %p
-      Currently, we're starting with public government data in CSV files, and 
-      other low hanging fruit.  If there's a dataset that you'd like to be 
-      included, you can request it in our queue.
-
     %h2 Where is it?
     %p
       It's currently under development, and we'd like you to be an alpha tester.
@@ -35,11 +36,9 @@
 
 .half
   .container
-    %h2 Interested in easily visualizing public datasets?
-    %p We'll notify you when we launch.
-    %div
-      - form_tag(launch_notify_funnelcake_path, :method => :post) do
-        .headroom.legroom
-          = text_field_tag("email", nil, :class => "balloon", :style => "width: 300px", :placeholder => "Leave your email, we don't spam.")
-        = submit_tag "Send", :class => "balloon", :style => "font-size: 1.2em; width: 300px"
+    %h2 What datasets?
+    %p
+      Currently, we're starting with public government data in CSV files, and 
+      other low hanging fruit.  If there's a dataset that you'd like to be 
+      included, #{mail_to "wil@graphbug.com", "tell us"}.
 
