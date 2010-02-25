@@ -31,10 +31,20 @@ class FunnelcakeControllerTest < ActionController::TestCase
   end
 
   test "can notify developers of request to notify when launch" do
-    post :notify_launch, :email => "wil@graphbug.com"
-    assert_equal 1, ActionMailer::Base.deliveries.length
+    assert_difference("ActionMailer::Base.deliveries.length") do
+      post :notify_launch, :email => "wil@graphbug.com"
+    end
     assert_redirected_to root_path
   end
+
+  test "can suggest datasets from frontpage" do
+    assert_difference("ActionMailer::Base.deliveries.length", 0) do
+      post :suggest_dataset, :suggestion => { :email => "", :body => "I'd like to see some beer data" }
+    end
+    
+    assert_difference("ActionMailer::Base.deliveries.length") do
+      post :suggest_dataset, :suggestion => { :email => "wil@graphbug.com", :body => "I'd like to see some beer data" }
+    end
     assert_redirected_to root_path
   end
   

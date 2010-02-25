@@ -34,4 +34,19 @@ class FunnelcakeController < ApplicationController
     redirect_to root_path
   end
 
+  # POST
+  # tells us what sorts of datasets people would be interested in
+  def suggest_dataset
+    @body = params[:suggestion][:body]
+    @email = params[:suggestion][:email]
+    raise Exception.new("No email address") if @email.blank?
+    
+    SalesMailer.deliver_suggest_dataset_email(params[:suggestion])
+    flash[:notice] = "Thanks for letting us know!  We'll try find those datasets"
+    redirect_to root_path
+  rescue Exception => e
+    flash[:error] = "Please leave your email address, so we can tell you when we got what you want"
+    render :action => "index"
+  end
+  
 end

@@ -6,12 +6,10 @@
         %p
           There's lots of public data out there, but there's <br/>
           no quick way to visually explore that data.
-        %p 
-          We'd like to help.
-        %div
+        %div{ :style => "margin-top: 3em" }
           - form_tag(notify_launch_funnelcake_path, :method => :post) do
             .headroom.legroom
-              = text_field_tag("email", nil, :class => "balloon", :style => "width: 300px", :placeholder => "Leave your email here.")
+              = text_field_tag("email", nil, :class => "balloon", :style => "width: 300px; padding: 0.25em;", :placeholder => "Leave your email here.")
             = submit_tag "Notify me when you launch", :class => "balloon", :style => "font-size: 1.2em; width: 300px"
 
 .half
@@ -39,5 +37,15 @@
     %p
       Currently, we're starting with public government data in CSV files, and 
       other low hanging fruit.  If there's a dataset that you'd like to be 
-      included, #{mail_to "wil@graphbug.com", "tell us"}.
-
+      included, help us out and tell us:
+    %div
+      %h3 What datasets are you interested in?
+      - form_tag(suggest_dataset_funnelcake_path, :class => "cmxform", :method => :post) do
+        %ol.legroom
+          %li
+            = label_tag("suggestion[body]", "Dataset suggestions:")
+            = text_area_tag("suggestion[body]", @body, :style => "width: 245px; padding: 0.25em", :rows => 6)
+          %li
+            = label_tag("suggestion[email]", "Your email address:")
+            = text_field_tag("suggestion[email]", @email, :style => "width: 240px; padding: 0.25em;")
+        = submit_tag("Suggest", :style => "width: 200px;")

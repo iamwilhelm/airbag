@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
     funnelcake.about_funnelcake "about", :action => "about"
     funnelcake.feedback_funnelcake "feedback", :action => "feedback"
     funnelcake.notify_launch_funnelcake "notify_launch", :action => "notify_launch"
+    funnelcake.suggest_dataset_funnelcake "suggest_dataset", :action => "suggest_dataset"
   end
 
   # visualization routes
