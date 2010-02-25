@@ -9,11 +9,10 @@
         %p 
           We'd like to help.
         %div
-          - form_tag(launch_notify_funnelcake_path, :method => :post) do
+          - form_tag(notify_launch_funnelcake_path, :method => :post) do
             .headroom.legroom
               = text_field_tag("email", nil, :class => "balloon", :style => "width: 300px", :placeholder => "Leave your email here.")
             = submit_tag "Notify me when you launch", :class => "balloon", :style => "font-size: 1.2em; width: 300px"
-
 
 .half
   .container

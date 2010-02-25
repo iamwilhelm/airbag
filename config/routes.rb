@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
     funnelcake.help_funnelcake "help", :action => "help"
     funnelcake.about_funnelcake "about", :action => "about"
     funnelcake.feedback_funnelcake "feedback", :action => "feedback"
-    funnelcake.launch_notify_funnelcake "launch_notify", :action => "launch_notify"
+    funnelcake.notify_launch_funnelcake "notify_launch", :action => "notify_launch"
   end
 
   # visualization routes

@@ -31,8 +31,10 @@ class FunnelcakeControllerTest < ActionController::TestCase
   end
 
   test "can notify developers of request to notify when launch" do
-    post :launch_notify, :email => "wil@graphbug.com"
-    assert ActionMailer::Base.deliveries.length == 1
+    post :notify_launch, :email => "wil@graphbug.com"
+    assert_equal 1, ActionMailer::Base.deliveries.length
+    assert_redirected_to root_path
+  end
     assert_redirected_to root_path
   end
   

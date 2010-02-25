@@ -28,7 +28,7 @@ class FunnelcakeController < ApplicationController
 
   # POST
   # signs up to be notified when we launch
-  def launch_notify
+  def notify_launch
     SalesMailer.deliver_notify_when_launch_email(params[:email])
     flash[:notice] = "Thanks for being interested!  We'll contact you when we have something up."
     redirect_to root_path
