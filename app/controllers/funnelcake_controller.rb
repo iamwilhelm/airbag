@@ -29,9 +29,14 @@ class FunnelcakeController < ApplicationController
   # POST
   # signs up to be notified when we launch
   def notify_launch
+    raise Exception.new("No email address") if params[:email] == "Leave your email here."
+    
     SalesMailer.deliver_notify_when_launch_email(params[:email])
     flash[:notice] = "Thanks for being interested!  We'll contact you when we have something up."
     redirect_to root_path
+  rescue Exception => e
+    flash[:error] = "I think you forgot to enter in an email address."
+    render :action => "index"    
   end
 
   # POST
