@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
+require 'squash'
 require 'misc_utils'
 require 'string_utils'
 
@@ -72,7 +73,12 @@ class Importer
   end
 
   # stuff dataset into redis
-  def import(dataset)
+  def import(dataset, new_indvar_names)
+    if !new_indvar_names.empty?
+      squasher = Squash.new
+      dataset = squasher.squash(dataset, new_indvar_names)
+    end
+
     meta = dataset["meta"]
     data = dataset["data"]
 
