@@ -2,6 +2,7 @@
 
 VER = "0.0.2"
 
+$LOAD_PATH << File.dirname(__FILE__)
 require "string_utils"
 require "misc_utils"
 

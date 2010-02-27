@@ -19,6 +19,7 @@ class Tyra
     begin
       case command["cmd"]
       when "remove" then Importer.new(@base_db).remove(command["dataset"])
+      when "import" then Importer.new(@base_db).import(command["dataset"], command["new_indvar_names"])
       when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
       when "search" then Retriever.new(@base_db).search(command["search_str"])
       when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dimension"])
@@ -34,8 +35,8 @@ class Tyra
 
   # shortcuts for convenience
 
-  def import(dataset)
-    process( {"cmd" => "import", "dataset" => dataset} )
+  def import(dataset, new_indvar_names)
+    process( {"cmd" => "import", "dataset" => dataset, "new_indvar_names" => new_indvar_names} )
   end
 
   def search(search_str)

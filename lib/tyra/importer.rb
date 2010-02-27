@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
+require 'squash'
 require 'misc_utils'
 require 'string_utils'
 
@@ -19,7 +20,7 @@ class Importer
   end
 
   # read csv file into import datastructure
-  def import_csv(fname)
+  def read_csv(fname)
     if !File.exists? fname
       raise "file not found"
     end
@@ -56,19 +57,28 @@ class Importer
     end
 
     # find dependent variables
-    colnames = data.keys
+    colnames = data.keys.sort
     indvarnames = meta["indvars"] || []
     depvarnames = colnames - indvarnames
     meta["depvars"] = depvarnames
 
-    import({
-              "meta" => meta,
-              "data" => data
-            })
+    {
+      "meta" => meta,
+      "data" => data
+    }
+  end
+
+  def import_csv(fname)
+    import(read_csv(fname));
   end
 
   # stuff dataset into redis
-  def import(dataset)
+  def import(dataset, new_indvar_names)
+    if !new_indvar_names.empty?
+      squasher = Squash.new
+      dataset = squasher.squash(dataset, new_indvar_names)
+    end
+
     meta = dataset["meta"]
     data = dataset["data"]
 
