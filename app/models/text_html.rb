@@ -2,21 +2,11 @@
 # and cleaned in order to extract the data they contain
 class TextHtml < Datasource
   
-  # returns a filtered safe response body without scripts
-  def safe_body(reload = false)
-    rm_script_tags(raw_body(reload))
-  end
-  
   # encapulates a response body in an Hpricot object so it can be traversed
   def document(reload = false)
     @doc = reload || @doc.nil? ? Nokogiri::HTML(raw_body(reload)) : @doc
   end
   
-  # displays datasource for human intervention of data extraction
-  def display
-    response_body(true)
-  end
-
   ########## Nokogiri based table extraction helper methods ##########
   # TODO need to refactor these methods elsewhere
   
