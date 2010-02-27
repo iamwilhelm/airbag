@@ -30,12 +30,7 @@ class Retriever
     dimensions.map do |dim_key|
       dataset, dim = dim_key.split("|")
       meta = get_metadata(dataset)
-
-      units = if meta['units'].has_key?(dim)
-                meta['units'][dim]
-              else
-                nil
-              end
+      units = meta['units'][dim]
 
       dim_name = if dim_key.include? "|"
                    meta['name'] + "|" + meta['depvars'].find{ |depvar| to_r(depvar)==dim }
