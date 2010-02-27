@@ -17,8 +17,7 @@ class Tyra
   # FIXME Why don't you call it delegate then?  Ruby has a delegate module.
   def process(command)
     begin
-      cmd = command["cmd"]
-      case cmd
+      case command["cmd"]
       when "remove" then Importer.new(@base_db).remove(command["dataset"])
       when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
       when "search" then Retriever.new(@base_db).search(command["search_str"])

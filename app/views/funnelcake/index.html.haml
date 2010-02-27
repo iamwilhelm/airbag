@@ -38,14 +38,13 @@
       Currently, we're starting with public government data in CSV files, and 
       other low hanging fruit.  If there's a dataset that you'd like to be 
       included, help us out and tell us:
-    %div
-      %h3 What datasets are you interested in?
+    %div.headroom
       - form_tag(suggest_dataset_funnelcake_path, :class => "cmxform", :method => :post) do
         %ol.legroom
           %li
-            = label_tag("suggestion[body]", "Dataset suggestions:")
+            = label_tag("suggestion[body]", "Dataset suggestions")
             = text_area_tag("suggestion[body]", @body, :style => "width: 245px; padding: 0.25em", :rows => 6)
           %li
-            = label_tag("suggestion[email]", "Your email address:")
+            = label_tag("suggestion[email]", "Your email address")
             = text_field_tag("suggestion[email]", @email, :style => "width: 240px; padding: 0.25em;")
         = submit_tag("Suggest", :style => "width: 200px;")
