@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 
-VER = "0.0.2"
 
 $LOAD_PATH << File.dirname(__FILE__)
 require "string_utils"
@@ -176,7 +175,7 @@ end
 # --------- run main ---------
 
 def showversion()
-  puts "bender.rb v" + VER
+  puts "bender.rb v0.0.2"
 end
 
 def showhelp()

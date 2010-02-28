@@ -6,8 +6,6 @@ require 'json/add/core'
 require 'importer'
 require 'retriever'
 
-VER = "0.2.1"
-
 class Tyra
   def initialize(base_db)
     @base_db = base_db
@@ -56,7 +54,7 @@ end
 # --------- run main ---------
 
 def show_version
-  puts "tyra.rb v" + VER
+  puts "tyra.rb v0.2.1"
 end
 
 def show_help

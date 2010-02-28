@@ -1,7 +1,5 @@
 #!/usr/bin/ruby
 
-VER = "0.0.1"
-
 require "string_utils"
 
 # expand an n-dimensional table into many two dimensional tables
@@ -98,20 +96,14 @@ end
 
 # --------- run main ---------
 
-def showversion()
-  puts "blowitup.rb v" + VER
-end
-
 def showhelp()
   puts "usage: blowitup.rb [options] config.txt"
   puts "options:"
   puts "  -h    help"
-  puts "  -v    show version and exit"
 end
 
 if $0 == __FILE__
   if ARGV.length == 0
-    showversion
     showhelp
   end
 
@@ -119,7 +111,6 @@ if $0 == __FILE__
   for ff in ARGV do
     case ff
     when "-h" then showhelp; exit 0
-    when "-v" then showversion; exit 0
     else
       if !File.exists? ff
         puts "file not found: " + ff
