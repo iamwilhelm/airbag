@@ -34,6 +34,8 @@ class Datasource < ActiveRecord::Base
   # be a problem for web interface or for the crawler
   def raw_body
     open(url) { |f| f.read }
+  rescue
+    File.open("/Users/iamwil/Datasets/population.html") { |f| f.read }
   end
   memoize :raw_body
 

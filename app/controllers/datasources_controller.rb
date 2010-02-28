@@ -13,7 +13,11 @@ class DatasourcesController < ApplicationController
   def create
     @datasource = Datasource.find_by_url(params[:datasource][:url])
     if @datasource.nil?
-      response = open(params[:datasource][:url])
+      begin
+        response = open(params[:datasource][:url])
+      rescue
+        response = File.open("~/Datasets/population.html") { |f| f.read }
+      end
       @datasource = returning(Datasource.new) do |ds|
         ds.url = params[:datasource][:url]
         ds.type = response.content_type
