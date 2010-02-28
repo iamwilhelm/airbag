@@ -54,7 +54,7 @@ end
 # --------- run main ---------
 
 def show_version
-  puts "tyra.rb v0.2.1"
+  puts "tyra.rb v0.2.2"
 end
 
 def show_help
