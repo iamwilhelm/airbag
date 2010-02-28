@@ -23,10 +23,14 @@ class Squash
   end
 
   # do it
-  # new_indvar_names is an array of independent variables being created
   # TODO handle multiple new_indvar_name
-  def squash(dataset, new_indvar_names)
-    data = {}
+  def squash(dataset)
+    data = {}           # tree datastructure to hold all data
+
+    if !dataset['meta'].key? 'new_indvar_names'
+      return dataset
+    end
+    new_indvar_names = dataset['meta']['new_indvar_names']
 
     # pack into hash tree
     for colname in dataset['meta']['depvars'] do
@@ -53,6 +57,8 @@ class Squash
     # update metadata
     dataset['meta']['indvars'] += new_indvar_names
     dataset['meta']['depvars'] = [@dataset_name]
+    dataset['meta']['depvars'] = [@dataset_name]
+    dataset['meta'].delete 'new_indvar_names'
 
     dataset
   end

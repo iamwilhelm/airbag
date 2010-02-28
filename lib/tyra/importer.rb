@@ -73,10 +73,10 @@ class Importer
   end
 
   # stuff dataset into redis
-  def import(dataset, new_indvar_names)
-    if !new_indvar_names.empty?
+  def import(dataset)
+    if dataset["meta"].key? 'new_indvar_names'
       squasher = Squash.new
-      dataset = squasher.squash(dataset, new_indvar_names)
+      dataset = squasher.squash(dataset)
     end
 
     meta = dataset["meta"]
@@ -127,7 +127,7 @@ class Importer
 
   # parameters may be a string or an array
   def get_paramval(param)
-    if param[0] == "indvars"
+    if param[0] == "indvars" || param[0] == "new_indvar_names"
       param[1..-1]
     else
       remove_quotes(param[1].to_s)
