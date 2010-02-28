@@ -4,6 +4,7 @@ require 'string_filters'
 class Datasource < ActiveRecord::Base
   include Subclass
   include StringFilters
+  include Memoize
   
   validates_presence_of :url, :message => "can't be blank"
   validates_presence_of :type, :message => "can't be blank"
@@ -31,13 +32,11 @@ class Datasource < ActiveRecord::Base
   # 
   # NOTE this might end up being a long running process and will have to 
   # be a problem for web interface or for the crawler
-  def raw_body(reload = false)
-    if reload or @body.nil?
-      @body = open(url) { |f| f.read }
-    else
-      @body
-    end
-  end  
+  def raw_body
+    open(url) { |f| f.read }
+  end
+  memoize :raw_body
+
   # contains a structured version of the raw_body.  For HTML, it's the
   # parsed data structure.  For CSV, it's the parsed CSV data structure
   def document

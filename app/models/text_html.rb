@@ -2,10 +2,11 @@
 # and cleaned in order to extract the data they contain
 class TextHtml < Datasource
   
-  # encapulates a response body in an Hpricot object so it can be traversed
-  def document(reload = false)
-    @doc = reload || @doc.nil? ? Nokogiri::HTML(raw_body(reload)) : @doc
+  # rencapulates a response body in an Hpricot object so it can be traversed
+  def document
+   Nokogiri::HTML(raw_body)
   end
+  memoize :document
   
   ########## Nokogiri based table extraction helper methods ##########
   # TODO need to refactor these methods elsewhere

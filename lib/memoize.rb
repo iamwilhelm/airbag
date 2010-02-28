@@ -23,39 +23,40 @@ module Memoize
   end
 end
 
-exit unless __FILE__ == $0
+if __FILE__ == $0
 
-def timer
-  start_time = Time.now
-  yield
-  puts "#{Time.now - start_time} secs elapsed"
-end
-
-# TODO turn memoize example into a test
-class Foo
-  include Memoize
-  
-  def expensive
-    sleep(2)
-    return 42
+  def timer
+    start_time = Time.now
+    yield
+    puts "#{Time.now - start_time} secs elapsed"
   end
-  memoize :expensive
+
+  # TODO turn memoize example into a test
+  class Foo
+    include Memoize
+    
+    def expensive
+      sleep(2)
+      return 42
+    end
+    memoize :expensive
+
+  end
+
+  foo = Foo.new
+  timer do
+    puts "result 1: #{foo.expensive}"
+    puts "It's slow the first time around to warm up cache"
+  end
+  puts
+  timer do
+    puts "result 2: #{foo.expensive}"
+    puts "This time, it's cached so it's fast"
+  end
+  puts
+  timer do
+    puts "result 2: #{foo.expensive(true)}"
+    puts "This time, it's slow, because we reloaded"
+  end
 
 end
-
-foo = Foo.new
-timer do
-  puts "result 1: #{foo.expensive}"
-  puts "It's slow the first time around to warm up cache"
-end
-puts
-timer do
-  puts "result 2: #{foo.expensive}"
-  puts "This time, it's cached so it's fast"
-end
-puts
-timer do
-  puts "result 2: #{foo.expensive(true)}"
-  puts "This time, it's slow, because we reloaded"
-end
-
