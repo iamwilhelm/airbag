@@ -1,11 +1,13 @@
-%table{ :style => "width: 84%" }
-  %tr 
-    %th{ :style => "width: 200px" } Columns
-    %th Values
-  - @datasource.headers_of(table).each_with_index do |header, i|
-    %tr.datacolumn.included
-      %td
+= hidden_field_tag "datatable[xpath]", table.path
+%table{ :style => "width: 85%; border-collapse: separate; border-spacing: 2px;" }
+  %tr
+    %th &nbsp;
+    - Datatable::headers_of(table).each_with_index do |header, i|
+      %th.datacolumn.included
         = check_box_tag "datatable[datacolumn_attributes][#{i}][xpath]", header.path, :checked => true
         = label_tag "datatable[datacolumns_attributes][#{i}][xpath]", truncate(h(formatted_html_content(header)), :length => 20)
-      %td
-        = truncate(@datasource.columns_of(table, header).map(&:content).inspect, :length => 200)
+  - Datatable::rows_of(table).each_with_index do |row, i|
+    %tr.datarow
+      %td.included= check_box_tag "", "", :checked => true
+      - Datatable::cells_of(row).each_with_index do |cell, i|
+        %td.included= cell.content.inspect.gsub(/\s+/, "")

@@ -11,7 +11,6 @@
 
   - @datasource.tables.each do |table|
     - form_for [:datasource, @datatable], :html => { :class => "headroom legroom" } do |datatable_f|
-      = hidden_field_tag "datatable[xpath]", table.path
       .license
         .sidebar{ :style => "width: 130px" }
           = datatable_f.submit "Add as datatable &rsaquo;"

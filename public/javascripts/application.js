@@ -4,11 +4,33 @@
 $(document).ready(function() {
     // Highlights dimension columns in the datatable forms
     var datacolumnHighlighter = function() {
-        $("tr.datacolumn input[type=checkbox]")
+        $(".datacolumn input[type=checkbox]")
             .click(function(event) {
-                $(event.target).parents('tr.datacolumn')
-                    .toggleClass("included").toggleClass("excluded");
+                var th = $(event.target).parents('.datacolumn');
+                // we add one to account for extra checkbox column
+                var index = th.parent().children().index(th) + 1;
+                var table = th.parents('table')
+                if (event.target.checked == true) {
+                    th.addClass("included").removeClass("excluded");
+                    table.find('tr').children("td:nth-child(" + index + ")")
+                        .addClass("included").removeClass("excluded");
+                } else {
+                    th.addClass("excluded").removeClass("included");
+                    table.find('tr').children("td:nth-child(" + index + ")")
+                        .addClass("excluded").removeClass("included");
+                }
             });
+        $(".datarow input[type=checkbox]")
+            .click(function(event) {
+                if (event.target.checked == true) {
+                    $(event.target).parents('.datarow').children('td, th')
+                        .addClass("included").removeClass("excluded");
+                } else {
+                    $(event.target).parents('.datarow').children('td, th')
+                        .addClass("excluded").removeClass("included");
+                }
+            });
+
     };
     datacolumnHighlighter();
     
