@@ -38,6 +38,11 @@ class Datasource < ActiveRecord::Base
       @body
     end
   end  
+  # contains a structured version of the raw_body.  For HTML, it's the
+  # parsed data structure.  For CSV, it's the parsed CSV data structure
+  def document
+    raise Exception("Need to override #{__method__}").new
+  end
 
 end
 
