@@ -58,12 +58,14 @@ class Datatable < ActiveRecord::Base
     end
     
   end
+
+  # for mass assignment of datacolumns from the datatable form
   def datacolumn_attributes=(attributes)
     attributes.values.each do |datacolumn_attrs|
       self.datacolumns.build(datacolumn_attrs)
     end
   end
-
+  
   def node
     datasource.document.xpath(xpath).first
   end

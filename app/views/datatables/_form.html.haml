@@ -1,7 +1,7 @@
 %fieldset 
   %legend Metadata
   %ol
-    - %w(table_heading descr col_heading row_heading other_dims default_dim published_at units multiplier is_numeric converter).each do |field|
+    - %w(name description other_dims default_dim published_at units multiplier is_numeric).each do |field|
       %li
         = f.label field
         = f.text_field field

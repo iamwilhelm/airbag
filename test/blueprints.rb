@@ -10,9 +10,8 @@ module Blueprints
     def self.build(datasource, number = 2)
       number.times do
         datasource.datatables.create(:xpath => "/table",
-                                     :table_heading => "s",
-                                     :col_heading => "s",
-                                     :row_heading => "s",
+                                     :name => "s",
+                                     :description => "a dummy datatable set",
                                      :default_dim => "s",
                                      :is_numeric => true,
                                      :units => "s")

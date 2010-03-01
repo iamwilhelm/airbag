@@ -10,7 +10,7 @@
     - @datasource.datatables.each do |dt|
       %tr{ :class => cycle("even", "odd") }
         %td      
-          = link_to dt.table_heading, edit_datasource_datatable_path(@datasource, dt)
+          = link_to dt.name, edit_datasource_datatable_path(@datasource, dt)
         %td
           = "(#{dt.units})"
         %td

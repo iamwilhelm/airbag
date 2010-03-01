@@ -51,7 +51,7 @@ class DatatablesControllerTest < ActionController::TestCase
     @datatable = @datatables.first
     assert_updated(:datatable) do
       put(:update, :datasource_id => @texthtml_datasource, :id => @datatable,
-          :datatable => { "table_heading" => "SAT scores by state" })
+          :datatable => { "name" => "SAT scores by state" })
     end
     assert_redirected_to datasource_path(@texthtml_datasource)
   end
