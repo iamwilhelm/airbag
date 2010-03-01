@@ -12,7 +12,7 @@ class Datacolumn < ActiveRecord::Base
   end
 
   def data
-    @data ||= datatable.datasource.columns_of(datatable.node, node).map(&:content)
+    @data ||= Datatable.columns_of(datatable.node, node).map(&:content)
   end
   
 end
