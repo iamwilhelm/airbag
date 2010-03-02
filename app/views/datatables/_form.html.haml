@@ -1,10 +1,16 @@
 %fieldset 
   %legend Metadata
   %ol
-    - %w(name description other_dims default_dim published_at units multiplier is_numeric).each do |field|
+    - %w(name description other_dims default_dim published_at units).each do |field|
       %li
         = f.label field
         = f.text_field field
+    %li
+      = f.label "multiplier"
+      = f.check_box "multiplier"
+    %li
+      = f.label "is_numeric"
+      = f.check_box "is_numeric"    
     %li
       = f.label "notes"
       = f.text_area "notes", :rows => 5, :cols => 40
