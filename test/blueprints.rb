@@ -14,7 +14,8 @@ module Blueprints
                                      :description => "a dummy datatable set",
                                      :default_dim => "s",
                                      :is_numeric => true,
-                                     :units => "s")
+                                     :units => "s",
+                                     :datarows => [1,2,3,4])
       end
       return datasource.datatables
     end
