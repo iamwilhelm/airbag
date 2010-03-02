@@ -20,4 +20,11 @@ module Blueprints
       return datasource.datatables
     end
   end
+
+  module Datacolumn
+    def self.build(datatable)
+      datatable.datacolumns.create(:xpath => "td[1]",
+                                   :position => "1")
+    end
+  end
 end

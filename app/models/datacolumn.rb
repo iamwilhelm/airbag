@@ -2,7 +2,8 @@ class Datacolumn < ActiveRecord::Base
   belongs_to :datatable
 
   validates_presence_of :xpath
-
+  validates_presence_of :position
+  
   def node
     datatable.datasource.document.xpath(xpath).first
   end

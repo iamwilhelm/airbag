@@ -61,8 +61,11 @@ class Datatable < ActiveRecord::Base
 
   # for mass assignment of datacolumns from the datatable form
   def datacolumn_attributes=(attributes)
-    attributes.values.each do |datacolumn_attrs|
-      self.datacolumns.build(datacolumn_attrs)
+    attributes.each do |position, datacolumn_attrs|
+      # NOTE: we don't use a hidden field for position because it doesn't
+      # get cancelled when a column is unchecked.  Since the column
+      # index is sent as the keys, we use that as the position
+      self.datacolumns.build(datacolumn_attrs.merge({ :position => position }))
     end
   end
 
@@ -77,6 +80,7 @@ class Datatable < ActiveRecord::Base
 
   # convert datarows string to array when read
   def datarows
+    return [] if self[:datarows].blank?
     self[:datarows].split(",").map(&:to_i)
   end
 
@@ -88,5 +92,10 @@ class Datatable < ActiveRecord::Base
   def rows
     datacolumns.map { |dc| dc.data }
   end
+
+  def column_checked?(index)
+    datacolumns.map(&:position).include?(index)
+  end
+
   
 end

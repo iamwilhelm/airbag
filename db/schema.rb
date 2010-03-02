@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100301193631) do
+ActiveRecord::Schema.define(:version => 20100302065449) do
 
   create_table "datacolumns", :force => true do |t|
     t.integer  "datatable_id", :null => false
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20100301193631) do
     t.integer  "length"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position",     :null => false
   end
 
   create_table "datasources", :force => true do |t|
