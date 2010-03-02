@@ -55,6 +55,9 @@ class Retriever
   def get_data(dimension, xaxis = nil, op = nil, xaxislabels = nil, zaxis = nil)
     op = "mean" if op.nil?
 
+    if !dimension.include? "|"
+      dimension += "|" + dimension
+    end
     dataset, dim = dimension.split "|"
 
     # pull whats needed from dw

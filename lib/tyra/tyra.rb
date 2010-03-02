@@ -60,17 +60,17 @@ end
 def show_help
   puts "Usage: tyra.rb [options]"
   puts "Options:"
-  puts "  -n dbnum      base db number"
-  puts "  -r dataset    remove dataset"
-  puts "  -i file.csv   import dataset"
-  puts "  -s search_str search for dimensions"
-  puts "  -m dimension    get dataset metadata"
-  puts "  -x xaxis      set xaxis for get data call"
-  puts "  -o op         set op for aggregating data"
-  puts "  -d dimension  get data"
-  puts "  -t            run tests"
-  puts "  -h            help"
-  puts "  -v            show version and exit"
+  puts "  -n dbnum                base db number"
+  puts "  -r dataset              remove dataset"
+  puts "  -i file.csv             import dataset"
+  puts "  -s search_str           search for dimensions"
+  puts "  -m dimension            get dataset metadata"
+  puts "  -x xaxis                set xaxis for get data call"
+  puts "  -o op                   set op for aggregating data"
+  puts "  -d \"dataset|dimension\"  get data"
+  puts "  -t                      run tests"
+  puts "  -h                      help"
+  puts "  -v                      show version and exit"
 end
 
 def run_tests
