@@ -12,5 +12,13 @@ class DatatableTest < ActiveSupport::TestCase
     @datatable = @datatables.first
     assert_equal @texthtml_datasource, @datatable.datasource
   end
+
+  # remove this test if datarows becomes an AR model
+  test "can assign datarows as string and read as array" do
+    @datatable = @datatables.first
+    @datatable.datarows = [1,2,3,4]
+    assert_equal "1,2,3,4", @datatable.read_attribute(:datarows)
+    assert_equal [1,2,3,4], @datatable.datarows
+  end
   
 end

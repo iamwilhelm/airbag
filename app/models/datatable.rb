@@ -65,7 +65,22 @@ class Datatable < ActiveRecord::Base
       self.datacolumns.build(datacolumn_attrs)
     end
   end
-  
+
+  # convert datarows to string upon assignment
+  #--
+  # NOTE: decided to store datarows as string, because there currently
+  # is no need to access the data by records (rows).  Once there's a
+  # need to do so, then we'll make datarows into an AR model
+  def datarows=(array)
+    self[:datarows] = array.join(",")
+  end
+
+  # convert datarows string to array when read
+  def datarows
+    self[:datarows].split(",").map(&:to_i)
+  end
+
+  # returns the Nokogiri node for the data
   def node
     datasource.document.xpath(xpath).first
   end

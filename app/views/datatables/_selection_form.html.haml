@@ -8,6 +8,6 @@
         = label_tag "datatable[datacolumns_attributes][#{i}][xpath]", truncate(h(formatted_html_content(header)), :length => 20)
   - Datatable::rows_of(table).each_with_index do |row, i|
     %tr.datarow
-      %td.included= check_box_tag "", "", :checked => true
+      %td.included= check_box_tag "datatable[datarows][]", i, :checked => true
       - Datatable::cells_of(row).each_with_index do |cell, i|
         %td.included= cell.content.inspect.gsub(/\s+/, "")

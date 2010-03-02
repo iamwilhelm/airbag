@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100301012430) do
+ActiveRecord::Schema.define(:version => 20100301193631) do
 
   create_table "datacolumns", :force => true do |t|
     t.integer  "datatable_id", :null => false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20100301012430) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "xpath",                          :null => false
+    t.text     "datarows"
   end
 
 end
