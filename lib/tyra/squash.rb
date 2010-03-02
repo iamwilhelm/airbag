@@ -21,7 +21,6 @@ class Squash
   end
 
   # do it
-  # TODO handle multiple new_indvar_name
   def squash(dataset)
     data = {}           # tree datastructure to hold all data
 
@@ -37,7 +36,7 @@ class Squash
         # get path to set value in tree.  path is a list of dimension values sorted by dimension names.
         path = dataset['meta']['indvars'].map{ |indvar|
           [indvar, dataset['data'][indvar][ii]]
-        }.push([new_indvar_names[0], colname]).sort.map{ |pair|
+        }.concat(new_indvar_names.zip(colname.split(";"))).sort.map{ |pair|
           pair[1]
         }
         setleaf data, path, vals[ii]
@@ -97,14 +96,6 @@ class Squash
       getleaf(node[path[0]], path[1..-1])
     else
       node[path[0]]
-    end
-  end
-
-  def countleaves(node, count)
-    if node.kind_of? Hash
-      count + node.values.reduce(0) { |sum, vv| sum + countleaves(vv, 0) }
-    else
-      count + 1
     end
   end
 
