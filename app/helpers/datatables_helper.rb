@@ -2,8 +2,8 @@ module DatatablesHelper
   include NokogiriFormatters
 
   # for datatable row and column selection form
-  def column_checked?(datatable, header_path)
-    datatable.new_record? or (datatable.column_checked?(header_path))
+  def column_checked?(datatable, col_index)
+    datatable.new_record? or (datatable.column_checked?(col_index))
   end
 
   def row_checked?(datatable, row_index)

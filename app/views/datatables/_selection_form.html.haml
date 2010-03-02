@@ -3,11 +3,14 @@
   %tr
     %th &nbsp;
     - Datatable::headers_of(table).each_with_index do |header, i|
-      %th.datacolumn.included
-        = check_box_tag "datatable[datacolumn_attributes][#{i}][xpath]", header.path, :checked => true
+      %th.datacolumn{ :class => column_checked?(@datatable, header.path) ? "included" : "excluded" }
+        = check_box_tag "datatable[datacolumn_attributes][#{i}][xpath]", header.path, column_checked?(@datatable, header.path)
         = label_tag "datatable[datacolumns_attributes][#{i}][xpath]", truncate(h(formatted_html_content(header)), :length => 20)
-  - Datatable::rows_of(table).each_with_index do |row, i|
+
+  - Datatable::rows_of(table).each_with_index do |row, row_index|
     %tr.datarow
-      %td.included= check_box_tag "datatable[datarows][]", i, :checked => true
-      - Datatable::cells_of(row).each_with_index do |cell, i|
-        %td.included= cell.content.inspect.gsub(/\s+/, "")
+      %td{ :class => row_checked?(@datatable, row_index) ? "included" : "excluded" }
+        = check_box_tag "datatable[datarows][]", row_index, row_checked?(@datatable, row_index)
+      - Datatable::cells_of(row).each_with_index do |cell, col_index|
+        %td{ :class => row_checked?(@datatable, row_index) && column_checked?(@datatable, col_index) ? "included" : "excluded" }
+          = cell.content.inspect.gsub(/\s+/, "")
