@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 
-VER = "0.0.2"
 
 $LOAD_PATH << File.dirname(__FILE__)
 require "string_utils"
@@ -87,7 +86,6 @@ class Bender
 
   # drop the specified column range from the specified rows
   def dropcols_cmd(col1, col2, l1, l2)
-    col1, col2, l1, l2 = 
     puts "dropping cols " + col1.to_s + " to " + col2.to_s + " from lines " + l1.to_s + " to " + l2.to_s
     each_line_in_range(l1, l2) do |ii|
       fields = @datafile[shiftedindex(ii)].split ","
@@ -176,7 +174,7 @@ end
 # --------- run main ---------
 
 def showversion()
-  puts "bender.rb v" + VER
+  puts "bender.rb v0.0.2"
 end
 
 def showhelp()

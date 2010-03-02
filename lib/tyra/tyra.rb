@@ -6,8 +6,6 @@ require 'json/add/core'
 require 'importer'
 require 'retriever'
 
-VER = "0.2.1"
-
 class Tyra
   def initialize(base_db)
     @base_db = base_db
@@ -19,7 +17,7 @@ class Tyra
     begin
       case command["cmd"]
       when "remove" then Importer.new(@base_db).remove(command["dataset"])
-      when "import" then Importer.new(@base_db).import(command["dataset"], command["new_indvar_names"])
+      when "import" then Importer.new(@base_db).import(command["dataset"])
       when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
       when "search" then Retriever.new(@base_db).search(command["search_str"])
       when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dimension"])
@@ -35,8 +33,8 @@ class Tyra
 
   # shortcuts for convenience
 
-  def import(dataset, new_indvar_names)
-    process( {"cmd" => "import", "dataset" => dataset, "new_indvar_names" => new_indvar_names} )
+  def import(dataset)
+    process( {"cmd" => "import", "dataset" => dataset} )
   end
 
   def search(search_str)
@@ -56,23 +54,23 @@ end
 # --------- run main ---------
 
 def show_version
-  puts "tyra.rb v" + VER
+  puts "tyra.rb v0.2.2"
 end
 
 def show_help
   puts "Usage: tyra.rb [options]"
   puts "Options:"
-  puts "  -n dbnum      base db number"
-  puts "  -r dataset    remove dataset"
-  puts "  -i file.csv   import dataset"
-  puts "  -s search_str search for dimensions"
-  puts "  -m dimension    get dataset metadata"
-  puts "  -x xaxis      set xaxis for get data call"
-  puts "  -o op         set op for aggregating data"
-  puts "  -d dimension  get data"
-  puts "  -t            run tests"
-  puts "  -h            help"
-  puts "  -v            show version and exit"
+  puts "  -n dbnum                base db number"
+  puts "  -r dataset              remove dataset"
+  puts "  -i file.csv             import dataset"
+  puts "  -s search_str           search for dimensions"
+  puts "  -m dimension            get dataset metadata"
+  puts "  -x xaxis                set xaxis for get data call"
+  puts "  -o op                   set op for aggregating data"
+  puts "  -d \"dataset|dimension\"  get data"
+  puts "  -t                      run tests"
+  puts "  -h                      help"
+  puts "  -v                      show version and exit"
 end
 
 def run_tests

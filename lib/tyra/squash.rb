@@ -1,7 +1,5 @@
 #!/usr/bin/ruby
 
-VER = "0.0.1"
-
 $LOAD_PATH << File.dirname(__FILE__)
 require "importer"
 
@@ -23,10 +21,13 @@ class Squash
   end
 
   # do it
-  # new_indvar_names is an array of independent variables being created
-  # TODO handle multiple new_indvar_name
-  def squash(dataset, new_indvar_names)
-    data = {}
+  def squash(dataset)
+    data = {}           # tree datastructure to hold all data
+
+    if !dataset['meta'].key? 'new_indvar_names'
+      return dataset
+    end
+    new_indvar_names = dataset['meta']['new_indvar_names']
 
     # pack into hash tree
     for colname in dataset['meta']['depvars'] do
@@ -35,7 +36,7 @@ class Squash
         # get path to set value in tree.  path is a list of dimension values sorted by dimension names.
         path = dataset['meta']['indvars'].map{ |indvar|
           [indvar, dataset['data'][indvar][ii]]
-        }.push([new_indvar_names[0], colname]).sort.map{ |pair|
+        }.concat(new_indvar_names.zip(colname.split(";"))).sort.map{ |pair|
           pair[1]
         }
         setleaf data, path, vals[ii]
@@ -53,6 +54,8 @@ class Squash
     # update metadata
     dataset['meta']['indvars'] += new_indvar_names
     dataset['meta']['depvars'] = [@dataset_name]
+    dataset['meta']['depvars'] = [@dataset_name]
+    dataset['meta'].delete 'new_indvar_names'
 
     dataset
   end
@@ -96,14 +99,6 @@ class Squash
     end
   end
 
-  def countleaves(node, count)
-    if node.kind_of? Hash
-      count + node.values.reduce(0) { |sum, vv| sum + countleaves(vv, 0) }
-    else
-      count + 1
-    end
-  end
-
   def splitnstrip(string, delimiter)
     string.split(delimiter).map{ |field| field.strip }
   end
@@ -114,25 +109,18 @@ class Squash
 end
 
 
-
-def showversion()
-  puts "squash.rb v" + VER
-end
-
 def showhelp()
   puts "usage: squash.rb [options] file.csv [file2.csv...]"
   puts "options:"
   puts "  -n name    set the name of the new independent variable"
   puts "             one for each"
   puts "  -h         help"
-  puts "  -v         show version and exit"
 end
 
 # -- main
 
 if __FILE__ == $0
   if ARGV.length == 0
-    showversion
     showhelp
   end
 
@@ -143,7 +131,6 @@ if __FILE__ == $0
     case arg
     when "-n" then indvar_names << ARGV.shift
     when "-h" then showhelp; exit 0
-    when "-v" then showversion; exit 0
     else
       if !File.exists? arg
         puts "file not found: " + arg
