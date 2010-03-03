@@ -77,6 +77,7 @@ module DynamicErrors
     return true
   end
 
+  # dynamic 503 page generation
   def render_503(deadline, reason)
     maintenance = ERB.new(File.read("./app/views/errors/503.erb")).result(binding)
   end
