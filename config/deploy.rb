@@ -69,7 +69,8 @@ namespace :deploy do
   task :tag_commit, :roles => :web do
     last_tag_name, commits_since, tag_hash = `git describe`.strip.split("-")
     if last_tag_name.nil? || !commits_since.nil?
-      version = `git log --pretty=oneline | wc -l`
+      `git fetch`
+      version = `git log --pretty=oneline | wc -l`.strip
       message = ENV["MSG"] || "deployment tag"
       `git tag -a -m '#{message}' deploy_#{version}`
       `git push --tags`
@@ -77,7 +78,6 @@ namespace :deploy do
     else
       # there's a tag on this commit already
       puts "already has tag #{last_tag_name}"
-      puts "let's just deploy"
     end
   end
 end
