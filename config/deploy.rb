@@ -68,3 +68,23 @@ namespace :deploy do
   
 end
 
+# TODO move this to a dynamic errors plugin or library
+
+# Set the following in apache in order for it to work:
+#
+# ErrorDocument 503 /system/maintenance.html
+# RewriteEngine On
+# RewriteCond %{REQUEST_URI} !\.(css|jpg|png)$
+# RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+# RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+# RewriteRule ^.*$ /system/maintenance.html [redirect=503,last]
+#
+task :disable_web, :roles => :web do
+  on_rollback { delete "#{deploy_to}/system/maintenance.html" }
+
+  maintenance = render("./app/views/errors/503.erb",
+                       :deadline => ENV["UNTIL"],
+                       :reason => ENV["REASON"])
+  
+  puts maintenance, "#{deploy_to}/system/maintenance.html", :mode => 0644
+end
