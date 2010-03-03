@@ -1,5 +1,6 @@
 #!/usr/bin/ruby
 
+$LOAD_PATH << File.dirname(__FILE__)
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
