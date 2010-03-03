@@ -63,9 +63,7 @@ namespace :deploy do
     copy_config_file("email.yml")
   end
   
-  task :after_deploy, :roles => :app do
-  end
-  
+
 end
 
 # TODO move this to a dynamic errors plugin or library
@@ -79,12 +77,17 @@ end
 # RewriteCond %{SCRIPT_FILENAME} !maintenance.html
 # RewriteRule ^.*$ /system/maintenance.html [redirect=503,last]
 #
-task :disable_web, :roles => :web do
-  on_rollback { delete "#{deploy_to}/system/maintenance.html" }
+namespace :deploy do
+  namespace :web do
+    task :disable, :roles => :web do
+      on_rollback { rm "#{deploy_to}/system/maintenance.html" }
 
-  maintenance = render("./app/views/errors/503.erb",
-                       :deadline => ENV["UNTIL"],
-                       :reason => ENV["REASON"])
-  
-  puts maintenance, "#{deploy_to}/system/maintenance.html", :mode => 0644
+      require 'erb'
+      deadline = ENV["UNTIL"]
+      reason = ENV["REASON"]
+      maintenance = ERB.new(File.read("./app/views/errors/503.erb")).result(binding)
+      
+      put maintenance, File.join(deploy_to, "shared", "system", "maintenance.html"), :mode => 0644
+    end
+  end
 end
