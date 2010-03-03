@@ -57,14 +57,14 @@ namespace :deploy do
   desc "Stop mod_rails not applicable"
   task :stop do; end
 
-  desc "tasks to do after updating the code"
-  task :after_update_code, :roles => :app do
+  desc "Copy configuration files from server to app's config directory"
+  task :copy_config, :roles => :app do
     copy_config_file("database.yml")
     copy_config_file("email.yml")
   end
-  
-
 end
+after "deploy:update_code", "deploy:copy_config"
+
 
 # TODO move this to a dynamic errors plugin or library
 
