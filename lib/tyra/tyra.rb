@@ -27,7 +27,7 @@ class Tyra
       end
     rescue => e
       puts "ERROR: #{e.message}"
-      puts "#{e.backtrace}"
+      #puts "#{e.backtrace}"
       nil
     end
   end

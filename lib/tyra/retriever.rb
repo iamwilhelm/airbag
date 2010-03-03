@@ -64,6 +64,7 @@ class Retriever
     meta = get_metadata(dataset)
     xaxis = meta['default'] if xaxis.nil?
     xaxislabels = getcol "#{dataset}|#{xaxis}"
+    raise "xaxis dimension not found" if xaxislabels.empty?
     data = getcol dimension
 
     # aggregate by xaxislabels
