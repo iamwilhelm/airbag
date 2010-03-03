@@ -64,9 +64,25 @@ namespace :deploy do
     copy_config_file("database.yml")
     copy_config_file("email.yml")
   end
+
+  desc "Tag current commit with a deploy tag"
+  task :tag_commit, :roles => :web do
+    last_tag_name, commits_since, tag_hash = `git describe`.strip.split("-")
+    if last_tag_name.nil? || !commits_since.nil?
+      version = `git log --pretty=oneline | wc -l`
+      message = ENV["MSG"] || "deployment tag"
+      `git tag -a -m '#{message}' deploy_#{version}`
+      `git push --tags`
+      puts "created tag 'deploy_#{version}'"
+    else
+      # there's a tag on this commit already
+      puts "already has tag #{last_tag_name}"
+      puts "let's just deploy"
+    end
+  end
 end
 after "deploy:update_code", "deploy:copy_config"
-
+after "deploy", "deploy:tag_commit"
 
 # TODO move this to a dynamic errors plugin or library
 
