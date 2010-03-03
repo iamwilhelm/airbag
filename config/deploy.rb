@@ -1,3 +1,5 @@
+require 'lib/dynamic_errors'
+
 ## application settings
 set :application, "graphbug"
 
@@ -81,12 +83,7 @@ namespace :deploy do
   namespace :web do
     task :disable, :roles => :web do
       on_rollback { rm "#{deploy_to}/system/maintenance.html" }
-
-      require 'erb'
-      deadline = ENV["UNTIL"]
-      reason = ENV["REASON"]
-      maintenance = ERB.new(File.read("./app/views/errors/503.erb")).result(binding)
-      
+      maintenance = DynamicErrors.render_503(ENV["UNTIL"], ENV["REASON"])
       put maintenance, File.join(deploy_to, "shared", "system", "maintenance.html"), :mode => 0644
     end
   end

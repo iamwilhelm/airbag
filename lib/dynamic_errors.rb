@@ -1,3 +1,5 @@
+require 'erb'
+
 # Generate dynamic and custom 404 errors.
 #
 # 1) include this module into application_controller
@@ -75,4 +77,9 @@ module DynamicErrors
     return true
   end
 
+  def render_503(deadline, reason)
+    maintenance = ERB.new(File.read("./app/views/errors/503.erb")).result(binding)
+  end
+  module_function :render_503
+  
 end
