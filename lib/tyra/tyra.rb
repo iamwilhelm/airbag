@@ -1,5 +1,6 @@
 #!/usr/bin/ruby
 
+$LOAD_PATH << File.dirname(__FILE__)
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
@@ -26,7 +27,7 @@ class Tyra
       end
     rescue => e
       puts "ERROR: #{e.message}"
-      puts "#{e.backtrace}"
+      #puts "#{e.backtrace}"
       nil
     end
   end
