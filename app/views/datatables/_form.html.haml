@@ -9,16 +9,25 @@
       = f.label "description"
       = f.text_area "description", :style => "width: 200px; height: 100px;"
 
-    - %w(other_dims default_dim units).each do |field|
-      %li
-        = f.label field
-        = f.text_field field
+    %li
+      = f.label "table_dim"
+      = f.text_field "table_dim"
 
     %li
-      = f.label "Units multiplier"
+      = f.label "default dimension"
+      = f.select "default_dim", | 
+          options_from_collection_for_select(@datatable.datacolumns, |
+          "name", "name", @datatable.default_dim) |
+
+    %li
+      = f.label "units"
+      = f.text_field "units"
+      
+    %li
+      = f.label "units multiplier"
       = f.text_field "multiplier"
     %li
-      = f.label "is_numeric"
+      = f.label "numeric?"
       = f.check_box "is_numeric"    
 
     %li

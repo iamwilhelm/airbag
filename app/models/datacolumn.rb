@@ -9,7 +9,7 @@ class Datacolumn < ActiveRecord::Base
   end
 
   def name
-    node.text
+    node.text.downcase
   end
 
   def data

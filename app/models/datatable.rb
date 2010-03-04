@@ -1,12 +1,16 @@
 class Datatable < ActiveRecord::Base
   belongs_to :datasource
   has_many :datacolumns, :dependent => :destroy
-  
+
+  # NOTE: default_dimension is not an association because we only need the
+  # name for the importer.  When there's more operations needed, we
+  # can change it.
+
   validates_presence_of :xpath
-
-  ########## Nokogiri based table extraction helper methods ##########
-
+  
   class << self
+    ########## Nokogiri based table extraction helper methods ##########
+
     # beware of those using th for row headers
     def headers_of(table)
       headers = table.css('thead tr:first th', 'thead tr:first td')
