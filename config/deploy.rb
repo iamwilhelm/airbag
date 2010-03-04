@@ -1,3 +1,5 @@
+require 'lib/dynamic_errors'
+
 ## application settings
 set :application, "graphbug"
 
@@ -57,14 +59,48 @@ namespace :deploy do
   desc "Stop mod_rails not applicable"
   task :stop do; end
 
-  desc "tasks to do after updating the code"
-  task :after_update_code, :roles => :app do
+  desc "Copy configuration files from server to app's config directory"
+  task :copy_config, :roles => :app do
     copy_config_file("database.yml")
     copy_config_file("email.yml")
   end
-  
-  task :after_deploy, :roles => :app do
-  end
-  
-end
 
+  desc "Tag current commit with a deploy tag"
+  task :tag_commit, :roles => :web do
+    last_tag_name, commits_since, tag_hash = `git describe`.strip.split("-")
+    if last_tag_name.nil? || !commits_since.nil?
+      `git fetch`
+      version = `git log --pretty=oneline | wc -l`.strip
+      message = ENV["MSG"] || "deployment tag"
+      `git tag -a -m '#{message}' deploy_#{version}`
+      `git push --tags`
+      puts "created tag 'deploy_#{version}'"
+    else
+      # there's a tag on this commit already
+      puts "already has tag #{last_tag_name}"
+    end
+  end
+end
+after "deploy:update_code", "deploy:copy_config"
+after "deploy", "deploy:tag_commit"
+
+# TODO move this to a dynamic errors plugin or library
+
+# Set the following in apache in order for it to work:
+#
+# ErrorDocument 503 /system/maintenance.html
+# RewriteEngine On
+# RewriteCond %{REQUEST_URI} !\.(css|jpg|png)$
+# RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+# RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+# RewriteRule ^.*$ /system/maintenance.html [redirect=503,last]
+#
+namespace :deploy do
+  namespace :web do
+    task :disable, :roles => :web do
+      on_rollback { rm "#{deploy_to}/system/maintenance.html" }
+      maintenance = DynamicErrors.render_503(ENV["UNTIL"], ENV["REASON"])
+      put maintenance, File.join(deploy_to, "shared", "system", "maintenance.html"), :mode => 0644
+    end
+  end
+end

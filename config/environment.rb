@@ -23,6 +23,10 @@ Rails::Initializer.run do |config|
   RUBYFORGE = "http://gems.rubyforge.org"
   GITHUB = "http://gems.github.com"
 
+  # rails framework
+  config.gem "rails", :version => "2.3.5"
+  # capistrano deployment framework
+  config.gem "capistrano", :version => "2.5.17", :source => RUBYFORGE
   # ruby debugger (not needed for production)
   config.gem "ruby-debug", :version => "0.10.3", :source => RUBYFORGE
   # postgresql interface

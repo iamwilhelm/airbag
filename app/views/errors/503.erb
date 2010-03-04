@@ -1,0 +1,20 @@
+<div class="full">
+  <div class="container" style="text-align: center">
+    <div style="text-align: center; width: 400px; margin: 0 auto;
+                padding: 20px;
+                border-top: 1px; border-right: 2px; border-bottom:
+                2px; border-left: 1px; border-style: solid; border-color: #aaa;">
+      <h1>Time for a tune up.</h1>
+      <p style="color: green; font-size: 16px; line-height: 20px;">
+        Graphbug is down for <%= reason ? reason : "maintenance" %>
+        as of <%= Time.now.strftime("%H:%M %Z") %>.
+      </p>
+      <p style="color: #666;">
+        It'll be back <%= deadline ? deadline : "shortly" %>.  
+        <a href="mailto:wil@graphbug.com, ianxm@jhu.edu">Email us</a>
+        us if you have any questions.
+      </p>
+    </div>
+    <image src="images/decor/bug_dan_zen.jpg" style="margin: 40px; border: 0px;"/>
+  </div>
+</div>
