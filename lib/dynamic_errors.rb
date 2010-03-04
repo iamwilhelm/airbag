@@ -24,7 +24,6 @@ module DynamicErrors
 
   class << self
     def config
-      puts "config " + RAILS_ENV
       case RAILS_ENV
       when "development"
         { :generate_error_pages => false,
