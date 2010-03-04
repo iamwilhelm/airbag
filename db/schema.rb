@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100303234627) do
+ActiveRecord::Schema.define(:version => 20100304010357) do
 
   create_table "datacolumns", :force => true do |t|
     t.integer  "datatable_id", :null => false
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(:version => 20100303234627) do
     t.string   "description",   :limit => 1024
     t.text     "notes"
     t.string   "name"
-    t.string   "other_dims"
+    t.string   "table_dim"
     t.string   "default_dim",                   :default => ""
-    t.string   "is_numeric",                    :default => "1"
+    t.boolean  "is_numeric",                    :default => true
     t.string   "units"
-    t.string   "multiplier",                    :default => "1"
+    t.integer  "multiplier",                    :default => 1
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
