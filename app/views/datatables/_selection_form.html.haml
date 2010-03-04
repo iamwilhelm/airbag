@@ -3,8 +3,8 @@
   %tr
     %th &nbsp;
     - Datatable::headers_of(table).each_with_index do |header, i|
-      %th.datacolumn{ :class => column_checked?(@datatable, header.path) ? "included" : "excluded" }
-        = check_box_tag "datatable[datacolumn_attributes][#{i}][xpath]", header.path, column_checked?(@datatable, header.path)
+      %th.datacolumn{ :class => column_checked?(@datatable, i) ? "included" : "excluded" }
+        = check_box_tag "datatable[datacolumn_attributes][#{i}][xpath]", header.path, column_checked?(@datatable, i)
         = label_tag "datatable[datacolumns_attributes][#{i}][xpath]", truncate(h(formatted_html_content(header)), :length => 20)
 
   - Datatable::rows_of(table).each_with_index do |row, row_index|
