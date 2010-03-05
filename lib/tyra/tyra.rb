@@ -34,6 +34,11 @@ class Tyra
 
   # shortcuts for convenience
 
+  # dataset is a hash with two parts:
+  #
+  #   - metadata: fields that describe the data
+  #   - data: the data itself
+  #
   def import(dataset)
     process( {"cmd" => "import", "dataset" => dataset} )
   end
