@@ -1,5 +1,4 @@
 %fieldset 
-  %legend Metadata
   %ol
     %li
       = f.label "name"
@@ -8,6 +7,10 @@
     %li
       = f.label "description"
       = f.text_area "description", :style => "width: 200px; height: 100px;"
+
+    %li
+      = f.label "license"
+      = f.select "license", options_for_select([["public domain", "public domain"]])
 
     %li
       = f.label "table_dim"
@@ -22,7 +25,7 @@
     %li
       = f.label "units"
       = f.text_field "units"
-      
+
     %li
       = f.label "units multiplier"
       = f.text_field "multiplier"
@@ -31,13 +34,8 @@
       = f.check_box "is_numeric"    
 
     %li
-      = f.label "license"
-      = f.select "license", options_for_select([["public domain", "public domain"]])
-      
-    %li
       = f.label "notes"
       = f.text_area "notes", :style => "width: 200px; height: 100px;"
     %li
       = f.label "published_at"
       = @datatable.published_at
-      
