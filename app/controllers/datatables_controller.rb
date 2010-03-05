@@ -19,6 +19,10 @@ class DatatablesController < ApplicationController
   def edit
     @datasource = Datasource.find(params[:datasource_id])
     @datatable = @datasource.datatables.find(params[:id])
+    @datacolumns = @datatable.datacolumns
+    @elapsed = Timer::timer do
+      @datasource.document
+    end
   end
 
   def update
@@ -47,13 +51,8 @@ class DatatablesController < ApplicationController
     @datasource = Datasource.find(params[:datasource_id])
     @datatable = @datasource.datatables.find(params[:id])
 
-    if params[:action] == "do"
-      @datatable.import
-      redirect_to datasource_path(@datasource)
-      return
-    end
-    @metadata = @datatable.metadata
-    @data = @datatable.data
+    @datatable.import
+    redirect_to datasource_path(@datasource)
   end
   
 end

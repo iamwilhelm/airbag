@@ -2,7 +2,10 @@
   %div.note{ :style => "float: right" }
     = link_to "&lsaquo; Back to datasource", datasource_path(@datasource)
   %h2 Edit Datatable's Metadata
-  %p= link_to "See Original Page", @datasource.url, :target => "_blank"
+  %p.half
+    = link_to "See Original Page", @datasource.url, :target => "_blank"
+  %p.half{ :style => "text-align: right" }
+    = "Retrieved source in #{@elapsed} secs"
 
 .container
   %div.half

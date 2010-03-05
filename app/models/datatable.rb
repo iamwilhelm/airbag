@@ -73,6 +73,32 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  # import the datatable into tyra
+  def import
+    update_attribute(:publish_at, Time.now)
+    @tyra = Tyra.new(0)
+    @tyra.import(metadata, data)
+  end
+
+  # package this datatable's metadata together in a hash
+  def metadata
+    { :name => name,
+      :description => description,
+      :license => license,
+      :source => datasource.title,
+      :url => datasource.url,
+      :publish_date => published_at,
+      :default => default_dim,
+      :indvars => nil }
+  end
+
+  # package this datatable's data
+  def data
+    datacolumns.reduce({}) do |t, col|
+      t[col.name] = col.data; t
+    end
+  end
+  
   # convert datarows to string upon assignment
   #--
   # NOTE: decided to store datarows as string, because there currently
