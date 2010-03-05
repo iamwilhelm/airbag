@@ -41,7 +41,19 @@ class DatatablesController < ApplicationController
     @datatable.destroy
 
     redirect_to datasource_path(@datasource)
-    
+  end
+
+  def import
+    @datasource = Datasource.find(params[:datasource_id])
+    @datatable = @datasource.datatables.find(params[:id])
+
+    if params[:action] == "do"
+      @datatable.import
+      redirect_to datasource_path(@datasource)
+      return
+    end
+    @metadata = @datatable.metadata
+    @data = @datatable.data
   end
   
 end
