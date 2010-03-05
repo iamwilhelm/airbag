@@ -13,11 +13,11 @@
       = f.select "license", options_for_select([["public domain", "public domain"]])
 
     %li
-      = f.label "table_dim"
+      = f.label "table_dim", "Table dimension"
       = f.text_field "table_dim"
 
     %li
-      = f.label "default dimension"
+      = f.label "default_dim", "Default dimension"
       = f.select "default_dim", | 
           options_from_collection_for_select(@datatable.datacolumns, |
           "name", "name", @datatable.default_dim) |
@@ -27,10 +27,10 @@
       = f.text_field "units"
 
     %li
-      = f.label "units multiplier"
+      = f.label "multiplier", "Units multiplier"
       = f.text_field "multiplier"
     %li
-      = f.label "numeric?"
+      = f.label "is_numeric", "Numeric?"
       = f.check_box "is_numeric"    
 
     %li
