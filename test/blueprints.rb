@@ -31,6 +31,7 @@ module Blueprints
   module Datacolumn
     def self.scaffold(optional_attrs = {})
       required = {
+        :name => "state"
         :xpath => "td[1]",
         :position => "1"
       }

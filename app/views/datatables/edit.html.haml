@@ -7,11 +7,35 @@
   %p.half{ :style => "text-align: right" }
     = "Retrieved source in #{@elapsed} secs"
 
-.container
-  %div.half
-    - form_for [:datasource, @datatable], :url => datasource_datatable_path(@datasource, @datatable), :html => { :class => "cmxform", :method => :put } do |f|
+.container.clear
+  .half
+    - form_for [:datasource, @datatable], |
+        :url => datasource_datatable_path(@datasource, @datatable), |
+        :html => { :class => "cmxform", :method => :put } do |f| |
       = render :partial => "form", :locals => { :f => f }
       = f.submit "Update"
+  .half
+    - @datacolumns.each do |datacolumn|
+      - form_for [:datatable, datacolumn], |
+          :url => "", |
+          :html => { :class => "cmxform", :method => :put } do |dc_f| |
+        %fieldset
+          %ol
+            %li 
+              = dc_f.label "name"
+              = dc_f.text_field "name"
+            %li
+              = dc_f.label "is_indep", "Independent"
+              = dc_f.check_box "is_indep"
+          = dc_f.submit("update")
+      = link_to "Data", ""
+      .hidden
+        = datacolumn.data.inspect
+    
+      
+.container.clear{ :style => "overflow: scroll; height: 600px" }
+  = render :partial => "selection_form", :locals => { :table => @datatable.node }
+
+
+
   
-  %div.half{ :style => "overflow: scroll; height: 600px" }
-    = render :partial => "selection_form", :locals => { :table => @datatable.node }

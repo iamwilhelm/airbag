@@ -1,6 +1,6 @@
 class Datatable < ActiveRecord::Base
   belongs_to :datasource
-  has_many :datacolumns, :dependent => :destroy
+  has_many :datacolumns, :order => "position asc", :dependent => :destroy
 
   # NOTE: default_dimension is not an association because we only need the
   # name for the importer.  When there's more operations needed, we
