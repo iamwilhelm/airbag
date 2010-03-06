@@ -1,8 +1,15 @@
 # poor man's blueprints.  Replace with actual blueprints later
 module Blueprints
   module Datasource
-    def self.build
-      TextHtml.create(:url => "http://census.gov", :title => "Census Population")
+    def self.scaffold(optional_attrs = {})
+      required = {
+        :url => "http://census.gov", :title => "Census Population"
+      }
+      required.merge(optional_attrs)
+    end
+    
+    def self.build(optional_attrs = {})
+      TextHtml.create(scaffold(optional_attrs))
     end
   end
 
@@ -22,9 +29,16 @@ module Blueprints
   end
 
   module Datacolumn
-    def self.build(datatable)
-      datatable.datacolumns.create(:xpath => "td[1]",
-                                   :position => "1")
+    def self.scaffold(optional_attrs = {})
+      required = {
+        :xpath => "td[1]",
+        :position => "1"
+      }
+      required.merge(optional_attrs)
+    end
+    
+    def self.build(datatable, optional_attrs = {})
+      datatable.datacolumns.create(scaffold(optional_attrs))
     end
   end
 end
