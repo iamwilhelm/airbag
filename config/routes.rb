@@ -19,7 +19,9 @@ ActionController::Routing::Routes.draw do |map|
 
   # datasource routes
   map.resources :datasources do |ds|
-    ds.resources :datatables
+    ds.resources :datatables, :member => ["import"] do |dt|
+      dt.resources :datacolumns, :shallow => true
+    end
   end
   
   # Install the default routes as the lowest priority.

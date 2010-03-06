@@ -65,11 +65,17 @@ class Datatable < ActiveRecord::Base
 
   # for mass assignment of datacolumns from the datatable form
   def datacolumn_attributes=(attributes)
-    attributes.each do |position, datacolumn_attrs|
-      # NOTE: we don't use a hidden field for position because it doesn't
-      # get cancelled when a column is unchecked.  Since the column
-      # index is sent as the keys, we use that as the position
-      self.datacolumns.build(datacolumn_attrs.merge({ :position => position }))
+    attributes.select do |position, datacolumn_attrs|
+      # we get all columns with an "included" key, meaning the
+      # column was selected.  We filter because there are hidden fields that
+      # get sent regardless of whether the column is selected.
+      datacolumn_attrs.has_key?("included")
+    end.each do |position, datacolumn_attrs|
+      datacolumn_attrs.delete("included")
+      unless datacolumn_attrs.has_key?("position")
+        datacolumn_attrs.merge!({ :position => position })
+      end
+      self.datacolumns.build(datacolumn_attrs)
     end
   end
 
@@ -122,10 +128,9 @@ class Datatable < ActiveRecord::Base
   def rows
     datacolumns.map { |dc| dc.data }
   end
-
+  
   def column_checked?(index)
     datacolumns.map(&:position).include?(index)
   end
-
   
 end

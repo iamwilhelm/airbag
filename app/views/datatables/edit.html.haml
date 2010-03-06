@@ -9,32 +9,36 @@
 
 .container.clear
   .half
-    - form_for [:datasource, @datatable], |
+    - metatime = Timer::timer do
+      - form_for [:datasource, @datatable], |
         :url => datasource_datatable_path(@datasource, @datatable), |
         :html => { :class => "cmxform", :method => :put } do |f| |
-      = render :partial => "form", :locals => { :f => f }
-      = f.submit "Update"
+        = render :partial => "form", :locals => { :f => f }
+        = f.submit "Update"
+    = "Metadata rendered in #{metatime} secs"
   .half
     - @datacolumns.each do |datacolumn|
-      - form_for [:datatable, datacolumn], |
-          :url => "", |
-          :html => { :class => "cmxform", :method => :put } do |dc_f| |
-        %fieldset
-          %ol
-            %li 
-              = dc_f.label "name"
-              = dc_f.text_field "name"
-            %li
-              = dc_f.label "is_indep", "Independent"
-              = dc_f.check_box "is_indep"
-          = dc_f.submit("update")
-      = link_to "Data", ""
-      .hidden
-        = datacolumn.data.inspect
-    
+      - col_time = Timer::timer do
+        - form_for [:datatable, datacolumn], |
+            :url => datacolumn_path(datacolumn.id), |
+            :html => { :class => "cmxform", :method => :put } do |dc_f| |
+          %fieldset
+            %ol
+              %li 
+                = dc_f.label "name"
+                = dc_f.text_field "name"
+              %li
+                = dc_f.label "is_indep", "Independent"
+                = dc_f.check_box "is_indep"
+            = dc_f.submit("update")
+        = link_to "Data", ""
+        .hidden
+          -# datacolumn.data.inspect
+      = "Column rendered in #{col_time} secs"
       
 .container.clear{ :style => "overflow: scroll; height: 600px" }
   = render :partial => "selection_form", :locals => { :table => @datatable.node }
+  
 
 
 
