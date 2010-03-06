@@ -31,6 +31,7 @@ module CrudAssertions
       assert_difference("#{model_name.to_s.classify}.count", number) do
         block.call
         assert assigns(model_name)
+        assert assigns(model_name).valid?
       end
     end
   end
