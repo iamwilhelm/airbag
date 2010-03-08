@@ -13,10 +13,9 @@ class Datacolumn < ActiveRecord::Base
     datatable.datasource.document.xpath(xpath).first
   end
 
-  # returns multibyte strings
   def data
     Datatable.columns_of(datatable.node, node).map(&:content).
-      values_at(*datatable.datarows).map(&:mb_chars).map(&:strip)
+      values_at(*datatable.datarows).map(&:mb_chars).map(&:strip).map(&:to_s)
   end
   memoize :data
 

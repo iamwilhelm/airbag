@@ -34,8 +34,10 @@
               = dc_f.submit("update")
           = link_to_function "Data", "$('#datacolumn_#{datacolumn.id}_data').toggle()"
           %div.hidden{ :id => "datacolumn_#{datacolumn.id}_data" }
-            = datacolumn.data.map(&:to_s).inspect
+            = datacolumn.data.inspect
         %p= "Column rendered in #{col_time} secs"
       
 .container.clear{ :style => "overflow: scroll; height: 600px" }
+  %h2 Import data
+  = @datatable.import.inspect
   -# render :partial => "selection_form", :locals => { :table => @datatable.node }
