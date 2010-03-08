@@ -19,6 +19,6 @@
             = check_box_tag "datatable[datarows][]", row_index, row_checked?(@datatable, row_index)
           - Datatable::cells_of(row).each_with_index do |cell, col_index|
             %td{ :class => row_checked?(@datatable, row_index) && column_checked?(@datatable, col_index) ? "included" : "excluded" }
-              = cell.content.inspect.gsub(/\s+/, "")
+              = cell.content.mb_chars.strip.to_s.inspect
         %td= "#{row_time} secs"
 = "Table rendered in #{table_time} secs"
