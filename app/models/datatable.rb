@@ -81,7 +81,7 @@ class Datatable < ActiveRecord::Base
 
   # import the datatable into tyra
   def import
-    update_attribute(:publish_at, Time.now)
+    update_attribute(:published_at, Time.now)
     @tyra = Tyra.new(0)
     @tyra.import(metadata, data)
   end
