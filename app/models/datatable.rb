@@ -95,7 +95,7 @@ class Datatable < ActiveRecord::Base
       :url => datasource.url,
       :publish_date => published_at,
       :default => default_dim,
-      :indvars => nil }
+      :indvars => datacolumns.independent.map(&:name) }
   end
 
   # package this datatable's data
