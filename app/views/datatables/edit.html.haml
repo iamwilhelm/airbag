@@ -18,23 +18,24 @@
     = "Metadata rendered in #{metatime} secs"
   .half
     - @datacolumns.each do |datacolumn|
-      - col_time = Timer::timer do
-        - form_for [:datatable, datacolumn], |
-            :url => datacolumn_path(datacolumn.id), |
-            :html => { :class => "cmxform", :method => :put } do |dc_f| |
-          %fieldset
-            %ol
-              %li 
-                = dc_f.label "name"
-                = dc_f.text_field "name"
-              %li
-                = dc_f.label "is_indep", "Independent"
-                = dc_f.check_box "is_indep"
-            = dc_f.submit("update")
-        = link_to "Data", ""
-        .hidden
-          -# datacolumn.data.inspect
-      = "Column rendered in #{col_time} secs"
+      %div.legroom
+        - col_time = Timer::timer do
+          - form_for [:datatable, datacolumn], |
+              :url => datacolumn_path(datacolumn.id), |
+              :html => { :class => "cmxform", :method => :put } do |dc_f| |
+            %fieldset
+              %ol
+                %li 
+                  = dc_f.label "name"
+                  = dc_f.text_field "name"
+                %li
+                  = dc_f.label "is_indep", "Independent"
+                  = dc_f.check_box "is_indep"
+              = dc_f.submit("update")
+          = link_to_function "Data", "$('#datacolumn_#{datacolumn.id}_data').toggle()"
+          %div.hidden{ :id => "datacolumn_#{datacolumn.id}_data" }
+            = datacolumn.data.map(&:to_s).inspect
+        %p= "Column rendered in #{col_time} secs"
       
 .container.clear{ :style => "overflow: scroll; height: 600px" }
-  = render :partial => "selection_form", :locals => { :table => @datatable.node }
+  -# render :partial => "selection_form", :locals => { :table => @datatable.node }
