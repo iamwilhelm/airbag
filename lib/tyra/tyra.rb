@@ -36,7 +36,7 @@ class Tyra
 
   # dataset is a hash with two parts:
   #
-  #   - metadata: fields that describe the data
+  #   - meta: fields that describe the data
   #   - data: the data itself
   #
   def import(dataset)

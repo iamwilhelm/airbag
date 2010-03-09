@@ -7,8 +7,26 @@ require 'squash'
 require 'misc_utils'
 require 'string_utils'
 
-# importer
 # import or remove datasets into datawarehouse
+#
+#   meta => metadata for the dataset with various attributes
+#   data => a hash of different columns with keys as column names,
+#           and values as an array of data
+# 
+# The meta data required are the following:
+#
+#   - name: The name of the dataset
+#   - description: a string describing deatils of the dataset
+#   - source: The name of the source where we got the data
+#   - url: a url describing where the data came from
+#   - license: what kind of license applies to this data
+#   - publish_date: The date that we published/imported this data
+#   - default: The default dimension that the graph will start with
+#   - indvars: An array of dimension names that have unique values
+#   - depvars: An array of dimensions names that do NOT have unique
+#              values.  The set of depvars must be mutually exclusive
+#              from indvars
+#
 class Importer
   include MiscUtils
   include StringUtils
@@ -21,9 +39,7 @@ class Importer
 
   # read csv file into import datastructure
   def read_csv(fname)
-    if !File.exists? fname
-      raise "file not found"
-    end
+    raise "file not found" if !File.exists? fname
     puts "Reading #{fname}"
 
     data = {}
@@ -55,7 +71,7 @@ class Importer
         fields.each { |name, value| data[name].push(value) }
       end
     end
-
+    
     # find dependent variables
     colnames = data.keys.sort
     indvarnames = meta["indvars"] || []
@@ -72,7 +88,7 @@ class Importer
     import(read_csv(fname));
   end
 
-  # stuff dataset into redis
+  # import takes a dataset hash with two keys:
   def import(dataset)
     if dataset["meta"].key? 'new_indvar_names'
       squasher = Squash.new
@@ -81,7 +97,7 @@ class Importer
 
     meta = dataset["meta"]
     data = dataset["data"]
-
+    
     # remove any traces of an existing dataset with the same name
     remove(meta["name"], true)
 
