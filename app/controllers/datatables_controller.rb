@@ -54,7 +54,10 @@ class DatatablesController < ApplicationController
     @datasource = Datasource.find(params[:datasource_id])
     @datatable = @datasource.datatables.find(params[:id])
 
-    @datatable.import
+    # TODO need to put this in a background process
+    @datatable.import or raise Exception
+
+    flash[:notice] = "Successfully imported the datatable"
     redirect_to datasource_path(@datasource)
   end
   
