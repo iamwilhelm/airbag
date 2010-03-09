@@ -38,6 +38,9 @@
         %p= "Column rendered in #{col_time} secs"
       
 .container.clear{ :style => "overflow: scroll; height: 600px" }
-  %h2 Import data
-  = @datatable.import.inspect
+  %h2 Metadata
+  = @datatable.metadata.inspect
+
+  %h2 Data
+  = @datatable.data.inspect
   -# render :partial => "selection_form", :locals => { :table => @datatable.node }
