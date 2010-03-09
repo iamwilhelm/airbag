@@ -104,7 +104,11 @@ class Importer
     # set lookup key and metadata
     puts "Importing #{meta['name']}"
     colnames = data.keys
-    @search_dw.set to_r(meta["name"]), JSON.generate(meta) 
+
+    puts "Inside import:"
+    puts meta.inspect
+    
+    @search_dw.set to_r(meta["name"]), meta.to_json
     meta["depvars"].each do |nn|
       @search_dw.set to_r(meta["name"] + "|" + nn), true
     end
