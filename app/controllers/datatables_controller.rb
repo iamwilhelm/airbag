@@ -10,6 +10,7 @@ class DatatablesController < ApplicationController
     @datasource = Datasource.find(params[:datasource_id])
     @datatable = @datasource.datatables.create!(params[:datatable])
 
+    flash[:notice] = "Successfully created the datatable"
     redirect_to edit_datasource_datatable_url(@datasource.id, @datatable.id)
   rescue ActiveRecord::RecordNotSaved => e
     flash[:error] = "Could not create datatable"
@@ -30,6 +31,7 @@ class DatatablesController < ApplicationController
     @datatable = @datasource.datatables.find(params[:id])
     @datatable.update_attributes!(params[:datatable])
 
+    flash[:notice] = "Successfully updated the datatable"
     redirect_to datasource_path(@datasource)
   rescue ActiveRecord::RecordNotSaved => e
     flash[:error] = "Could not update datatable"
@@ -44,6 +46,7 @@ class DatatablesController < ApplicationController
     @datatable = @datasource.datatables.find(params[:id])
     @datatable.destroy
 
+    flash[:notice] = "Successfully destroyed the datatable"
     redirect_to datasource_path(@datasource)
   end
 
