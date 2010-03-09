@@ -6,6 +6,7 @@ require 'redis'
 require 'json/add/core'
 require 'importer'
 require 'retriever'
+require 'pp'
 
 class Tyra
   def initialize(base_db)
@@ -15,20 +16,14 @@ class Tyra
   # delegate to the responsible object/method
   # FIXME Why don't you call it delegate then?  Ruby has a delegate module.
   def process(command)
-    begin
-      case command["cmd"]
-      when "remove" then Importer.new(@base_db).remove(command["dataset"])
-      when "import" then Importer.new(@base_db).import(command["dataset"])
-      when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
-      when "search" then Retriever.new(@base_db).search(command["search_str"])
-      when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dimension"])
-      when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"], command["op"])
-      else raise "unknown command"
-      end
-    rescue => e
-      puts "ERROR: #{e.message}"
-      #puts "#{e.backtrace}"
-      nil
+    case command["cmd"]
+    when "remove" then Importer.new(@base_db).remove(command["dataset"])
+    when "import" then Importer.new(@base_db).import(command["dataset"])
+    when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
+    when "search" then Retriever.new(@base_db).search(command["search_str"])
+    when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dimension"])
+    when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"], command["op"])
+    else raise "unknown command"
     end
   end
 
