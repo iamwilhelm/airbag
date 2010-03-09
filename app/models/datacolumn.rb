@@ -3,7 +3,8 @@ class Datacolumn < ActiveRecord::Base
   
   belongs_to :datatable
   named_scope :independent, :conditions => { :is_indep => true }
-
+  named_scope :dependent, :conditions => { :is_indep => false }
+  
   validates_presence_of :name
   validates_presence_of :xpath
   validates_presence_of :position

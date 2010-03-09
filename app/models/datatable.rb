@@ -1,7 +1,7 @@
 class Datatable < ActiveRecord::Base
   belongs_to :datasource
   has_many :datacolumns, :order => "position asc", :dependent => :destroy
-
+  
   # NOTE: default_dimension is not an association because we only need the
   # name for the importer.  When there's more operations needed, we
   # can change it.
@@ -83,19 +83,21 @@ class Datatable < ActiveRecord::Base
   def import
     update_attribute(:published_at, Time.now)
     @tyra = Tyra.new(0)
-    @tyra.import(metadata, data)
+    @tyra.import({ "meta" => metadata, "data" => data })
   end
 
   # package this datatable's metadata together in a hash
   def metadata
-    { :name => name,
-      :description => description,
-      :license => license,
-      :source => datasource.title,
-      :url => datasource.url,
-      :publish_date => published_at,
-      :default => default_dim,
-      :indvars => datacolumns.independent.map(&:name) }
+    { "name" => name,
+      "description" => description,
+      "license" => license,
+      "source" => datasource.title,
+      "url" => datasource.url,
+      "publish_date" => published_at,
+      "default" => default_dim,
+      "indvars" => datacolumns.independent.map(&:name),
+      "depvars" => datacolumns.dependent.map(&:name)
+    }
   end
 
   # package this datatable's data
