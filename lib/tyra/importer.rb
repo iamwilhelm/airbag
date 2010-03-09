@@ -22,6 +22,8 @@ require 'string_utils'
 #   - license: what kind of license applies to this data
 #   - publish_date: The date that we published/imported this data
 #   - default: The default dimension that the graph will start with
+#   - units: A hash of dimension names as keys and the unit labels as
+#            their values
 #   - indvars: An array of dimension names that have unique values
 #   - depvars: An array of dimensions names that do NOT have unique
 #              values.  The set of depvars must be mutually exclusive

@@ -95,6 +95,7 @@ class Datatable < ActiveRecord::Base
       "url" => datasource.url,
       "publish_date" => published_at,
       "default" => default_dim,
+      "units" => {}, 
       "indvars" => datacolumns.independent.map(&:name),
       "depvars" => datacolumns.dependent.map(&:name)
     }
