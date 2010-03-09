@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100306011127) do
+ActiveRecord::Schema.define(:version => 20100309222824) do
 
   create_table "datacolumns", :force => true do |t|
     t.integer  "datatable_id",                    :null => false
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(:version => 20100306011127) do
     t.integer  "position",                        :null => false
     t.boolean  "is_indep",     :default => false
     t.string   "name"
+  end
+
+  create_table "dataconverters", :force => true do |t|
+    t.integer  "datacolumn_id",                 :null => false
+    t.string   "expression",    :default => ""
+    t.string   "replacement",   :default => ""
+    t.integer  "position",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "datasources", :force => true do |t|

@@ -2,6 +2,8 @@ class Datacolumn < ActiveRecord::Base
   include Memoize
   
   belongs_to :datatable
+  has_many :dataconverters, :order => "position asc"
+  
   named_scope :independent, :conditions => { :is_indep => true }
   named_scope :dependent, :conditions => { :is_indep => false }
   
@@ -19,5 +21,5 @@ class Datacolumn < ActiveRecord::Base
       values_at(*datatable.datarows).map(&:mb_chars).map(&:strip).map(&:to_s)
   end
   memoize :data
-
+  
 end
