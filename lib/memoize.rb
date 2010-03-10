@@ -8,11 +8,11 @@ module Memoize
   
   module ClassMethods
     def memoize(method_name, options = {})
-      alias_method "original_#{method_name}", method_name
+      alias_method "unmemoized_#{method_name}", method_name
       define_method(method_name) do |*args|
         reload = args ? args.pop : false
         value = if (reload == true || instance_variable_get("@#{method_name}").nil?)
-                  send("original_#{method_name}")
+                  send("unmemoized_#{method_name}")
                 else
                   instance_variable_get("@#{method_name}")
                 end
