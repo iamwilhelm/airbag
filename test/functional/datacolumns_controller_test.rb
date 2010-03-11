@@ -10,8 +10,9 @@ class DatacolumnsControllerTest < ActionController::TestCase
 
   test "can see edit page of datacolumn" do
     # TODO need a mocked datasource url because uses @datacolumn.data
-    get :edit, { :id => @datacolumn.id }
-    assert_show_page("edit")
+    # get :edit, { :id => @datacolumn.id }
+    # assert_show_page("edit")
+    assert false, "Is missing mock for columns_of call"
   end
   
   # Replace this with your real tests.
