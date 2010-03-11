@@ -42,4 +42,19 @@ module Blueprints
       datatable.datacolumns.create(scaffold(optional_attrs))
     end
   end
+
+  module Dataconverter
+    def self.scaffold(optional_attrs = {})
+      required = {
+        :expression => ",",
+        :replacement => "",
+        :position => "0"
+      }
+      required.merge(optional_attrs)
+    end
+
+    def self.build(datacolumn, optional_attrs = {})
+      datacolumn.dataconverters.create(scaffold(optional_attrs))
+    end
+  end
 end

@@ -19,9 +19,9 @@
         %li
           = "/#{dataconverter.expression}/, '#{dataconverter.replacement}' | "
           = link_to "remove"
-
+    
     - form_for [@datacolumn, @dataconverter], |
-       :html => { :class => "cmxform", :method => :put } do |dcon_f| |
+       :html => { :class => "cmxform" } do |dcon_f| |
       %ol
         %li
           = dcon_f.label "expression", "Regex"
@@ -29,7 +29,7 @@
         %li
           = dcon_f.label "replacement"
           = dcon_f.text_field "replacement"
-      = dcon_f.submit("add")
+      = dcon_f.submit("Add")
 
   .half
     %h3 Data
