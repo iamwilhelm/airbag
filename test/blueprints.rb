@@ -3,7 +3,7 @@ module Blueprints
   module Datasource
     def self.scaffold(optional_attrs = {})
       required = {
-        :url => "http://census.gov", :title => "Census Population"
+        :url => "http://www.census.gov", :title => "Census Population"
       }
       required.merge(optional_attrs)
     end

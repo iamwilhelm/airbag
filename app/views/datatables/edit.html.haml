@@ -9,38 +9,29 @@
 
 .container.clear
   .half
-    - metatime = Timer::timer do
-      - form_for [:datasource, @datatable], |
+    - form_for [:datasource, @datatable], |
         :url => datasource_datatable_path(@datasource, @datatable), |
         :html => { :class => "cmxform", :method => :put } do |f| |
-        = render :partial => "form", :locals => { :f => f }
-        = f.submit "Update"
-    = "Metadata rendered in #{metatime} secs"
+      = render :partial => "form", :locals => { :f => f }
+      = f.submit "Update"
+
   .half
-    - @datacolumns.each do |datacolumn|
-      %div.legroom
-        - col_time = Timer::timer do
-          - form_for [:datatable, datacolumn], |
-              :url => datacolumn_path(datacolumn.id), |
-              :html => { :class => "cmxform", :method => :put } do |dc_f| |
-            %fieldset
-              %ol
-                %li 
-                  = dc_f.label "name"
-                  = dc_f.text_field "name"
-                %li
-                  = dc_f.label "is_indep", "Independent"
-                  = dc_f.check_box "is_indep"
-              = dc_f.submit("update")
-          = link_to_function "Data", "$('#datacolumn_#{datacolumn.id}_data').toggle()"
-          %div.hidden{ :id => "datacolumn_#{datacolumn.id}_data" }
-            = datacolumn.data.inspect
-        %p= "Column rendered in #{col_time} secs"
-      
+    %table.listing
+      %tr
+        %th &nbsp;
+        %th Name
+        %th Indep?
+      - @datacolumns.each do |@datacolumn|
+        %tr
+          %td= link_to "edit ", edit_datacolumn_path(@datacolumn)
+          %td= "[#{@datacolumn.name}] "
+          %td= image_tag (@datacolumn.is_indep? ? "icons/accept.png" : "icons/cross.png")
+
+
 .container.clear{ :style => "overflow: scroll; height: 600px" }
   %h2 Metadata
   = @datatable.metadata.inspect
 
   %h2 Data
-  = @datatable.data.inspect
+  -# @datatable.data.inspect
   -# render :partial => "selection_form", :locals => { :table => @datatable.node }

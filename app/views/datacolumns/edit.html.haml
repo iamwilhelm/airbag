@@ -1,0 +1,7 @@
+.container
+  %div.note{ :style => "float: right" }
+    = link_to "&lsaquo; Back to datatable", edit_datasource_datatable_path(@datacolumn.datatable.datasource, @datacolumn.datatable)
+  %h2 Edit Datacolumn
+
+.container
+  = render :partial => "edit"

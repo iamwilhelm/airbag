@@ -20,7 +20,9 @@ ActionController::Routing::Routes.draw do |map|
   # datasource routes
   map.resources :datasources do |ds|
     ds.resources :datatables, :member => ["import"] do |dt|
-      dt.resources :datacolumns, :shallow => true
+      dt.resources :datacolumns, :shallow => true do |dc|
+        dc.resources :dataconverters
+      end
     end
   end
   

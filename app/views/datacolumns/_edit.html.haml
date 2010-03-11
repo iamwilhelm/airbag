@@ -1,0 +1,38 @@
+- col_time = Timer::timer do
+  - form_for [:datatable, @datacolumn], |
+      :url => datacolumn_path(@datacolumn.id), |
+      :html => { :class => "cmxform", :method => :put } do |dcol_f| |
+    %fieldset
+      %ol
+        %li 
+          = dcol_f.label "name"
+          = dcol_f.text_field "name"
+        %li
+          = dcol_f.label "is_indep", "Independent"
+          = dcol_f.check_box "is_indep"
+    = dcol_f.submit("update")
+
+  .half
+    %h3 Converters
+    %ol
+      - @datacolumn.dataconverters.each do |dataconverter|
+        %li
+          = "/#{dataconverter.expression}/, '#{dataconverter.replacement}' | "
+          = link_to "remove"
+
+    - form_for [@datacolumn, @dataconverter], |
+       :html => { :class => "cmxform", :method => :put } do |dcon_f| |
+      %ol
+        %li
+          = dcon_f.label "expression", "Regex"
+          = dcon_f.text_field "expression"
+        %li
+          = dcon_f.label "replacement"
+          = dcon_f.text_field "replacement"
+      = dcon_f.submit("add")
+
+  .half
+    %h3 Data
+    %div{ :id => "datacolumn_#{@datacolumn.id}_data" }
+      = @datacolumn.data.inspect
+%p= "Column rendered in #{col_time} secs"

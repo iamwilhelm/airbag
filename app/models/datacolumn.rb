@@ -1,8 +1,11 @@
+require 'open-uri'
+
 class Datacolumn < ActiveRecord::Base
   include Memoize
   
   belongs_to :datatable
-  has_many :dataconverters, :order => "position asc"
+  has_many :dataconverters, :order => "position asc", :dependent => :destroy
+  accepts_nested_attributes_for :dataconverters, :allow_destroy => true
   
   named_scope :independent, :conditions => { :is_indep => true }
   named_scope :dependent, :conditions => { :is_indep => false }

@@ -1,5 +1,16 @@
 class DatacolumnsController < ApplicationController
-
+  layout "importer"
+  
+  def edit
+    @datacolumn = Datacolumn.find(params[:id])
+    @dataconverter = @datacolumn.dataconverters.new
+    
+    respond_to do |wants|
+      wants.html {}
+      wants.json { render :partial => "edit" }
+    end
+  end
+  
   def update
     @datacolumn = Datacolumn.find(params[:id])
     @datacolumn.update_attributes(params[:datacolumn])
