@@ -14,11 +14,16 @@
 
   .half
     %h3 Converters
-    %ol
+    %table.listing
+      %tr
+        %th Regex Pattern
+        %th Replacement
+        %th &nbsp;
       - @datacolumn.dataconverters.each do |dataconverter|
-        %li
-          = "/#{dataconverter.expression}/, '#{dataconverter.replacement}' | "
-          = link_to "remove"
+        %tr
+          %td= "/#{dataconverter.expression}/"
+          %td= "\"#{dataconverter.replacement}\""
+          %td= "remove"
     
     - form_for [@datacolumn, @dataconverter], |
        :html => { :class => "cmxform" } do |dcon_f| |
