@@ -16,17 +16,18 @@ require 'string_utils'
 # The meta data required are the following:
 #
 #   - name: The name of the dataset
-#   - description: a string describing deatils of the dataset
+#   - description: a string describing details of the dataset
 #   - source: The name of the source where we got the data
-#   - url: a url describing where the data came from
+#   - url: a link to find the data
 #   - license: what kind of license applies to this data
-#   - publish_date: The date that we published/imported this data
-#   - default: The default dimension that the graph will start with
+#   - publish_date: The date that the source published this data
+#   - default: The default x axis dimension for this dataset
 #   - units: A hash of dimension names as keys and the unit labels as
 #            their values
-#   - indvars: An array of dimension names that have unique values
-#   - depvars: An array of dimensions names that do NOT have unique
-#              values.  The set of depvars must be mutually exclusive
+#   - indvars: An array of independent variables (can only be used as
+#              x axis)
+#   - depvars: An array of dependent variables (can be used on any
+#              axis).  The set of depvars must be mutually exclusive
 #              from indvars
 #
 class Importer
@@ -107,9 +108,6 @@ class Importer
     puts "Importing #{meta['name']}"
     colnames = data.keys
 
-    puts "Inside import:"
-    puts meta.inspect
-    
     @search_dw.set to_r(meta["name"]), meta.to_json
     meta["depvars"].each do |nn|
       @search_dw.set to_r(meta["name"] + "|" + nn), true
