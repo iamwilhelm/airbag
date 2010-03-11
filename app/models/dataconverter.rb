@@ -4,7 +4,7 @@ class Dataconverter < ActiveRecord::Base
   validates_presence_of :position
 
   class << self
-    def comma_remover
+    def comma_remove_converter
       Dataconverter.new(:expression => ",", :replacement => "")
     end
   end
