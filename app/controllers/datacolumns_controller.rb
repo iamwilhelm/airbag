@@ -4,7 +4,7 @@ class DatacolumnsController < ApplicationController
   def edit
     @datacolumn = Datacolumn.find(params[:id])
     @dataconverter = @datacolumn.dataconverters.new
-    
+
     respond_to do |wants|
       wants.html {}
       wants.json { render :partial => "edit" }
