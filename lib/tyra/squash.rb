@@ -20,7 +20,27 @@ class Squash
     squash(dataset, new_indvar_names)
   end
 
-  # do it
+  # TODO: use a tree datastructure instead of hashes?
+  #
+  # pack everything into a tree datastructre keyed by independent
+  # variable values, then traverse the tree to build a new dataset.
+  #
+  # data is a tree built from hashes in hashes.  each level of the
+  # tree is an independent variable (sorted by dimension name).  the
+  # hash keys are independent variable values.  the leaves of the tree
+  # are the dependent variable values.  for example, this is data for
+  # a dataset with two independent variables: State and Year.
+  # 
+  #                   Head
+  #                 /      \
+  # (State)   Alabama ...  Wyoming
+  #          /      \      /      \
+  # (Year) 1992 .. 2008   1992 .. 2008
+  #          |       |      |       |
+  # (Value) 1.2     2.2    3.2     4.1
+  #
+  # So, data['Alabama]['1992'] would be 1.2, likewise ['Alabama', '1992'] 
+  # is the path to 1.2.
   def squash(dataset)
     data = {}           # tree datastructure to hold all data
 
@@ -53,7 +73,6 @@ class Squash
 
     # update metadata
     dataset['meta']['indvars'] += new_indvar_names
-    dataset['meta']['depvars'] = [@dataset_name]
     dataset['meta']['depvars'] = [@dataset_name]
     dataset['meta'].delete 'new_indvar_names'
 
