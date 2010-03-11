@@ -20,8 +20,15 @@ class Datacolumn < ActiveRecord::Base
   end
 
   def data
-    Datatable.columns_of(datatable.node, node).map(&:content).
-      values_at(*datatable.datarows).map(&:mb_chars).map(&:strip).map(&:to_s)
+    data = Datatable.columns_of(datatable.node, node).map(&:content).
+      values_at(*datatable.datarows).map(&:mb_chars).map(&:strip)
+
+    data.map do |datum|
+      dataconverters.each do |dataconverter|
+        datum = dataconverter.convert(datum)
+      end
+      datum
+    end.map(&:to_s)
   end
   memoize :data
   

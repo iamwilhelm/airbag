@@ -8,5 +8,9 @@ class Dataconverter < ActiveRecord::Base
       Dataconverter.new(:expression => ",", :replacement => "")
     end
   end
+
+  def convert(string)
+    string.gsub(/#{expression}/, replacement)
+  end
   
 end
