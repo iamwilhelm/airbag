@@ -43,7 +43,7 @@ class Importer
   # read csv file into import datastructure
   def read_csv(fname)
     raise "file not found" if !File.exists? fname
-    puts "Reading #{fname}"
+    #puts "Reading #{fname}"
 
     data = {}
     meta = {}
@@ -105,7 +105,7 @@ class Importer
     remove(meta["name"], true)
 
     # set lookup key and metadata
-    puts "Importing #{meta['name']}"
+    #puts "Importing #{meta['name']}"
     colnames = data.keys
 
     @search_dw.set to_r(meta["name"]), meta.to_json
@@ -128,7 +128,7 @@ class Importer
     exists = @search_dw.exists to_r(dataset)
 
     return false if !for_import && !exists
-    puts "Removing #{dataset}" if for_import && exists
+    #puts "Removing #{dataset}" if for_import && exists
 
     # del meta
     @search_dw.del to_r(dataset)
