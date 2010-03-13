@@ -1,5 +1,6 @@
 require 'test/unit'
-require '../tyra'
+$LOAD_PATH << File.join(File.dirname(__FILE__), "..")
+require 'tyra'
 
 # note: some tests inspect expected and actual values to prevent
 # repeating decimals from messing up comparison
@@ -10,15 +11,10 @@ class TyraTest < Test::Unit::TestCase
   end
 
   # remove, then import, then import (with implicit remove)
-  def test_remove_import_both
+  def test_import
+    fname = File.join(File.dirname(__FILE__), "fixtures", "peanut_butter.csv")
     expected = true
-    actual = @tyra.process( "cmd" => "remove", "dataset" => "peanut_butter" )
-    assert_equal expected, actual, "fail"
-
-    actual = @tyra.process( "cmd" => "import_csv", "fname" => "fixtures/peanut_butter.csv" )
-    assert_equal expected, actual, "fail"
-
-    actual = @tyra.process( "cmd" => "import_csv", "fname" => "fixtures/peanut_butter.csv" )
+    actual = @tyra.process( "cmd" => "import_csv", "fname" => fname )
     assert_equal expected, actual, "fail"
   end
 
