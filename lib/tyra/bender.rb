@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 
-
 $LOAD_PATH << File.dirname(__FILE__)
 require "string_utils"
 require "misc_utils"
@@ -142,10 +141,10 @@ class Bender
   end
 
   # replace state names with abbreviations
-  def abbrev_cmd(str)
+  def abbrev_cmd(fname)
     puts "replacing states with abbrev"
     stateabbrev = []
-    File.open("states.txt", "r") do |fin|
+    File.open(fname, "r") do |fin|
       fin.each_line do |ll|
         stateabbrev.push to_fields(ll)
       end

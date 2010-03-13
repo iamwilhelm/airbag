@@ -1,0 +1,53 @@
+WV,\.?[Ww]est [Vv]irginia
+AL,\.?[Aa]labama
+AK,\.?[Aa]laska
+AZ,\.?[Aa]rizona
+AR,\.?[Aa]rkansas
+CA,\.?[Cc]alifornia
+CO,\.?[Cc]olorado
+CT,\.?[Cc]onnecticut
+DE,\.?[Dd]elaware
+DC,\.?[Dd]istrict [Oo]f [Cc]olumbia
+DC,\.?[Ww]ashington DC
+FL,\.?[Ff]lorida
+GA,\.?[Gg]eorgia
+HI,\.?[Hh]awaii
+ID,\.?[Ii]daho
+IL,\.?[Ii]llinois
+IN,\.?[Ii]ndiana
+IA,\.?[Ii]owa
+KS,\.?[Kk]ansas
+KY,\.?[Kk]entucky
+LA,\.?[Ll]ouisiana
+ME,\.?[Mm]aine
+MD,\.?[Mm]aryland
+MA,\.?[Mm]assachusetts
+MI,\.?[Mm]ichigan
+MN,\.?[Mm]innesota
+MS,\.?[Mm]ississippi
+MO,\.?[Mm]issouri
+MT,\.?[Mm]ontana
+NE,\.?[Nn]ebraska
+NV,\.?[Nn]evada
+NH,\.?[Nn]ew [Hh]ampshire
+NJ,\.?[Nn]ew [Jj]ersey
+NM,\.?[Nn]ew [Mm]exico
+NY,\.?[Nn]ew [Yy]ork
+NC,\.?[Nn]orth [Cc]arolina
+ND,\.?[Nn]orth [Dd]akota
+OH,\.?[Oo]hio
+OK,\.?[Oo]klahoma
+OR,\.?[Oo]regon
+PA,\.?[Pp]ennsylvania
+PR,\.?[Pp]uerto [Rr]ico
+RI,\.?[Rr]hode [Ii]sland
+SC,\.?[Ss]outh [Cc]arolina
+SD,\.?[Ss]outh [Dd]akota
+TN,\.?[Tt]ennessee
+TX,\.?[Tt]exas
+UT,\.?[Uu]tah
+VT,\.?[Vv]ermont
+VA,\.?[Vv]irginia
+WA,\.?[Ww]ashington
+WI,\.?[Ww]isconsin
+WY,\.?[Ww]yoming

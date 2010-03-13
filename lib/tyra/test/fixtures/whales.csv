@@ -8,258 +8,258 @@ default, State
 indvars, State, Species
 
 State,Species,Whales (whales)
-Alabama,Humpback,2.04494633e+02
-Alaska,Humpback,2.01366761e+02
-Arizona,Humpback,2.02077637e+02
-Arkansas,Humpback,2.00489285e+02
-California,Humpback,2.01796524e+02
-Colorado,Humpback,2.02068229e+02
-Connecticut,Humpback,2.01657764e+02
-Delaware,Humpback,2.04129421e+02
-District of Columbia,Humpback,2.00693428e+02
-Florida,Humpback,2.04015995e+02
-Georgia,Humpback,2.03907874e+02
-Hawaii,Humpback,2.00247465e+02
-Idaho,Humpback,2.02578080e+02
-Illinois,Humpback,2.03168911e+02
-Indiana,Humpback,2.04624186e+02
-Iowa,Humpback,2.01516911e+02
-Kansas,Humpback,2.04377048e+02
-Kentucky,Humpback,2.01006215e+02
-Louisiana,Humpback,2.03174387e+02
-Maine,Humpback,2.03266518e+02
-Maryland,Humpback,2.02976300e+02
-Massachusetts,Humpback,2.01777514e+02
-Michigan,Humpback,2.02695286e+02
-Minnesota,Humpback,2.04845262e+02
-Mississippi,Humpback,2.02082347e+02
-Missouri,Humpback,2.04739034e+02
-Montana,Humpback,2.01525573e+02
-Nebraska,Humpback,2.03814517e+02
-Nevada,Humpback,2.02260975e+02
-New Hampshire,Humpback,2.03949468e+02
-New Jersey,Humpback,2.01424092e+02
-New Mexico,Humpback,2.00420245e+02
-New York,Humpback,2.01234057e+02
-North Carolina,Humpback,2.02732241e+02
-North Dakota,Humpback,2.03527201e+02
-Ohio,Humpback,2.04181466e+02
-Oklahoma,Humpback,2.04075963e+02
-Oregon,Humpback,2.03591515e+02
-Pennsylvania,Humpback,2.03948775e+02
-Rhode Island,Humpback,2.00890795e+02
-South Carolina,Humpback,2.02147049e+02
-South Dakota,Humpback,2.01805557e+02
-Tennessee,Humpback,2.00541373e+02
-Texas,Humpback,2.04399591e+02
-Utah,Humpback,2.01101616e+02
-Vermont,Humpback,2.03469599e+02
-Virginia,Humpback,2.03412227e+02
-Washington,Humpback,2.01090062e+02
-West Virginia,Humpback,2.01231441e+02
-Wisconsin,Humpback,2.00478065e+02
-Wyoming,Humpback,2.02939433e+02
-Alabama,Sperm,2.04657492e+02
-Alaska,Sperm,2.01289166e+02
-Arizona,Sperm,2.04060668e+02
-Arkansas,Sperm,2.01526925e+02
-California,Sperm,2.04208942e+02
-Colorado,Sperm,2.04896218e+02
-Connecticut,Sperm,2.01509481e+02
-Delaware,Sperm,2.01027380e+02
-District of Columbia,Sperm,2.01420569e+02
-Florida,Sperm,2.03542943e+02
-Georgia,Sperm,2.01367379e+02
-Hawaii,Sperm,2.03433826e+02
-Idaho,Sperm,2.03186020e+02
-Illinois,Sperm,2.04223714e+02
-Indiana,Sperm,2.02243595e+02
-Iowa,Sperm,2.04848091e+02
-Kansas,Sperm,2.01428690e+02
-Kentucky,Sperm,2.04153140e+02
-Louisiana,Sperm,2.03041493e+02
-Maine,Sperm,2.00606576e+02
-Maryland,Sperm,2.04364303e+02
-Massachusetts,Sperm,2.04171207e+02
-Michigan,Sperm,2.03159423e+02
-Minnesota,Sperm,2.00119704e+02
-Mississippi,Sperm,2.04999932e+02
-Missouri,Sperm,2.04535634e+02
-Montana,Sperm,2.01073238e+02
-Nebraska,Sperm,2.03304617e+02
-Nevada,Sperm,2.04484488e+02
-New Hampshire,Sperm,2.01323654e+02
-New Jersey,Sperm,2.03297589e+02
-New Mexico,Sperm,2.04432821e+02
-New York,Sperm,2.03189803e+02
-North Carolina,Sperm,2.02688553e+02
-North Dakota,Sperm,2.00152319e+02
-Ohio,Sperm,2.04306268e+02
-Oklahoma,Sperm,2.01162774e+02
-Oregon,Sperm,2.02960826e+02
-Pennsylvania,Sperm,2.00402581e+02
-Rhode Island,Sperm,2.00710362e+02
-South Carolina,Sperm,2.03755532e+02
-South Dakota,Sperm,2.03496045e+02
-Tennessee,Sperm,2.02848517e+02
-Texas,Sperm,2.04588333e+02
-Utah,Sperm,2.04154832e+02
-Vermont,Sperm,2.03011054e+02
-Virginia,Sperm,2.01083212e+02
-Washington,Sperm,2.04237917e+02
-West Virginia,Sperm,2.02616740e+02
-Wisconsin,Sperm,2.00448646e+02
-Wyoming,Sperm,2.02735982e+02
-Alabama,Blue,2.01009647e+02
-Alaska,Blue,2.01334360e+02
-Arizona,Blue,2.03764858e+02
-Arkansas,Blue,2.00261746e+02
-California,Blue,2.02490999e+02
-Colorado,Blue,2.00439146e+02
-Connecticut,Blue,2.01439433e+02
-Delaware,Blue,2.00193899e+02
-District of Columbia,Blue,2.02251245e+02
-Florida,Blue,2.04722744e+02
-Georgia,Blue,2.02623947e+02
-Hawaii,Blue,2.02225949e+02
-Idaho,Blue,2.00245058e+02
-Illinois,Blue,2.01294144e+02
-Indiana,Blue,2.00569784e+02
-Iowa,Blue,2.04151692e+02
-Kansas,Blue,2.02203542e+02
-Kentucky,Blue,2.03663220e+02
-Louisiana,Blue,2.01799616e+02
-Maine,Blue,2.02964034e+02
-Maryland,Blue,2.01444664e+02
-Massachusetts,Blue,2.02320437e+02
-Michigan,Blue,2.01052371e+02
-Minnesota,Blue,2.04433176e+02
-Mississippi,Blue,2.02234782e+02
-Missouri,Blue,2.03673058e+02
-Montana,Blue,2.01833183e+02
-Nebraska,Blue,2.02471562e+02
-Nevada,Blue,2.01585463e+02
-New Hampshire,Blue,2.00101492e+02
-New Jersey,Blue,2.04560760e+02
-New Mexico,Blue,2.00084541e+02
-New York,Blue,2.01831015e+02
-North Carolina,Blue,2.03546248e+02
-North Dakota,Blue,2.00771016e+02
-Ohio,Blue,2.01043178e+02
-Oklahoma,Blue,2.01180199e+02
-Oregon,Blue,2.04686626e+02
-Pennsylvania,Blue,2.02655560e+02
-Rhode Island,Blue,2.04489321e+02
-South Carolina,Blue,2.03420100e+02
-South Dakota,Blue,2.03284482e+02
-Tennessee,Blue,2.01627550e+02
-Texas,Blue,2.00122765e+02
-Utah,Blue,2.00903683e+02
-Vermont,Blue,2.01547552e+02
-Virginia,Blue,2.04979376e+02
-Washington,Blue,2.01811621e+02
-West Virginia,Blue,2.01873061e+02
-Wisconsin,Blue,2.04557049e+02
-Wyoming,Blue,2.03715297e+02
-Alabama,Grey,2.04706163e+02
-Alaska,Grey,2.03614855e+02
-Arizona,Grey,2.03633325e+02
-Arkansas,Grey,2.01778098e+02
-California,Grey,2.03798818e+02
-Colorado,Grey,2.03812551e+02
-Connecticut,Grey,2.04869054e+02
-Delaware,Grey,2.03491069e+02
-District of Columbia,Grey,2.02677525e+02
-Florida,Grey,2.04093372e+02
-Georgia,Grey,2.02697603e+02
-Hawaii,Grey,2.03883058e+02
-Idaho,Grey,2.04964772e+02
-Illinois,Grey,2.03815169e+02
-Indiana,Grey,2.03791170e+02
-Iowa,Grey,2.03517462e+02
-Kansas,Grey,2.03154543e+02
-Kentucky,Grey,2.02183466e+02
-Louisiana,Grey,2.03818079e+02
-Maine,Grey,2.02761119e+02
-Maryland,Grey,2.03063433e+02
-Massachusetts,Grey,2.04141685e+02
-Michigan,Grey,2.03638636e+02
-Minnesota,Grey,2.00446189e+02
-Mississippi,Grey,2.00322383e+02
-Missouri,Grey,2.02750051e+02
-Montana,Grey,2.00317806e+02
-Nebraska,Grey,2.03117898e+02
-Nevada,Grey,2.00299641e+02
-New Hampshire,Grey,2.04887546e+02
-New Jersey,Grey,2.04882811e+02
-New Mexico,Grey,2.03620026e+02
-New York,Grey,2.04143727e+02
-North Carolina,Grey,2.02750172e+02
-North Dakota,Grey,2.04075531e+02
-Ohio,Grey,2.03985326e+02
-Oklahoma,Grey,2.02294487e+02
-Oregon,Grey,2.01548337e+02
-Pennsylvania,Grey,2.04704822e+02
-Rhode Island,Grey,2.03128288e+02
-South Carolina,Grey,2.00842930e+02
-South Dakota,Grey,2.03039577e+02
-Tennessee,Grey,2.04593019e+02
-Texas,Grey,2.02403375e+02
-Utah,Grey,2.02005532e+02
-Vermont,Grey,2.00215327e+02
-Virginia,Grey,2.01850835e+02
-Washington,Grey,2.04070569e+02
-West Virginia,Grey,2.00030247e+02
-Wisconsin,Grey,2.00502795e+02
-Wyoming,Grey,2.01135656e+02
-Alabama,Pygmy,2.00522862e+02
-Alaska,Pygmy,2.04203314e+02
-Arizona,Pygmy,2.03347465e+02
-Arkansas,Pygmy,2.01023449e+02
-California,Pygmy,2.02109425e+02
-Colorado,Pygmy,2.00048824e+02
-Connecticut,Pygmy,2.00630989e+02
-Delaware,Pygmy,2.04203700e+02
-District of Columbia,Pygmy,2.00302477e+02
-Florida,Pygmy,2.01400254e+02
-Georgia,Pygmy,2.03658921e+02
-Hawaii,Pygmy,2.02857338e+02
-Idaho,Pygmy,2.02695841e+02
-Illinois,Pygmy,2.01307126e+02
-Indiana,Pygmy,2.00854149e+02
-Iowa,Pygmy,2.01422602e+02
-Kansas,Pygmy,2.02022813e+02
-Kentucky,Pygmy,2.03485230e+02
-Louisiana,Pygmy,2.00192673e+02
-Maine,Pygmy,2.03982328e+02
-Maryland,Pygmy,2.02295090e+02
-Massachusetts,Pygmy,2.02538683e+02
-Michigan,Pygmy,2.03704170e+02
-Minnesota,Pygmy,2.02666210e+02
-Mississippi,Pygmy,2.00996094e+02
-Missouri,Pygmy,2.03974320e+02
-Montana,Pygmy,2.03040325e+02
-Nebraska,Pygmy,2.02073263e+02
-Nevada,Pygmy,2.04602223e+02
-New Hampshire,Pygmy,2.04152518e+02
-New Jersey,Pygmy,2.03443320e+02
-New Mexico,Pygmy,2.03280365e+02
-New York,Pygmy,2.02642456e+02
-North Carolina,Pygmy,2.00590526e+02
-North Dakota,Pygmy,2.04806255e+02
-Ohio,Pygmy,2.01354085e+02
-Oklahoma,Pygmy,2.04185696e+02
-Oregon,Pygmy,2.02801301e+02
-Pennsylvania,Pygmy,2.02803833e+02
-Rhode Island,Pygmy,2.00020292e+02
-South Carolina,Pygmy,2.04650464e+02
-South Dakota,Pygmy,2.01303623e+02
-Tennessee,Pygmy,2.02998593e+02
-Texas,Pygmy,2.02060064e+02
-Utah,Pygmy,2.00788678e+02
-Vermont,Pygmy,2.03868640e+02
-Virginia,Pygmy,2.00941102e+02
-Washington,Pygmy,2.03449531e+02
-West Virginia,Pygmy,2.04577056e+02
-Wisconsin,Pygmy,2.02199953e+02
-Wyoming,Pygmy,2.02827887e+02
+AL,Humpback,2.04494633e+02
+AK,Humpback,2.01366761e+02
+AZ,Humpback,2.02077637e+02
+AR,Humpback,2.00489285e+02
+CA,Humpback,2.01796524e+02
+CO,Humpback,2.02068229e+02
+CT,Humpback,2.01657764e+02
+DE,Humpback,2.04129421e+02
+DC,Humpback,2.00693428e+02
+FL,Humpback,2.04015995e+02
+GA,Humpback,2.03907874e+02
+HI,Humpback,2.00247465e+02
+ID,Humpback,2.02578080e+02
+IL,Humpback,2.03168911e+02
+IN,Humpback,2.04624186e+02
+IA,Humpback,2.01516911e+02
+KS,Humpback,2.04377048e+02
+KY,Humpback,2.01006215e+02
+LA,Humpback,2.03174387e+02
+ME,Humpback,2.03266518e+02
+MD,Humpback,2.02976300e+02
+MA,Humpback,2.01777514e+02
+MI,Humpback,2.02695286e+02
+MN,Humpback,2.04845262e+02
+MS,Humpback,2.02082347e+02
+MO,Humpback,2.04739034e+02
+MT,Humpback,2.01525573e+02
+NE,Humpback,2.03814517e+02
+NV,Humpback,2.02260975e+02
+NH,Humpback,2.03949468e+02
+NJ,Humpback,2.01424092e+02
+NM,Humpback,2.00420245e+02
+NY,Humpback,2.01234057e+02
+NC,Humpback,2.02732241e+02
+ND,Humpback,2.03527201e+02
+OH,Humpback,2.04181466e+02
+OK,Humpback,2.04075963e+02
+OR,Humpback,2.03591515e+02
+PA,Humpback,2.03948775e+02
+RI,Humpback,2.00890795e+02
+SC,Humpback,2.02147049e+02
+SD,Humpback,2.01805557e+02
+TN,Humpback,2.00541373e+02
+TX,Humpback,2.04399591e+02
+UT,Humpback,2.01101616e+02
+VT,Humpback,2.03469599e+02
+VA,Humpback,2.03412227e+02
+WA,Humpback,2.01090062e+02
+WV,Humpback,2.01231441e+02
+WI,Humpback,2.00478065e+02
+WY,Humpback,2.02939433e+02
+AL,Sperm,2.04657492e+02
+AK,Sperm,2.01289166e+02
+AZ,Sperm,2.04060668e+02
+AR,Sperm,2.01526925e+02
+CA,Sperm,2.04208942e+02
+CO,Sperm,2.04896218e+02
+CT,Sperm,2.01509481e+02
+DE,Sperm,2.01027380e+02
+DC,Sperm,2.01420569e+02
+FL,Sperm,2.03542943e+02
+GA,Sperm,2.01367379e+02
+HI,Sperm,2.03433826e+02
+ID,Sperm,2.03186020e+02
+IL,Sperm,2.04223714e+02
+IN,Sperm,2.02243595e+02
+IA,Sperm,2.04848091e+02
+KS,Sperm,2.01428690e+02
+KY,Sperm,2.04153140e+02
+LA,Sperm,2.03041493e+02
+ME,Sperm,2.00606576e+02
+MD,Sperm,2.04364303e+02
+MA,Sperm,2.04171207e+02
+MI,Sperm,2.03159423e+02
+MN,Sperm,2.00119704e+02
+MS,Sperm,2.04999932e+02
+MO,Sperm,2.04535634e+02
+MT,Sperm,2.01073238e+02
+NE,Sperm,2.03304617e+02
+NV,Sperm,2.04484488e+02
+NH,Sperm,2.01323654e+02
+NJ,Sperm,2.03297589e+02
+NM,Sperm,2.04432821e+02
+NY,Sperm,2.03189803e+02
+NC,Sperm,2.02688553e+02
+ND,Sperm,2.00152319e+02
+OH,Sperm,2.04306268e+02
+OK,Sperm,2.01162774e+02
+OR,Sperm,2.02960826e+02
+PA,Sperm,2.00402581e+02
+RI,Sperm,2.00710362e+02
+SC,Sperm,2.03755532e+02
+SD,Sperm,2.03496045e+02
+TN,Sperm,2.02848517e+02
+TX,Sperm,2.04588333e+02
+UT,Sperm,2.04154832e+02
+VT,Sperm,2.03011054e+02
+VA,Sperm,2.01083212e+02
+WA,Sperm,2.04237917e+02
+WV,Sperm,2.02616740e+02
+WI,Sperm,2.00448646e+02
+WY,Sperm,2.02735982e+02
+AL,Blue,2.01009647e+02
+AK,Blue,2.01334360e+02
+AZ,Blue,2.03764858e+02
+AR,Blue,2.00261746e+02
+CA,Blue,2.02490999e+02
+CO,Blue,2.00439146e+02
+CT,Blue,2.01439433e+02
+DE,Blue,2.00193899e+02
+DC,Blue,2.02251245e+02
+FL,Blue,2.04722744e+02
+GA,Blue,2.02623947e+02
+HI,Blue,2.02225949e+02
+ID,Blue,2.00245058e+02
+IL,Blue,2.01294144e+02
+IN,Blue,2.00569784e+02
+IA,Blue,2.04151692e+02
+KS,Blue,2.02203542e+02
+KY,Blue,2.03663220e+02
+LA,Blue,2.01799616e+02
+ME,Blue,2.02964034e+02
+MD,Blue,2.01444664e+02
+MA,Blue,2.02320437e+02
+MI,Blue,2.01052371e+02
+MN,Blue,2.04433176e+02
+MS,Blue,2.02234782e+02
+MO,Blue,2.03673058e+02
+MT,Blue,2.01833183e+02
+NE,Blue,2.02471562e+02
+NV,Blue,2.01585463e+02
+NH,Blue,2.00101492e+02
+NJ,Blue,2.04560760e+02
+NM,Blue,2.00084541e+02
+NY,Blue,2.01831015e+02
+NC,Blue,2.03546248e+02
+ND,Blue,2.00771016e+02
+OH,Blue,2.01043178e+02
+OK,Blue,2.01180199e+02
+OR,Blue,2.04686626e+02
+PA,Blue,2.02655560e+02
+RI,Blue,2.04489321e+02
+SC,Blue,2.03420100e+02
+SD,Blue,2.03284482e+02
+TN,Blue,2.01627550e+02
+TX,Blue,2.00122765e+02
+UT,Blue,2.00903683e+02
+VT,Blue,2.01547552e+02
+VA,Blue,2.04979376e+02
+WA,Blue,2.01811621e+02
+WV,Blue,2.01873061e+02
+WI,Blue,2.04557049e+02
+WY,Blue,2.03715297e+02
+AL,Grey,2.04706163e+02
+AK,Grey,2.03614855e+02
+AZ,Grey,2.03633325e+02
+AR,Grey,2.01778098e+02
+CA,Grey,2.03798818e+02
+CO,Grey,2.03812551e+02
+CT,Grey,2.04869054e+02
+DE,Grey,2.03491069e+02
+DC,Grey,2.02677525e+02
+FL,Grey,2.04093372e+02
+GA,Grey,2.02697603e+02
+HI,Grey,2.03883058e+02
+ID,Grey,2.04964772e+02
+IL,Grey,2.03815169e+02
+IN,Grey,2.03791170e+02
+IA,Grey,2.03517462e+02
+KS,Grey,2.03154543e+02
+KY,Grey,2.02183466e+02
+LA,Grey,2.03818079e+02
+ME,Grey,2.02761119e+02
+MD,Grey,2.03063433e+02
+MA,Grey,2.04141685e+02
+MI,Grey,2.03638636e+02
+MN,Grey,2.00446189e+02
+MS,Grey,2.00322383e+02
+MO,Grey,2.02750051e+02
+MT,Grey,2.00317806e+02
+NE,Grey,2.03117898e+02
+NV,Grey,2.00299641e+02
+NH,Grey,2.04887546e+02
+NJ,Grey,2.04882811e+02
+NM,Grey,2.03620026e+02
+NY,Grey,2.04143727e+02
+NC,Grey,2.02750172e+02
+ND,Grey,2.04075531e+02
+OH,Grey,2.03985326e+02
+OK,Grey,2.02294487e+02
+OR,Grey,2.01548337e+02
+PA,Grey,2.04704822e+02
+RI,Grey,2.03128288e+02
+SC,Grey,2.00842930e+02
+SD,Grey,2.03039577e+02
+TN,Grey,2.04593019e+02
+TX,Grey,2.02403375e+02
+UT,Grey,2.02005532e+02
+VT,Grey,2.00215327e+02
+VA,Grey,2.01850835e+02
+WA,Grey,2.04070569e+02
+WV,Grey,2.00030247e+02
+WI,Grey,2.00502795e+02
+WY,Grey,2.01135656e+02
+AL,Pygmy,2.00522862e+02
+AK,Pygmy,2.04203314e+02
+AZ,Pygmy,2.03347465e+02
+AR,Pygmy,2.01023449e+02
+CA,Pygmy,2.02109425e+02
+CO,Pygmy,2.00048824e+02
+CT,Pygmy,2.00630989e+02
+DE,Pygmy,2.04203700e+02
+DC,Pygmy,2.00302477e+02
+FL,Pygmy,2.01400254e+02
+GA,Pygmy,2.03658921e+02
+HI,Pygmy,2.02857338e+02
+ID,Pygmy,2.02695841e+02
+IL,Pygmy,2.01307126e+02
+IN,Pygmy,2.00854149e+02
+IA,Pygmy,2.01422602e+02
+KS,Pygmy,2.02022813e+02
+KY,Pygmy,2.03485230e+02
+LA,Pygmy,2.00192673e+02
+ME,Pygmy,2.03982328e+02
+MD,Pygmy,2.02295090e+02
+MA,Pygmy,2.02538683e+02
+MI,Pygmy,2.03704170e+02
+MN,Pygmy,2.02666210e+02
+MS,Pygmy,2.00996094e+02
+MO,Pygmy,2.03974320e+02
+MT,Pygmy,2.03040325e+02
+NE,Pygmy,2.02073263e+02
+NV,Pygmy,2.04602223e+02
+NH,Pygmy,2.04152518e+02
+NJ,Pygmy,2.03443320e+02
+NM,Pygmy,2.03280365e+02
+NY,Pygmy,2.02642456e+02
+NC,Pygmy,2.00590526e+02
+ND,Pygmy,2.04806255e+02
+OH,Pygmy,2.01354085e+02
+OK,Pygmy,2.04185696e+02
+OR,Pygmy,2.02801301e+02
+PA,Pygmy,2.02803833e+02
+RI,Pygmy,2.00020292e+02
+SC,Pygmy,2.04650464e+02
+SD,Pygmy,2.01303623e+02
+TN,Pygmy,2.02998593e+02
+TX,Pygmy,2.02060064e+02
+UT,Pygmy,2.00788678e+02
+VT,Pygmy,2.03868640e+02
+VA,Pygmy,2.00941102e+02
+WA,Pygmy,2.03449531e+02
+WV,Pygmy,2.04577056e+02
+WI,Pygmy,2.02199953e+02
+WY,Pygmy,2.02827887e+02
