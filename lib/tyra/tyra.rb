@@ -69,33 +69,8 @@ def show_help
   puts "  -x xaxis                set xaxis for get data call"
   puts "  -o op                   set op for aggregating data"
   puts "  -d \"dataset|dimension\"  get data"
-  puts "  -t                      run tests"
   puts "  -h                      help"
   puts "  -v                      show version and exit"
-end
-
-def run_tests
-  tyra = Tyra.new(2)
-
-  p tyra.process( "cmd" => "remove", "dataset" => "peanut_butter" )
-  p "---------"
-  p tyra.process( "cmd" => "import_csv", "fname" => "test/fixtures/peanut_butter.csv" )
-  p "---------"
-  p tyra.process( "cmd" => "search", "search_str" => "peanut_butter" )
-  p "---------"
-  p tyra.process( "cmd" => "search", "search_str" => "number_of_banks" )
-  p "---------"
-  p tyra.process( "cmd" => "get_metadata", "dimension" => "peanut_butter|donut" )
-  p "---------"
-  p tyra.process( "cmd" => "get_metadata", "dimension" => "number_of_banks|number_of_banks" )
-  p "---------"
-  p tyra.process( "cmd" => "get_data", "dimension" => "peanut_butter|donut" )
-  p "---------"
-  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks|number_of_banks" )
-  p "---------"
-  p tyra.process( "cmd" => "get_data", "dimension" => "number_of_banks|number_of_banks", "xaxis" => "State" )
-  p "---------"
-  p tyra.search("butter bank")
 end
 
 if __FILE__ == $0
@@ -112,7 +87,6 @@ if __FILE__ == $0
     case arg
     when "-h" then show_help; exit 0
     when "-v" then show_version; exit 0
-    when "-t" then run_tests(); exit 0
     when "-n" then base_db = ARGV.shift.to_i
     when "-r" then cmd = {"cmd" => "remove", "dataset" => ARGV.shift}
     when "-i" then cmd = {"cmd" => "import_csv", "fname" => ARGV.shift}
