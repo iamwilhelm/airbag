@@ -2,11 +2,14 @@
 
 $LOAD_PATH << File.dirname(__FILE__)
 require "importer"
+require 'misc_utils'
 
 # squash cols into a single col plus a "value" column.  this should be
 # done when col headers are the values of an independent variable.
 
 class Squash
+  include MiscUtils
+
   def initialize()
     @tree_levels = ""   # list of indvars in order (levels of the tree)
     @newcols = {}       # column data to replace dataset['data']
@@ -73,7 +76,7 @@ class Squash
     dataset['meta']['indvars'] += new_indvar_names
     dataset['meta']['depvars'] = [@dataset_name]
     if dataset['meta'].key? 'new_depvar_units'
-      dataset['meta']['units'][@dataset_name] = dataset['meta']['new_depvar_units']
+      dataset['meta']['units'][to_r(@dataset_name)] = dataset['meta']['new_depvar_units']
     end
     dataset['meta'].delete 'new_indvar_names'
     dataset['meta'].delete 'new_depvar_units'
