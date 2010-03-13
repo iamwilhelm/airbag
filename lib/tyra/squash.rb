@@ -44,9 +44,7 @@ class Squash
   def squash(dataset)
     data = {}           # tree datastructure to hold all data
 
-    if !dataset['meta'].key? 'new_indvar_names'
-      return dataset
-    end
+    return dataset if !dataset['meta'].key? 'new_indvar_names'
     new_indvar_names = dataset['meta']['new_indvar_names']
 
     # pack into hash tree
@@ -74,7 +72,11 @@ class Squash
     # update metadata
     dataset['meta']['indvars'] += new_indvar_names
     dataset['meta']['depvars'] = [@dataset_name]
+    if dataset['meta'].key? 'new_depvar_units'
+      dataset['meta']['units'][@dataset_name] = dataset['meta']['new_depvar_units']
+    end
     dataset['meta'].delete 'new_indvar_names'
+    dataset['meta'].delete 'new_depvar_units'
 
     dataset
   end

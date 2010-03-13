@@ -7,6 +7,7 @@ publish_date, Tue Jan 01 00:00:00 -0500 1980
 default, Year
 indvars, State
 new_indvar_names, Type, Year
+new_depvar_units, Banks
 
 State, Public;1980, Public;1981, Public;1982, Public;1983, Public;1984, Public;1985, Private;1980, Private;1981, Private;1982, Private;1983, Private;1984, Private;1985, Private;1986
 Alabama,		         1.00667766e+02, 1.00465369e+02, 1.01325459e+02, 1.00582933e+02, 1.00276873e+02, 1.01910555e+02, 1.01525773e+02, 1.01453989e+02, 1.01537518e+02, 1.00124494e+02, 1.00852533e+02, 1.00687268e+02, 1.01166968e+02
