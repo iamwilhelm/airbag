@@ -1,0 +1,20 @@
+name, US Deaths from Firearms
+description, US Deaths from Firearms by year, race, sex
+source, US Center for Desease Control
+url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
+license, Public Domain
+publish_date, Fri Apr 17 00:00:00 -0400 2009
+default, Year
+indvars, Year
+new_indvar_names, Race, Sex
+new_depvar_units, Persons
+
+Year, White;Male, White;Female, Black;Male, Black;Female, Native American;Male, Native American;Female, Asian;Male, Asian;Female
+2006,18496,3225,7563,846,253,38,400,75
+2005,18788,3170,7226,758,264,41,379,68
+2004,18223,3219,6709,739,236,45,330,68
+2003,18647,3116,6882,777,229,40,366,79
+2002,18714,3188,6798,825,235,52,351,79
+2001,18527,3233,6438,746,196,44,319,70
+2000,17750,3195,6284,770,196,44,352,72
+1999,17942,3201,6184,833,228,40,346,100
