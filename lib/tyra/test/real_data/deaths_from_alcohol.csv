@@ -1,0 +1,20 @@
+name, US Deaths from Alcohol
+description, US Deaths from Alcohol by year, race, sex
+source, US Center for Desease Control
+url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
+license, Public Domain
+publish_date, Fri Apr 17 00:00:00 -0400 2009
+default, Year
+indvars, Year
+new_indvar_names, Race, Sex
+new_depvar_units, Persons
+
+Year, White;Male, White;Female, Black;Male, Black;Female, Native American;Male, Native American;Female, Asian;Male, Asian;Female
+2006,14186,4731,1599,573,458,259,229,38
+2005,13917,4515,1698,618,432,223,191,40
+2004,13525,4350,1784,567,417,228,180,30
+2003,13218,4219,1824,582,431,233,157,23
+2002,12926,4062,1798,636,387,210,161,38
+2001,12588,4052,2048,675,387,204,126,34
+2000,12509,3714,1993,719,353,184,138,33
+1999,12277,3626,2100,732,397,192,120,25

@@ -1,0 +1,20 @@
+name, US Deaths from Drugs
+description, US Deaths from Drugs by year, race, sex
+source, US Center for Desease Control
+url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
+license, Public Domain
+publish_date, Fri Apr 17 00:00:00 -0400 2009
+default, Year
+indvars, Year
+new_indvar_names, Race, Sex
+new_depvar_units, Persons
+
+Year, White;Male, White;Female, Black;Male, Black;Female, Native American;Male, Native American;Female, Asian;Male, Asian;Female
+2006,20786,12080,3261,1529,253,154,207,126
+2005,18152,10652,2677,1421,205,157,174,103
+2004,16634,9840,2352,1281,212,142,164,86
+2003,15824,8859,2303,1224,168,127,131,87
+2002,14170,7976,2307,1156,136,94,121,80
+2001,11882,6313,2163,1002,100,84,108,53
+2000,10857,5531,2094,940,99,61,87,51
+1999,10506,5208,2191,909,96,68,92,58
