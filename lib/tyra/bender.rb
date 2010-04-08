@@ -51,6 +51,9 @@ class Bender
   private  # ---- the rest are private methods ----
 
   def each_line_in_range(linenum_start, linenum_end)
+    if linenum_end == "*"
+      linenum_end = @datafile.length
+    end
     (linenum_start..linenum_end).reject do |line|
       @droppedlines.include? line
     end.each do |line|
@@ -83,6 +86,17 @@ class Bender
     @droppedlines += (l1..l2).to_a
   end
 
+  # drop lines not containing the given string
+  def droplines_without_cmd(l1, l2, str)
+    puts "dropping lines without " + str.to_s + " from " + l1.to_s + " to " + l2.to_s
+    each_line_in_range(l1, l2) do |ii|
+      if @datafile[shiftedindex ii].include? str
+        @datafile.delete_at(shiftedindex l1)
+        @droppedlines.push ii
+      end
+    end
+  end
+
   # drop the specified column range from the specified rows
   def dropcols_cmd(col1, col2, l1, l2)
     puts "dropping cols " + col1.to_s + " to " + col2.to_s + " from lines " + l1.to_s + " to " + l2.to_s
@@ -90,6 +104,24 @@ class Bender
       fields = @datafile[shiftedindex(ii)].split ","
       (col1..col2).each { |cc| fields.delete_at(col1 - 1) }
       @datafile[shiftedindex(ii)] = fields.join ","
+    end
+  end
+
+  # remove commas from inside quoted strings, and remove quotes
+  # so '"1,200","2,300"' becomes '1200,2300'
+  def strip_quotes_commas_cmd(l1, l2)
+    puts "stripping quotes and commas from " + l1.to_s + " to " + l2.to_s
+    each_line_in_range(l1, l2) do |ii|
+      inquote = false;
+      newLine = '';
+      @datafile[shiftedindex ii].chars.each{ |char|
+        if char == '"'
+          inquote = !inquote
+        else
+          newLine += char if char != ',' || !inquote
+        end
+      }
+      @datafile[shiftedindex ii] = newLine
     end
   end
 
@@ -115,16 +147,16 @@ class Bender
     puts "stacking " + l1.to_s + " to " + l2.to_s + " next to " + l3.to_s
     each_line_in_range(l1, l2) do |ii|
       # FIXME I can't tell the order of operations with shiftedindex...
-      @datafile[shiftedindex l3 + ii-l1] += "," + @datafile[shiftedindex l1 + ii-l1]
+      @datafile[shiftedindex l3 + ii-l1] += "," + @datafile[shiftedindex(l1 + ii - l1)]
     end
     droplines l1, l1 + l2 - l1
   end
 
   # prefix the specified lines with the given string and a comma
   def prefixlines_cmd(l1, l2, str)
-    puts "prefixing lines " + l1.to_s + " to " + l1.to_s + " with " + str
+    puts "prefixing lines " + l1.to_s + " to " + l1.to_s + " with " + str.to_s
     each_line_in_range(l1, l2) do |ii|
-      @datafile[shiftedindex ii] = str + "," + @datafile[shiftedindex ii]
+      @datafile[shiftedindex ii] = str.to_s + "," + @datafile[shiftedindex ii]
     end
   end
 

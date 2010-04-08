@@ -1,8 +1,12 @@
 #!/usr/bin/ruby
+$LOAD_PATH << File.dirname(__FILE__)
+require 'string_utils'
 
 # merge tables
 
 class Merge
+  include StringUtils
+
   def initialize()
     @datafiles = []
     @indcols = []
