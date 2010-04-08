@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
 $LOAD_PATH << File.dirname(__FILE__)
+require "yaml"
 require "string_utils"
 require "misc_utils"
 
@@ -17,38 +18,39 @@ class Bender
   include MiscUtils
   
   def initialize()
-    @config = nil
     @datafile = nil
     @droppedlines = nil
     @fname = nil
   end
 
-  # process the given config file
+  # process the config file
   def process(configfname)
-    # read config
-    File.open(configfname, "r") do |fin|
-      @config = fin.readlines
-    end
-
-    @config = remove_comments(@config)
-    @config = remove_whitespace(@config)
 
     # process each command in order
-    @config.each do |commandline|
-      command, *fields = commandline.split(' ')
-
+    read_config(configfname) do | cmd, args |
       # convert fields to numbers if they're a number
-      fields.map! { |field| trynumber field }
+      args.map! { |arg| trynumber arg }
 
       # dynamically call method based on command name
-      self.send("#{command}_cmd", *fields)
+      self.send("#{cmd}_cmd", *args)
     end
 
     #puts "\nfile:"
-    #@datafile.each { |ll| puts ll }
+    # @datafile.each { |ll| puts ll }
   end
 
   private  # ---- the rest are private methods ----
+
+  # read config
+  def read_config(fname)
+    File.open(fname) do |fin|
+      YAML.load_documents(fin) do |ydoc|
+        for cmd in ydoc do
+          yield cmd[0], cmd[1..-1]
+        end
+      end
+    end
+  end
 
   def each_line_in_range(linenum_start, linenum_end)
     if linenum_end == "*"
@@ -61,6 +63,12 @@ class Bender
     end
   end
   
+  # shift given index by the number of dropped lines above it
+  def shiftedindex(ii)
+    shift = @droppedlines.select { |nn| nn < ii }.length
+    ii - shift - 1
+  end
+
   # read the data from the given source
   def read_cmd(fname)
     puts "reading " + fname
@@ -71,12 +79,6 @@ class Bender
     end
     # remove whitespace at line start/end
     @datafile.each { |ll| ll.strip! }
-  end
-
-  # shift given index by the number of dropped lines above it
-  def shiftedindex(ii)
-    shift = @droppedlines.select { |nn| nn < ii }.length
-    ii - shift - 1
   end
 
   # l1 l2 range of lines to remove (inclusive, indexed from 1)
@@ -188,11 +190,9 @@ class Bender
   end
 
   # write data to output file
-  def writefile_cmd(prefix)
-    path, fname = File.split @fname
-    ext = File.extname fname
-    base = fname[0, fname.length-ext.length]
-    outfname = File.join path, prefix + base + ".csv"
+  def write_cmd(fname)
+    path, in_fname = File.split @fname
+    outfname = File.join path, fname
     puts "writing file " + outfname
 
     File.open(outfname, "w") do |fout|
