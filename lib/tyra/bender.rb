@@ -32,6 +32,7 @@ class Bender
       args.map! { |arg| trynumber arg }
 
       # dynamically call method based on command name
+      #puts cmd.inspect, args.inspect
       self.send("#{cmd}_cmd", *args)
     end
 
@@ -129,10 +130,10 @@ class Bender
 
   # remove quotes or build a regex to be passed into a gsub
   def replaceparam(str)
-    if str[0,1] == "\""
-      str = str[1..-2]
-    elsif str[0,1] == "/"
+    if str[0,1] == "/"
       str = Regexp.new str[1..-2]
+    else
+      str
     end
   end
 
@@ -140,7 +141,7 @@ class Bender
   def replace_cmd(str1, str2)
     str1 = replaceparam str1
     str2 = replaceparam str2
-    puts "replacing " + str1.to_s + " with " + str2.to_s
+    puts "replacing \"" + str1.to_s + "\" with \"" + str2.to_s + "\""
     @datafile.map! { |ll| ll.gsub str1, str2 }
   end
 
