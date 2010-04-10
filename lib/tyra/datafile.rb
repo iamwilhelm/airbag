@@ -1,0 +1,92 @@
+#!/usr/bin/ruby
+
+$LOAD_PATH << File.dirname(__FILE__)
+require "span"
+
+# DataFile manages an input text file.  it keeps track of which lines have been dropped.
+
+class DataFile
+  def initialize(fname)
+    @fname = fname
+    @droppedlines = []
+    File.open fname do |fin|
+      @datafile = fin.readlines
+    end
+    # remove whitespace at line start/end
+    @datafile.each { |ll| ll.strip! }
+  end
+
+  # apply block to each line in span, skipping dropped lines
+  def each_line_in_span(spanstr)
+    #puts @droppedlines.inspect
+
+    span = Span.new(spanstr, @datafile.length)
+    span.each { |linenum|
+      if !@droppedlines.include? linenum
+        yield @datafile[shiftedindex linenum]
+      end
+    }
+  end
+
+  # apply block to each col in span to the specified line, skipping dropped lines
+  # assumes datafile is csv format
+  def each_col_in_span(linenum, spanstr)
+    span = Span.new(spanstr, nil)
+    fields = @datafile[shiftedindex linenum].split ","
+    span.each { |colnum| yield fields[colnum] }
+  end
+
+  # linenums is the span of lines to remove (inclusive, indexed from 1)
+  # linenums index into the original datafile
+  def droplines(linenums)
+    span = Span.new(linenums, @datafile.length)
+    span.each { |linenum|
+      if !@droppedlines.include? linenum
+        @datafile.delete_at(shiftedindex linenum)
+        @droppedlines.push linenum
+      end
+    }
+  end
+
+  # drop lines not containing the given string
+  def droplines_without(linenums, str)
+    span = Span.new(linenums, @datafile.length)
+    span.each { |linenum|
+      if !@droppedlines.include? linenum and
+          !@datafile[shiftedindex linenum].include? str
+        @datafile.delete_at(shiftedindex linenum)
+        @droppedlines.push linenum
+      end
+    }
+  end
+
+  # drop lines containing the given string
+  def droplines_containing(linenums, str)
+    span = Span.new(linenums, @datafile.length)
+    span.each { |linenum|
+      if !@droppedlines.include? linenum and
+          @datafile[shiftedindex linenum].include? str
+        @datafile.delete_at(shiftedindex linenum)
+        @droppedlines.push linenum
+      end
+    }
+  end
+
+  private
+
+  # shift given index by the number of dropped lines above it
+  def shiftedindex(linenum)
+    shift = @droppedlines.select { |nn| nn < linenum }.length
+    linenum - shift - 1
+  end
+end
+
+#df = DataFile.new("singles.csv")
+#df.each_line_in_span("1-10") { |line| puts line[0..40] }
+#puts "---"
+#df.each_line_in_span("1-2,4,6") { |line| line.replace("_" + line) }
+#df.droplines_cmd("3-5,7")
+#df.droplines_without_cmd("3-5,7", ",Ariz")
+#df.droplines_containing_cmd("3-5,7", ",Ariz")
+#df.dropcols_cmd("3-5,7", "1-2,4")
+#df.each_line_in_span("1-10") { |line| puts line[0..40] }

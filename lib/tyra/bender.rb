@@ -4,6 +4,8 @@ $LOAD_PATH << File.dirname(__FILE__)
 require "yaml"
 require "string_utils"
 require "misc_utils"
+require "datafile"
+require "span"
 
 # bender
 # bends source data into a format the importer understands
@@ -19,18 +21,14 @@ class Bender
   
   def initialize()
     @datafile = nil
-    @droppedlines = nil
     @fname = nil
   end
 
-  # process the config file
-  def process(configfname)
+  # execute commands from the config file
+  def run(configfname)
 
     # process each command in order
     read_config(configfname) do | cmd, args |
-      # convert fields to numbers if they're a number
-      args.map! { |arg| trynumber arg }
-
       # dynamically call method based on command name
       #puts cmd.inspect, args.inspect
       self.send("#{cmd}_cmd", *args)
@@ -53,78 +51,57 @@ class Bender
     end
   end
 
-  def each_line_in_range(linenum_start, linenum_end)
-    if linenum_end == "*"
-      linenum_end = @datafile.length
-    end
-    (linenum_start..linenum_end).reject do |line|
-      @droppedlines.include? line
-    end.each do |line|
-      yield line
-    end
-  end
-  
-  # shift given index by the number of dropped lines above it
-  def shiftedindex(ii)
-    shift = @droppedlines.select { |nn| nn < ii }.length
-    ii - shift - 1
-  end
-
-  # read the data from the given source
+  # load the given file
   def read_cmd(fname)
     puts "reading " + fname
     @fname = fname
-    @droppedlines = []
-    File.open fname do |fin|
-      @datafile = fin.readlines
-    end
-    # remove whitespace at line start/end
-    @datafile.each { |ll| ll.strip! }
+    @datafile = DataFile.new fname
   end
 
-  # l1 l2 range of lines to remove (inclusive, indexed from 1)
-  def dropline_cmd(l1, l2)
-    puts "dropping lines " + l1.to_s + " to " + l2.to_s
-    (l1..l2).each { |ii| @datafile.delete_at(shiftedindex l1) }
-    @droppedlines += (l1..l2).to_a
+  # forwards to datafile object
+  def droplines_cmd(linenums)
+    puts "dropping lines " + linenums.to_s
+    @datafile.droplines(linenums)
   end
 
-  # drop lines not containing the given string
-  def droplines_without_cmd(l1, l2, str)
-    puts "dropping lines without " + str.to_s + " from " + l1.to_s + " to " + l2.to_s
-    each_line_in_range(l1, l2) do |ii|
-      if @datafile[shiftedindex ii].include? str
-        @datafile.delete_at(shiftedindex l1)
-        @droppedlines.push ii
-      end
-    end
+  # forwards to datafile object
+  def droplines_without_cmd(linenums, str)
+    puts "dropping lines without " + str.to_s + " for lines " + linenums
+    @datafile.droplines_without(linenums, str)
+  end
+
+  # forwards to datafile object
+  def droplines_containing_cmd(linenums, str)
+    puts "dropping lines containing " + str.to_s + " for lines " + linenums
+    @datafile.droplines_containing(linenums, str)
   end
 
   # drop the specified column range from the specified rows
-  def dropcols_cmd(col1, col2, l1, l2)
-    puts "dropping cols " + col1.to_s + " to " + col2.to_s + " from lines " + l1.to_s + " to " + l2.to_s
-    each_line_in_range(l1, l2) do |ii|
-      fields = @datafile[shiftedindex(ii)].split ","
-      (col1..col2).each { |cc| fields.delete_at(col1 - 1) }
-      @datafile[shiftedindex(ii)] = fields.join ","
-    end
+  def dropcols_cmd(linenums, colnums)
+    puts "dropping cols " + colnums.to_s + " from lines " + linenums.to_s
+    colnums = Span.new(colnums, nil).to_a.reverse
+    @datafile.each_line_in_span(linenums) { |line|
+      fields = line.split ","
+      colnums.each { |colnum| fields.delete_at(colnum - 1) }
+      line.replace(fields.join ",")
+    }
   end
 
   # remove commas from inside quoted strings, and remove quotes
   # so '"1,200","2,300"' becomes '1200,2300'
-  def strip_quotes_commas_cmd(l1, l2)
-    puts "stripping quotes and commas from " + l1.to_s + " to " + l2.to_s
-    each_line_in_range(l1, l2) do |ii|
+  def strip_quotes_commas_cmd(linenums)
+    puts "stripping quotes and commas from lines " + linenums.to_s
+    @datafile.each_line_in_span(linenums) do |line|
       inquote = false;
       newLine = '';
-      @datafile[shiftedindex ii].chars.each{ |char|
+      line.chars.each{ |char|
         if char == '"'
           inquote = !inquote
         else
           newLine += char if char != ',' || !inquote
         end
       }
-      @datafile[shiftedindex ii] = newLine
+      line.replace newLine
     end
   end
 
@@ -138,11 +115,13 @@ class Bender
   end
 
   # replace str1 with str2 for whole datafile
-  def replace_cmd(str1, str2)
+  def replace_cmd(linenums, str1, str2)
     str1 = replaceparam str1
     str2 = replaceparam str2
     puts "replacing \"" + str1.to_s + "\" with \"" + str2.to_s + "\""
-    @datafile.map! { |ll| ll.gsub str1, str2 }
+    @datafile.each_line_in_span(linenums) do |line|
+      line.replace line.gsub(str1, str2)
+    end
   end
 
   # stack the specified rows to the right of l3
@@ -197,7 +176,9 @@ class Bender
     puts "writing file " + outfname
 
     File.open(outfname, "w") do |fout|
-      @datafile.each { |ll| fout.write ll + "\n" }
+      @datafile.each_line_in_span("*") { |line|
+        fout.write line + "\n"
+      }
     end
   end
 end
@@ -233,7 +214,7 @@ if $0 == __FILE__
         puts "file not found: " + ff
         next
       end
-      bender.process ff
+      bender.run ff
     end
   end
 end
