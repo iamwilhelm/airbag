@@ -6,25 +6,28 @@ require "span"
 # DataFile manages an input text file.  it keeps track of which lines have been dropped.
 
 class DataFile
+  attr_reader :droppedlines
+  attr_reader :content
+  attr_reader :fulllength
+
   def initialize(fname)
     @fname = fname
     @droppedlines = []
     File.open fname do |fin|
-      @datafile = fin.readlines
+      @content = fin.readlines
     end
-    @fulllength = @datafile.length
+    @fulllength = @content.length
     # remove whitespace at line start/end
-    @datafile.each { |ll| ll.strip! }
+    @content.each { |ll| ll.strip! }
   end
 
   # apply block to each line in span, skipping dropped lines
   def each_line_in_span(spanstr)
     #puts @droppedlines.inspect
-
     span = Span.new(spanstr, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum
-        yield @datafile[shiftedindex linenum]
+        yield @content[shiftedindex linenum]
       end
     }
   end
@@ -33,7 +36,7 @@ class DataFile
   # assumes datafile is csv format
   def each_col_in_span(linenum, spanstr)
     span = Span.new(spanstr, nil)
-    fields = @datafile[shiftedindex linenum].split ","
+    fields = @content[shiftedindex linenum].split ","
     span.each { |colnum| yield fields[colnum] }
   end
 
@@ -43,7 +46,7 @@ class DataFile
     span = Span.new(linenums, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum
-        @datafile.delete_at(shiftedindex linenum)
+        @content.delete_at(shiftedindex linenum)
         @droppedlines.push linenum
       end
     }
@@ -54,8 +57,8 @@ class DataFile
     span = Span.new(linenums, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum and
-          !@datafile[shiftedindex linenum].include? str
-        @datafile.delete_at(shiftedindex linenum)
+          !@content[shiftedindex linenum].include? str
+        @content.delete_at(shiftedindex linenum)
         @droppedlines.push linenum
       end
     }
@@ -66,8 +69,8 @@ class DataFile
     span = Span.new(linenums, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum and
-          @datafile[shiftedindex linenum].include? str
-        @datafile.delete_at(shiftedindex linenum)
+          @content[shiftedindex linenum].include? str
+        @content.delete_at(shiftedindex linenum)
         @droppedlines.push linenum
       end
     }
@@ -78,10 +81,16 @@ class DataFile
     linenum_indices = Span.new(linenums, @fulllength).to_a
     first = linenum_indices[0]
     for linenum in linenum_indices do
-      @datafile[shiftedindex(index.to_i + linenum - first)] +=
-        "," + @datafile[shiftedindex linenum]
+      @content[shiftedindex(index.to_i + linenum - first)] +=
+        "," + @content[shiftedindex linenum]
     end
     droplines linenums
+  end
+
+  def concat(other)
+    @content += other.content
+    @droppedlines += other.droppedlines.map{ |x| x + @fulllength }
+    @fulllength += other.fulllength
   end
 
   private
