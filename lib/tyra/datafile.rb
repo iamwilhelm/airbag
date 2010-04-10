@@ -12,6 +12,7 @@ class DataFile
     File.open fname do |fin|
       @datafile = fin.readlines
     end
+    @fulllength = @datafile.length
     # remove whitespace at line start/end
     @datafile.each { |ll| ll.strip! }
   end
@@ -20,7 +21,7 @@ class DataFile
   def each_line_in_span(spanstr)
     #puts @droppedlines.inspect
 
-    span = Span.new(spanstr, @datafile.length)
+    span = Span.new(spanstr, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum
         yield @datafile[shiftedindex linenum]
@@ -39,7 +40,7 @@ class DataFile
   # linenums is the span of lines to remove (inclusive, indexed from 1)
   # linenums index into the original datafile
   def droplines(linenums)
-    span = Span.new(linenums, @datafile.length)
+    span = Span.new(linenums, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum
         @datafile.delete_at(shiftedindex linenum)
@@ -50,7 +51,7 @@ class DataFile
 
   # drop lines not containing the given string
   def droplines_without(linenums, str)
-    span = Span.new(linenums, @datafile.length)
+    span = Span.new(linenums, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum and
           !@datafile[shiftedindex linenum].include? str
@@ -62,7 +63,7 @@ class DataFile
 
   # drop lines containing the given string
   def droplines_containing(linenums, str)
-    span = Span.new(linenums, @datafile.length)
+    span = Span.new(linenums, @fulllength)
     span.each { |linenum|
       if !@droppedlines.include? linenum and
           @datafile[shiftedindex linenum].include? str
@@ -70,6 +71,17 @@ class DataFile
         @droppedlines.push linenum
       end
     }
+  end
+
+  # stack the specified rows to the right of line index
+  def stack(linenums, index)
+    linenum_indices = Span.new(linenums, @fulllength).to_a
+    first = linenum_indices[0]
+    for linenum in linenum_indices do
+      @datafile[shiftedindex(index.to_i + linenum - first)] +=
+        "," + @datafile[shiftedindex linenum]
+    end
+    droplines linenums
   end
 
   private

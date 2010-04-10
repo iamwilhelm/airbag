@@ -114,58 +114,66 @@ class Bender
     end
   end
 
-  # replace str1 with str2 for whole datafile
+  # replace str1 with str2
   def replace_cmd(linenums, str1, str2)
     str1 = replaceparam str1
     str2 = replaceparam str2
-    puts "replacing \"" + str1.to_s + "\" with \"" + str2.to_s + "\""
+    puts "replacing \"" + str1.to_s + "\" with \"" + str2.to_s + "\" for lines " + linenums.to_s
     @datafile.each_line_in_span(linenums) do |line|
       line.replace line.gsub(str1, str2)
     end
   end
 
-  # stack the specified rows to the right of l3
-  def stack_cmd(l1, l2, l3)
-    puts "stacking " + l1.to_s + " to " + l2.to_s + " next to " + l3.to_s
-    each_line_in_range(l1, l2) do |ii|
-      # FIXME I can't tell the order of operations with shiftedindex...
-      @datafile[shiftedindex l3 + ii-l1] += "," + @datafile[shiftedindex(l1 + ii - l1)]
-    end
-    droplines l1, l1 + l2 - l1
+  # forward to datafile object
+  def stack_cmd(linenums, index)
+    puts "stacking " + linenums.to_s + " next to " + index.to_s
+    @datafile.stack(linenums, index)
   end
 
-  # prefix the specified lines with the given string and a comma
-  def prefixlines_cmd(l1, l2, str)
-    puts "prefixing lines " + l1.to_s + " to " + l1.to_s + " with " + str.to_s
-    each_line_in_range(l1, l2) do |ii|
-      @datafile[shiftedindex ii] = str.to_s + "," + @datafile[shiftedindex ii]
+  # prefix the specified lines with the given string
+  def prefixlines_cmd(linenums, str)
+    puts "prefixing lines " + linenums.to_s + " with " + str.to_s
+    @datafile.each_line_in_span(linenums) do |line|
+      line.replace(str.to_s + line)
+    end
+  end
+
+  # suffix the specified lines with the given string
+  def suffixlines_cmd(linenums, str)
+    puts "suffixing lines " + linenums.to_s + " with " + str.to_s
+    @datafile.each_line_in_span(linenums) do |line|
+      line.replace(line + str.to_s)
     end
   end
 
   # scale values by given scale factor
   # datafile must be comma delimited
   # sf scale factor
-  def scale_cmd(l1, l2, c1, c2, sf)
-    puts "scaling lines " + l1.to_s + " to " + l2.to_s + " cols " + c1.to_s + " to " + c2.to_s
-    each_line_in_range(l1, l2) do |ii|
-      fields = @datafile[shiftedindex ii].split(",")
-      fields[c1-1..c2-1] = fields[c1-1..c2-1].map{ |x| (x.to_f * sf).to_s }
-      @datafile[shiftedindex ii] = fields.join(",")
+  def scale_cmd(linenums, colnums, sf)
+    puts "scaling lines " + linenums.to_s + " cols " + colnums.to_s + " by " + sf.to_s
+    @datafile.each_line_in_span(linenums) do |line|
+      fields = line.split ","
+      colspan = Span.new(colnums, nil)
+      colspan.each{ |colnum|
+        fields[colnum] = (fields[colnum].to_f * sf.to_f).to_s
+      }
+      line.replace(fields.join ",")
     end
   end
 
   # replace state names with abbreviations
-  def abbrev_cmd(fname)
+  def abbrev_cmd(linenums, fname)
     puts "replacing states with abbrev"
     stateabbrev = []
+    fname = File.join(File.dirname(__FILE__), fname + ".txt")
     File.open(fname, "r") do |fin|
       fin.each_line do |ll|
         stateabbrev.push to_fields(ll)
       end
     end
-    @datafile.each do |ll|
+    @datafile.each_line_in_span(linenums) do |line|
       # FIXME I think you can use gsub with /#{s_name}/m here.  
-      stateabbrev.each { |s_abbr, s_name| ll.sub!(/#{s_name}/, s_abbr) }
+      stateabbrev.each { |s_abbr, s_name| line.sub!(/#{s_name}/, s_abbr) }
     end 
   end
 

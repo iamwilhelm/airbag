@@ -7,11 +7,17 @@ class Span
     @segments =     
       if str.class == String
         str.split(",").map { |segment|
-          if segment.include? "-"
-            Range.new( *segment.split("-").map{|x| x.to_i} )
-          elsif segment == "*"
+          if segment.include? "-"               # range
+            Range.new( *segment.split("-").map{|x|
+                         if x=="*"
+                           maxlen
+                         else
+                           x.to_i
+                         end
+                       } )
+          elsif segment == "*"                  # whole file
             1..maxlen
-          else
+          else                                  # single index
             segment..segment
           end
         }
