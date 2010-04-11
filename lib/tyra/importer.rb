@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'redis'
 require 'json/add/core'
-require 'squash'
+#require 'squash'
 require 'misc_utils'
 require 'string_utils'
 
@@ -93,10 +93,10 @@ class Importer
 
   # import takes a dataset hash with two keys:
   def import(dataset)
-    if dataset["meta"].key? 'new_indvar_names'
-      squasher = Squash.new
-      dataset = squasher.squash(dataset)
-    end
+    #if dataset["meta"].key? 'new_indvar_names'
+    #  squasher = Squash.new
+    #  dataset = squasher.squash(dataset)
+    #end
 
     meta = dataset["meta"]
     data = dataset["data"]
