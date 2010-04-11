@@ -5,44 +5,150 @@ url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
 license, Public Domain
 publish_date, Fri Apr 17 00:00:00 -0400 2009
 default, Year
-indvars, Year
-new_indvar_names, Race, Sex
-new_depvar_units, Years
+indvars, Year, Race, Sex
 
-Year, White;Male, White;Female, Black;Male, Black;Female
-2006,75.7,80.6,69.7,76.5
-2005,75.4,80.4,69.3,76.1
-2004,75.4,80.4,69.3,76.0
-2003,75.0,80.0,68.8,75.6
-2002,74.9,79.9,68.6,75.4
-2001,74.8,79.9,68.4,75.2
-2000,74.7,79.9,68.2,75.1
-1999,74.6,79.9,67.8,74.7
-1998,74.5,80.0,67.6,74.8
-1997,74.3,79.9,67.2,74.7
-1996,73.9,79.7,66.1,74.2
-1995,73.4,79.6,65.2,73.9
-1994,73.3,79.6,64.9,73.9
-1993,73.1,79.5,64.6,73.7
-1992,73.2,79.8,65.0,73.9
-1991,72.9,79.6,64.6,73.8
-1990,72.7,79.4,64.5,73.6
-1989,72.5,79.2,64.3,73.3
-1988,72.2,78.9,64.4,73.2
-1987,72.1,78.9,64.7,73.4
-1986,71.9,78.8,64.8,73.4
-1985,71.8,78.7,65.0,73.4
-1984,71.8,78.7,65.3,73.6
-1983,71.6,78.7,65.2,73.5
-1982,71.5,78.7,65.1,73.6
-1981,71.1,78.4,64.5,73.2
-1980,70.7,78.1,63.8,72.5
-1979,70.8,78.4,64.0,72.9
-1978,70.4,78.0,63.7,72.4
-1977,70.2,77.9,63.4,72.0
-1976,69.9,77.5,62.9,71.6
-1975,69.5,77.3,62.4,71.3
-1970,68.0,75.6,60.0,68.3
-1960,67.4,74.1,---,---
-1950,66.5,72.2,---,---
-1940,62.1,66.6,---,---
+Race, Sex, Year, value (People)
+Black, Female, 1940, ---
+Black, Female, 1950, ---
+Black, Female, 1960, ---
+Black, Female, 1970, 68.3
+Black, Female, 1975, 71.3
+Black, Female, 1976, 71.6
+Black, Female, 1977, 72.0
+Black, Female, 1978, 72.4
+Black, Female, 1979, 72.9
+Black, Female, 1980, 72.5
+Black, Female, 1981, 73.2
+Black, Female, 1982, 73.6
+Black, Female, 1983, 73.5
+Black, Female, 1984, 73.6
+Black, Female, 1985, 73.4
+Black, Female, 1986, 73.4
+Black, Female, 1987, 73.4
+Black, Female, 1988, 73.2
+Black, Female, 1989, 73.3
+Black, Female, 1990, 73.6
+Black, Female, 1991, 73.8
+Black, Female, 1992, 73.9
+Black, Female, 1993, 73.7
+Black, Female, 1994, 73.9
+Black, Female, 1995, 73.9
+Black, Female, 1996, 74.2
+Black, Female, 1997, 74.7
+Black, Female, 1998, 74.8
+Black, Female, 1999, 74.7
+Black, Female, 2000, 75.1
+Black, Female, 2001, 75.2
+Black, Female, 2002, 75.4
+Black, Female, 2003, 75.6
+Black, Female, 2004, 76.0
+Black, Female, 2005, 76.1
+Black, Female, 2006, 76.5
+Black, Male, 1940, ---
+Black, Male, 1950, ---
+Black, Male, 1960, ---
+Black, Male, 1970, 60.0
+Black, Male, 1975, 62.4
+Black, Male, 1976, 62.9
+Black, Male, 1977, 63.4
+Black, Male, 1978, 63.7
+Black, Male, 1979, 64.0
+Black, Male, 1980, 63.8
+Black, Male, 1981, 64.5
+Black, Male, 1982, 65.1
+Black, Male, 1983, 65.2
+Black, Male, 1984, 65.3
+Black, Male, 1985, 65.0
+Black, Male, 1986, 64.8
+Black, Male, 1987, 64.7
+Black, Male, 1988, 64.4
+Black, Male, 1989, 64.3
+Black, Male, 1990, 64.5
+Black, Male, 1991, 64.6
+Black, Male, 1992, 65.0
+Black, Male, 1993, 64.6
+Black, Male, 1994, 64.9
+Black, Male, 1995, 65.2
+Black, Male, 1996, 66.1
+Black, Male, 1997, 67.2
+Black, Male, 1998, 67.6
+Black, Male, 1999, 67.8
+Black, Male, 2000, 68.2
+Black, Male, 2001, 68.4
+Black, Male, 2002, 68.6
+Black, Male, 2003, 68.8
+Black, Male, 2004, 69.3
+Black, Male, 2005, 69.3
+Black, Male, 2006, 69.7
+White, Female, 1940, 66.6
+White, Female, 1950, 72.2
+White, Female, 1960, 74.1
+White, Female, 1970, 75.6
+White, Female, 1975, 77.3
+White, Female, 1976, 77.5
+White, Female, 1977, 77.9
+White, Female, 1978, 78.0
+White, Female, 1979, 78.4
+White, Female, 1980, 78.1
+White, Female, 1981, 78.4
+White, Female, 1982, 78.7
+White, Female, 1983, 78.7
+White, Female, 1984, 78.7
+White, Female, 1985, 78.7
+White, Female, 1986, 78.8
+White, Female, 1987, 78.9
+White, Female, 1988, 78.9
+White, Female, 1989, 79.2
+White, Female, 1990, 79.4
+White, Female, 1991, 79.6
+White, Female, 1992, 79.8
+White, Female, 1993, 79.5
+White, Female, 1994, 79.6
+White, Female, 1995, 79.6
+White, Female, 1996, 79.7
+White, Female, 1997, 79.9
+White, Female, 1998, 80.0
+White, Female, 1999, 79.9
+White, Female, 2000, 79.9
+White, Female, 2001, 79.9
+White, Female, 2002, 79.9
+White, Female, 2003, 80.0
+White, Female, 2004, 80.4
+White, Female, 2005, 80.4
+White, Female, 2006, 80.6
+White, Male, 1940, 62.1
+White, Male, 1950, 66.5
+White, Male, 1960, 67.4
+White, Male, 1970, 68.0
+White, Male, 1975, 69.5
+White, Male, 1976, 69.9
+White, Male, 1977, 70.2
+White, Male, 1978, 70.4
+White, Male, 1979, 70.8
+White, Male, 1980, 70.7
+White, Male, 1981, 71.1
+White, Male, 1982, 71.5
+White, Male, 1983, 71.6
+White, Male, 1984, 71.8
+White, Male, 1985, 71.8
+White, Male, 1986, 71.9
+White, Male, 1987, 72.1
+White, Male, 1988, 72.2
+White, Male, 1989, 72.5
+White, Male, 1990, 72.7
+White, Male, 1991, 72.9
+White, Male, 1992, 73.2
+White, Male, 1993, 73.1
+White, Male, 1994, 73.3
+White, Male, 1995, 73.4
+White, Male, 1996, 73.9
+White, Male, 1997, 74.3
+White, Male, 1998, 74.5
+White, Male, 1999, 74.6
+White, Male, 2000, 74.7
+White, Male, 2001, 74.8
+White, Male, 2002, 74.9
+White, Male, 2003, 75.0
+White, Male, 2004, 75.4
+White, Male, 2005, 75.4
+White, Male, 2006, 75.7
