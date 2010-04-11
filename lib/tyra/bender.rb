@@ -21,24 +21,25 @@ class Bender
   
   def initialize()
     @datafiles = {}
-    inputdir = nil
+    @inputdir = nil
   end
 
   # execute commands from the config file
   def run(configfname)
-
     # process each command in order
     read_config(configfname) do | cmd, args |
-      # dynamically call method based on command name
-      #puts cmd.inspect, args.inspect
-      self.send("#{cmd}_cmd", *args)
+      if cmd == "read"
+        read_cmd(*args)
+      else
+        # TODO the rest of the cmd's could be moved to DataFile and calls could be made
+        # directly to there.  just have to handle conversion of table names to objects.
+        # dynamically call method based on command name
+        self.send("#{cmd}_cmd", *args)
+      end
     end
-
-    #puts "\nfile:"
-    # @datafiles.each { |ll| puts ll }
   end
 
-  private  # ---- the rest are private methods ----
+  private
 
   # read config
   def read_config(fname)
@@ -184,9 +185,10 @@ class Bender
   end
 
   # forward to datafile object
-  def merge_cmd(tablename1, tablename2, indcols)
-    puts "merging table " + tablename2.to_s + " into " + tablename1.to_s
-    @datafiles[tablename1].merge(@datafiles[tablename2], indcols)
+  def merge_cmd(tablenames, indcols)
+    puts "merging tables " + tablenames.join(", ")
+    tables = tablenames[1..-1].map{ |x| @datafiles[x].content }
+    @datafiles[tablenames[0]].merge(tables, indcols)
   end
 
   # forward to datafile object

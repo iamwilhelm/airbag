@@ -100,8 +100,8 @@ class DataFile
   end
 
   # merge table2 into table1
-  def merge(table2, indcols)
-    @content = merge_tables([@content, table2.content], indcols)
+  def merge(tables, indcols)
+    @content = merge_tables([@content] + tables, indcols)
     @fulllength = @content.length
     @droppedlines = []
   end
