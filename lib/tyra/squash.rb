@@ -58,7 +58,9 @@ module Squash
     tree_levels = (indvar_names + new_indvar_names).sort
     content << (tree_levels + ["value"]).join(", ")
     tree.traverse([], nil) { |path, node|
-      content <<  (path+[node]).join(", ")
+      if node.class != Hash
+        content << (path+[node]).join(", ")
+      end
     }
     content
   end
