@@ -177,10 +177,22 @@ class Bender
     end 
   end
 
-  # concatenate a table to the end of another
+  # forward to datafile object
   def concat_cmd(tablename1, tablename2)
     puts "concatinating table " + tablename2.to_s + " to " + tablename1.to_s
     table1 = @datafiles[tablename1].concat(@datafiles[tablename2])
+  end
+
+  # forward to datafile object
+  def merge_cmd(tablename1, tablename2, indcols)
+    puts "merging table " + tablename2.to_s + " into " + tablename1.to_s
+    @datafiles[tablename1].merge(@datafiles[tablename2], indcols)
+  end
+
+  # forward to datafile object
+  def squash_cmd(tablename, indcols, new_indvar_names)
+    puts "squashing table " + tablename.to_s
+    @datafiles[tablename].squash(indcols, new_indvar_names)
   end
 
   # write data to output file

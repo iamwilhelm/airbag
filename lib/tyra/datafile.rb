@@ -2,10 +2,15 @@
 
 $LOAD_PATH << File.dirname(__FILE__)
 require "span"
+require "merge"
+require "squash"
 
 # DataFile manages an input text file.  it keeps track of which lines have been dropped.
 
 class DataFile
+  include Merge
+  include Squash
+
   attr_reader :droppedlines
   attr_reader :content
   attr_reader :fulllength
@@ -87,10 +92,25 @@ class DataFile
     droplines linenums
   end
 
+  # concatenate a table to the end of another
   def concat(other)
     @content += other.content
     @droppedlines += other.droppedlines.map{ |x| x + @fulllength }
     @fulllength += other.fulllength
+  end
+
+  # merge table2 into table1
+  def merge(table2, indcols)
+    @content = merge_tables([@content, table2.content], indcols)
+    @fulllength = @content.length
+    @droppedlines = []
+  end
+
+  # squash table
+  def squash(indcols, new_indvar_names)
+    @content = squash_table(@content, indcols, new_indvar_names)
+    @fulllength = @content.length
+    @droppedlines = []
   end
 
   private
