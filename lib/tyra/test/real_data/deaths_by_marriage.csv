@@ -1,0 +1,66 @@
+name, US Deaths and Death Rate by Marital Status for 2006
+description, Deaths and Death Rate in the US by sex, marital status
+source, US Center for Desease Control
+url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
+license, Public Domain
+publish_date, Fri Apr 17 00:00:00 -0400 2009
+default, Marital Status
+indvars, Age, Marital Status, Sex
+
+Age (Years), Marital Status, Sex, Death Rate (Persons per 100000), Deaths (Persons)
+15-24, Divorced, Female, 74.4, 143
+15-24, Divorced, Male, 177.0, 202
+15-24, Married, Female, 31.7, 814
+15-24, Married, Male, 93.2, 1388
+15-24, Never_married, Female, 44.0, 7827
+15-24, Never_married, Male, 120.5, 24368
+15-24, Widowed, Female, *, 18
+15-24, Widowed, Male, *, 26
+25-34, Divorced, Female, 120.5, 1586
+25-34, Divorced, Male, 299.2, 2732
+25-34, Married, Female, 38.6, 4533
+25-34, Married, Male, 77.9, 7979
+25-34, Never_married, Female, 95.8, 6422
+25-34, Never_married, Male, 203.8, 19134
+25-34, Widowed, Female, 166.5, 159
+25-34, Widowed, Male, *, 132
+35-44, Divorced, Female, 233.8, 7109
+35-44, Divorced, Male, 454.8, 10691
+35-44, Married, Female, 90.0, 13779
+35-44, Married, Male, 128.5, 19173
+35-44, Never_married, Female, 281.2, 8925
+35-44, Never_married, Male, 468.8, 21053
+35-44, Widowed, Female, 296.8, 866
+35-44, Widowed, Male, 637.7, 569
+45-54, Divorced, Female, 485.5, 18531
+45-54, Divorced, Male, 1023.6, 32229
+45-54, Married, Female, 218.8, 33293
+45-54, Married, Male, 324.2, 49283
+45-54, Never_married, Female, 582.7, 13199
+45-54, Never_married, Male, 1077.4, 29458
+45-54, Widowed, Female, 634.0, 4371
+45-54, Widowed, Male, 1204.1, 2474
+55-64, Divorced, Female, 968.9, 28546
+55-64, Divorced, Male, 2123.0, 44122
+55-64, Married, Female, 503.1, 54423
+55-64, Married, Male, 786.0, 92412
+55-64, Never_married, Female, 1098.2, 11741
+55-64, Never_married, Male, 2105.2, 22284
+55-64, Widowed, Female, 1121.0, 17157
+55-64, Widowed, Male, 2430.1, 8012
+65-74, Divorced, Female, 2376.0, 30468
+65-74, Divorced, Male, 4330.7, 37463
+65-74, Married, Female, 1196.7, 70239
+65-74, Married, Male, 2030.6, 137998
+65-74, Never_married, Female, 2574.5, 10419
+65-74, Never_married, Male, 4521.5, 16375
+65-74, Widowed, Female, 2238.2, 60216
+65-74, Widowed, Male, 3776.5, 24438
+75+, Divorced, Female, 8288.0, 55108
+75+, Divorced, Male, 10435.9, 37359
+75+, Married, Female, 3493.5, 122676
+75+, Married, Male, 6391.9, 313549
+75+, Never_married, Female, 10580.5, 40236
+75+, Never_married, Male, 11292.4, 27199
+75+, Widowed, Female, 8538.9, 580656
+75+, Widowed, Male, 12727.0, 188653

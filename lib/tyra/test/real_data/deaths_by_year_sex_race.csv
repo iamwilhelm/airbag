@@ -1,0 +1,258 @@
+name, US Deaths and Death Rate
+description, US Deaths and Death Rate by year, sex, race
+source, US Center for Desease Control
+url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
+license, Public Domain
+publish_date, Fri Apr 17 00:00:00 -0400 2009
+default, Year
+indvars, Year, Sex, Race
+
+Race, Sex, Year, Death Rate (Persons per 100000), Deaths (Persons)
+Asian, Female, 1940, -, -
+Asian, Female, 1950, -, -
+Asian, Female, 1960, -, -
+Asian, Female, 1970, -, -
+Asian, Female, 1980, 222.5, 4262
+Asian, Female, 1981, 211.5, 4567
+Asian, Female, 1982, 207.4, 4866
+Asian, Female, 1983, 216.1, 5428
+Asian, Female, 1984, 218.1, 5856
+Asian, Female, 1985, 224.9, 6446
+Asian, Female, 1986, 219.9, 6719
+Asian, Female, 1987, 222.0, 7193
+Asian, Female, 1988, 227.4, 7808
+Asian, Female, 1989, 229.4, 8354
+Asian, Female, 1990, 234.3, 8916
+Asian, Female, 1991, 232.4, 9446
+Asian, Female, 1992, 235.3, 10092
+Asian, Female, 1993, 240.3, 10854
+Asian, Female, 1994, 247.7, 11695
+Asian, Female, 1995, 250.4, 12364
+Asian, Female, 1996, 251.1, 12958
+Asian, Female, 1997, 253.9, 13696
+Asian, Female, 1998, 254.9, 14328
+Asian, Female, 1999, 262.5, 15345
+Asian, Female, 2000, 262.3, 15857
+Asian, Female, 2001, 274.4, 17219
+Asian, Female, 2002, 269.7, 17849
+Asian, Female, 2003, 279.2, 18941
+Asian, Female, 2004, 274.6, 19235
+Asian, Female, 2005, 282.8, 20386
+Asian, Female, 2006, 285.6, 21325
+Asian, Male, 1940, -, -
+Asian, Male, 1950, -, -
+Asian, Male, 1960, -, -
+Asian, Male, 1970, -, -
+Asian, Male, 1980, 375.3, 6809
+Asian, Male, 1981, 336.2, 6908
+Asian, Male, 1982, 338.3, 7564
+Asian, Male, 1983, 339.1, 8126
+Asian, Male, 1984, 336.5, 8627
+Asian, Male, 1985, 344.6, 9441
+Asian, Male, 1986, 335.1, 9795
+Asian, Male, 1987, 338.3, 10496
+Asian, Male, 1988, 339.0, 11155
+Asian, Male, 1989, 334.5, 11688
+Asian, Male, 1990, 334.3, 12211
+Asian, Male, 1991, 326.9, 12727
+Asian, Male, 1992, 331.1, 13568
+Asian, Male, 1993, 338.1, 14532
+Asian, Male, 1994, 344.0, 15408
+Asian, Male, 1995, 341.4, 15933
+Asian, Male, 1996, 340.2, 16550
+Asian, Male, 1997, 336.8, 17060
+Asian, Male, 1998, 335.4, 17659
+Asian, Male, 1999, 333.2, 18330
+Asian, Male, 2000, 332.9, 19018
+Asian, Male, 2001, 335.0, 19829
+Asian, Male, 2002, 331.4, 20483
+Asian, Male, 2003, 330.0, 21186
+Asian, Male, 2004, 321.1, 21298
+Asian, Male, 2005, 333.9, 22808
+Asian, Male, 2006, 330.6, 23382
+Black, Female, 1940, -, 83226
+Black, Female, 1950, -, 77602
+Black, Female, 1960, 905.0, 88309
+Black, Female, 1970, 829.2, 98107
+Black, Female, 1980, 733.3, 102997
+Black, Female, 1981, 707.7, 101264
+Black, Female, 1982, 695.5, 100903
+Black, Female, 1983, 715.9, 105213
+Black, Female, 1984, 717.4, 106737
+Black, Female, 1985, 734.2, 110597
+Black, Female, 1986, 741.5, 113112
+Black, Female, 1987, 745.7, 115263
+Black, Female, 1988, 764.6, 119791
+Black, Female, 1989, 763.2, 121249
+Black, Female, 1990, 747.9, 120139
+Black, Female, 1991, 741.4, 122194
+Black, Female, 1992, 728.6, 122589
+Black, Female, 1993, 749.6, 128649
+Black, Female, 1994, 739.7, 129360
+Black, Female, 1995, 743.2, 132226
+Black, Female, 1996, 733.3, 132617
+Black, Female, 1997, 720.1, 132410
+Black, Female, 1998, 722.6, 135023
+Black, Female, 1999, 734.3, 139361
+Black, Female, 2000, 733.0, 140642
+Black, Female, 2001, 727.7, 141801
+Black, Female, 2002, 724.4, 143216
+Black, Female, 2003, 717.9, 143278
+Black, Female, 2004, 700.3, 141345
+Black, Female, 2005, 703.9, 143700
+Black, Female, 2006, 684.0, 141369
+Black, Male, 1940, -, 95517
+Black, Male, 1950, -, 92004
+Black, Male, 1960, 1181.7, 107701
+Black, Male, 1970, 1186.6, 127540
+Black, Male, 1980, 1034.1, 130138
+Black, Male, 1981, 992.6, 127296
+Black, Male, 1982, 966.2, 125610
+Black, Male, 1983, 971.2, 127911
+Black, Male, 1984, 968.5, 129147
+Black, Male, 1985, 989.3, 133610
+Black, Male, 1986, 1002.6, 137214
+Black, Male, 1987, 1006.2, 139551
+Black, Male, 1988, 1026.1, 144228
+Black, Male, 1989, 1026.7, 146393
+Black, Male, 1990, 1008.0, 145359
+Black, Male, 1991, 994.8, 147331
+Black, Male, 1992, 967.6, 146630
+Black, Male, 1993, 992.2, 153502
+Black, Male, 1994, 970.2, 153019
+Black, Male, 1995, 960.2, 154175
+Black, Male, 1996, 915.3, 149472
+Black, Male, 1997, 867.1, 144110
+Black, Male, 1998, 848.2, 143417
+Black, Male, 1999, 847.4, 145703
+Black, Male, 2000, 834.1, 145184
+Black, Male, 2001, 823.9, 145908
+Black, Male, 2002, 816.7, 146835
+Black, Male, 2003, 813.7, 148022
+Black, Male, 2004, 792.6, 145970
+Black, Male, 2005, 799.2, 149108
+Black, Male, 2006, 786.7, 148602
+Native American, Female, 1940, -, 2264
+Native American, Female, 1950, -, 1943
+Native American, Female, 1960, -, 1870
+Native American, Female, 1970, -, 2284
+Native American, Female, 1980, 380.1, 2730
+Native American, Female, 1981, 345.6, 2592
+Native American, Female, 1982, 348.1, 2705
+Native American, Female, 1983, 343.9, 2775
+Native American, Female, 1984, 338.4, 2832
+Native American, Female, 1985, 342.5, 2973
+Native American, Female, 1986, 325.9, 2936
+Native American, Female, 1987, 339.0, 3170
+Native American, Female, 1988, 339.9, 3300
+Native American, Female, 1989, 351.3, 3548
+Native American, Female, 1990, 330.4, 3439
+Native American, Female, 1991, 342.7, 3673
+Native American, Female, 1992, 340.0, 3772
+Native American, Female, 1993, 360.7, 4145
+Native American, Female, 1994, 348.3, 4140
+Native American, Female, 1995, 360.1, 4423
+Native American, Female, 1996, 358.0, 4564
+Native American, Female, 1997, 347.7, 4591
+Native American, Female, 1998, 354.2, 4851
+Native American, Female, 1999, 367.1, 5220
+Native American, Female, 2000, 346.1, 5178
+Native American, Female, 2001, 360.2, 5511
+Native American, Female, 2002, 367.7, 5665
+Native American, Female, 2003, 387.7, 6041
+Native American, Female, 2004, 380.0, 5990
+Native American, Female, 2005, 398.8, 6311
+Native American, Female, 2006, 399.9, 6407
+Native American, Male, 1940, -, 2527
+Native American, Male, 1950, -, 2497
+Native American, Male, 1960, -, 2658
+Native American, Male, 1970, -, 3391
+Native American, Male, 1980, 597.1, 4193
+Native American, Male, 1981, 547.9, 4016
+Native American, Male, 1982, 522.9, 3974
+Native American, Male, 1983, 515.1, 4064
+Native American, Male, 1984, 502.7, 4117
+Native American, Male, 1985, 492.5, 4181
+Native American, Male, 1986, 494.9, 4365
+Native American, Male, 1987, 483.8, 4432
+Native American, Male, 1988, 485.0, 4617
+Native American, Male, 1989, 510.7, 5066
+Native American, Male, 1990, 476.4, 4877
+Native American, Male, 1991, 468.9, 4948
+Native American, Male, 1992, 474.1, 5181
+Native American, Male, 1993, 479.6, 5434
+Native American, Male, 1994, 468.8, 5497
+Native American, Male, 1995, 459.4, 5574
+Native American, Male, 1996, 441.5, 5563
+Native American, Male, 1997, 458.2, 5985
+Native American, Male, 1998, 441.9, 5994
+Native American, Male, 1999, 431.8, 6092
+Native American, Male, 2000, 415.6, 6185
+Native American, Male, 2001, 424.2, 6466
+Native American, Male, 2002, 439.6, 6750
+Native American, Male, 2003, 457.6, 7106
+Native American, Male, 2004, 453.8, 7134
+Native American, Male, 2005, 481.9, 7607
+Native American, Male, 2006, 477.1, 7630
+White, Female, 1940, 919.4, 540322
+White, Female, 1950, 803.3, 544719
+White, Female, 1960, 800.9, 644478
+White, Female, 1970, 812.6, 739659
+White, Female, 1980, 806.1, 804729
+White, Female, 1981, 799.8, 805743
+White, Female, 1982, 798.2, 809846
+White, Female, 1983, 816.4, 833803
+White, Female, 1984, 824.6, 847368
+White, Female, 1985, 840.1, 868599
+White, Female, 1986, 844.3, 878529
+White, Female, 1987, 849.8, 889685
+White, Female, 1988, 865.3, 911487
+White, Female, 1989, 851.8, 902989
+White, Female, 1990, 846.9, 902442
+White, Female, 1991, 845.2, 912407
+White, Female, 1992, 840.8, 916824
+White, Female, 1993, 874.6, 963108
+White, Female, 1994, 873.8, 971052
+White, Female, 1995, 883.2, 990160
+White, Female, 1996, 885.3, 1000982
+White, Female, 1997, 885.0, 1009509
+White, Female, 1998, 891.6, 1025794
+White, Female, 1999, 910.4, 1056013
+White, Female, 2000, 912.3, 1064096
+White, Female, 2001, 907.9, 1068473
+White, Female, 2002, 907.0, 1077393
+White, Female, 2003, 902.3, 1078064
+White, Female, 2004, 871.9, 1049377
+White, Female, 2005, 882.8, 1069945
+White, Female, 2006, 863.9, 1055221
+White, Male, 1940, 1162.2, 690901
+White, Male, 1950, 1089.5, 731366
+White, Male, 1960, 1098.5, 860857
+White, Male, 1970, 1086.7, 942437
+White, Male, 1980, 983.3, 933878
+White, Male, 1981, 965.2, 925490
+White, Male, 1982, 951.8, 919239
+White, Male, 1983, 957.7, 931779
+White, Male, 1984, 954.1, 934529
+White, Male, 1985, 963.6, 950455
+White, Male, 1986, 958.6, 952554
+White, Male, 1987, 952.7, 953382
+White, Male, 1988, 957.9, 965419
+White, Male, 1989, 936.5, 950852
+White, Male, 1990, 930.9, 950812
+White, Male, 1991, 922.7, 956497
+White, Male, 1992, 912.2, 956957
+White, Male, 1993, 931.8, 988329
+White, Male, 1994, 922.6, 988823
+White, Male, 1995, 921.0, 997277
+White, Male, 1996, 907.1, 991984
+White, Male, 1997, 893.3, 986884
+White, Male, 1998, 887.3, 990190
+White, Male, 1999, 892.1, 1005335
+White, Male, 2000, 887.8, 1007191
+White, Male, 2001, 881.9, 1011218
+White, Male, 2002, 884.0, 1025196
+White, Male, 2003, 877.6, 1025650
+White, Male, 2004, 854.2, 1007266
+White, Male, 2005, 864.5, 1028152
+White, Male, 2006, 852.3, 1022328

@@ -1,0 +1,162 @@
+name, US Deaths and Death Rate for 2006
+description, Death Rate in the US by age, sex, race
+source, US Center for Desease Control
+url, http://www.cdc.gov/NCHS/data/nvsr/nvsr57/nvsr57_14.pdf
+license, Public Domain
+publish_date, Fri Apr 17 00:00:00 -0400 2009
+default, Age
+indvars, Age, Race, Sex
+
+Age (Years), Race, Sex, Death Rate (Persons per 100000), Deaths (Persons)
+00-01, Asian, Female, 356.9, 366
+00-01, Asian, Male, 469.7, 507
+00-01, Black, Female, 1194.6, 3972
+00-01, Black, Male, 1407.1, 4886
+00-01, Native American, Female, 689.9, 151
+00-01, Native American, Male, 1057.8, 242
+00-01, White, Female, 516.5, 8058
+00-01, White, Male, 632.7, 10345
+01-04, Asian, Female, 21.1, 84
+01-04, Asian, Male, 18.1, 76
+01-04, Black, Female, 39.4, 511
+01-04, Black, Male, 47.1, 633
+01-04, Native American, Female, 50.5, 43
+01-04, Native American, Male, 58.1, 51
+01-04, White, Female, 23.5, 1452
+01-04, White, Male, 27.5, 1781
+05-09, Asian, Female, 11.4, 53
+05-09, Asian, Male, 10.7, 51
+05-09, Black, Female, 16.8, 262
+05-09, Black, Male, 22.9, 369
+05-09, Native American, Female, *, 19
+05-09, Native American, Male, 15.5, 20
+05-09, White, Female, 11.4, 850
+05-09, White, Male, 14.1, 1111
+10-14, Asian, Female, 9.3, 43
+10-14, Asian, Male, 11.8, 57
+10-14, Black, Female, 17.9, 301
+10-14, Black, Male, 26.7, 462
+10-14, Native American, Female, 17.8, 25
+10-14, Native American, Male, 18.7, 27
+10-14, White, Female, 12.5, 971
+10-14, White, Male, 18.6, 1528
+15-19, Asian, Female, 23.5, 108
+15-19, Asian, Male, 50.4, 246
+15-19, Black, Female, 37.4, 643
+15-19, Black, Male, 130.8, 2309
+15-19, Native American, Female, 63.9, 96
+15-19, Native American, Male, 126.1, 195
+15-19, White, Female, 36.9, 2974
+15-19, White, Male, 84.1, 7168
+20-24, Asian, Female, 27.2, 137
+20-24, Asian, Male, 72.1, 378
+20-24, Black, Female, 66.5, 1047
+20-24, Black, Male, 215.7, 3484
+20-24, Native American, Female, 63.1, 90
+20-24, Native American, Male, 186.7, 283
+20-24, White, Female, 46.6, 3722
+20-24, White, Male, 139.3, 12007
+25-29, Asian, Female, 26.2, 162
+25-29, Asian, Male, 53.0, 319
+25-29, Black, Female, 89.8, 1369
+25-29, Black, Male, 242.0, 3506
+25-29, Native American, Female, 68.1, 85
+25-29, Native American, Male, 177.7, 242
+25-29, White, Female, 52.2, 4100
+25-29, White, Male, 132.3, 11114
+30-34, Asian, Female, 30.5, 216
+30-34, Asian, Male, 55.2, 375
+30-34, Black, Female, 124.9, 1757
+30-34, Black, Male, 268.0, 3413
+30-34, Native American, Female, 119.4, 131
+30-34, Native American, Male, 212.9, 250
+30-34, White, Female, 65.9, 4944
+30-34, White, Male, 138.7, 10969
+35-39, Asian, Female, 45.2, 304
+35-39, Asian, Male, 67.2, 431
+35-39, Black, Female, 188.2, 2772
+35-39, Black, Male, 324.7, 4268
+35-39, Native American, Female, 155.6, 172
+35-39, Native American, Male, 284.2, 325
+35-39, White, Female, 98.1, 8120
+35-39, White, Male, 176.1, 15107
+40-44, Asian, Female, 69.6, 422
+40-44, Asian, Male, 112.4, 644
+40-44, Black, Female, 298.9, 4637
+40-44, Black, Male, 457.3, 6253
+40-44, Native American, Female, 250.5, 296
+40-44, Native American, Male, 391.4, 459
+40-44, White, Female, 157.3, 14170
+40-44, White, Male, 269.8, 24663
+45-49, Asian, Female, 118.3, 658
+45-49, Asian, Male, 188.7, 952
+45-49, Black, Female, 455.0, 6863
+45-49, Black, Male, 715.6, 9391
+45-49, Native American, Female, 292.9, 341
+45-49, Native American, Male, 510.8, 563
+45-49, White, Female, 239.3, 22388
+45-49, White, Male, 408.3, 38112
+50-54, Asian, Female, 175.3, 868
+50-54, Asian, Male, 283.4, 1228
+50-54, Black, Female, 657.4, 8444
+50-54, Black, Male, 1171.2, 12721
+50-54, Native American, Female, 400.6, 397
+50-54, Native American, Male, 688.7, 636
+50-54, White, Female, 348.7, 29900
+50-54, White, Male, 612.8, 51569
+55-59, Asian, Female, 265.2, 1108
+55-59, Asian, Male, 450.2, 1612
+55-59, Black, Female, 909.1, 9614
+55-59, Black, Male, 1625.1, 14168
+55-59, Native American, Female, 533.6, 431
+55-59, Native American, Male, 869.8, 658
+55-59, White, Female, 518.0, 40527
+55-59, White, Male, 861.2, 64935
+60-64, Asian, Female, 431.8, 1229
+60-64, Asian, Male, 696.3, 1722
+60-64, Black, Female, 1319.8, 9584
+60-64, Black, Male, 2302.6, 13030
+60-64, Native American, Female, 911.4, 501
+60-64, Native American, Male, 1271.0, 636
+60-64, White, Female, 835.1, 49420
+60-64, White, Male, 1309.5, 72226
+65-69, Asian, Female, 695.7, 1534
+65-69, Asian, Male, 1087.8, 2071
+65-69, Black, Female, 1876.0, 10839
+65-69, Black, Male, 3132.8, 13369
+65-69, Native American, Female, 1430.3, 570
+65-69, Native American, Male, 1926.1, 687
+65-69, White, Female, 1281.6, 60219
+65-69, White, Male, 1973.1, 82594
+70-74, Asian, Female, 1148.2, 2045
+70-74, Asian, Male, 1663.5, 2287
+70-74, Black, Female, 2683.8, 12700
+70-74, Black, Male, 4373.3, 14218
+70-74, Native American, Female, 1959.3, 587
+70-74, Native American, Male, 2465.9, 608
+70-74, White, Female, 2071.0, 83434
+70-74, White, Male, 3060.0, 102331
+75-79, Asian, Female, 1965.0, 2768
+75-79, Asian, Male, 2882.9, 2814
+75-79, Black, Female, 4048.5, 15116
+75-79, Black, Male, 6329.2, 14144
+75-79, Native American, Female, 2933.2, 638
+75-79, Native American, Male, 3549.3, 607
+75-79, White, Female, 3353.8, 124961
+75-79, White, Male, 4914.2, 136662
+80-84, Asian, Female, 3360.5, 3177
+80-84, Asian, Male, 4707.6, 3019
+80-84, Black, Female, 6352.9, 17564
+80-84, Black, Male, 9021.0, 13178
+80-84, Native American, Female, 4906.5, 748
+80-84, Native American, Male, 5261.1, 549
+80-84, White, Female, 5646.4, 175051
+80-84, White, Male, 7982.5, 156342
+85+, Asian, Female, 7560.2, 6042
+85+, Asian, Male, 9524.7, 4587
+85+, Black, Female, 12196.7, 33364
+85+, Black, Male, 13206.0, 14778
+85+, Native American, Female, 6633.7, 1085
+85+, Native American, Male, 7540.2, 591
+85+, White, Female, 12965.7, 419923
+85+, White, Male, 14576.8, 221622
