@@ -178,6 +178,22 @@ class Bender
     end 
   end
 
+  # create table
+  def create_cmd(tablename)
+    puts "creating empty table " + tablename.to_s
+    @datafiles[tablename] = DataFile.new
+  end
+
+  # insert into table from other table
+  # insert_index is the point of insertion
+  # copy_span are the lines being copied
+  def insert_cmd(to_tablename, from_tablename, insert_index, copy_span)
+    puts "inserting lines " + copy_span.to_s + " from " + from_tablename.to_s +
+      " to " + to_tablename.to_s + " at line " + insert_index.to_s
+    from = @datafiles[from_tablename]
+    @datafiles[to_tablename].insert(@datafiles[from_tablename], insert_index, copy_span)
+  end
+
   # forward to datafile object
   def concat_cmd(tablename1, tablename2)
     puts "concatinating table " + tablename2.to_s + " to " + tablename1.to_s

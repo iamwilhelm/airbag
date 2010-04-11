@@ -15,15 +15,18 @@ class DataFile
   attr_reader :content
   attr_reader :fulllength
 
-  def initialize(fname)
-    @fname = fname
+  def initialize(fname = nil)
     @droppedlines = []
-    File.open fname do |fin|
-      @content = fin.readlines
+    @content = []
+    if fname != nil
+      @fname = fname
+      File.open fname do |fin|
+        @content = fin.readlines
+      end
+      # remove whitespace at line start/end
+      @content.each { |ll| ll.strip! }
     end
     @fulllength = @content.length
-    # remove whitespace at line start/end
-    @content.each { |ll| ll.strip! }
   end
 
   # apply block to each line in span, skipping dropped lines
@@ -90,6 +93,17 @@ class DataFile
         "," + @content[shiftedindex linenum]
     end
     droplines linenums
+  end
+
+  # insert content from one table to another
+  def insert(other, insert_index, copy_span)
+    count = 0
+    other.each_line_in_span(copy_span) do |line|
+      @content.insert(insert_index - 1 + count, line)
+      count += 1
+    end
+    @fulllength += count
+    @droppedlines.map!{ |x| x += count if x > insert_index }
   end
 
   # concatenate a table to the end of another
