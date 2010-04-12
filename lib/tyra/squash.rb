@@ -40,7 +40,7 @@ module Squash
         first = false
       else
         fields = to_fields line
-        puts "ERROR: num columns mismatch" if header.length != fields.length
+        throw "ERROR: num columns mismatch" if header.length != fields.length
         for fieldnum in 0...fields.length do
           next if indvar_names.include? header[fieldnum]
           # get path to set value in tree.  path is a list of dimension values sorted by dimension names.
