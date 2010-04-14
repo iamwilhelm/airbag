@@ -40,53 +40,6 @@ class Importer
     @data_dw = Redis.new(:host => host, :db => base_db + 1)
   end
 
-  # read csv file into import datastructure
-  def read_csv(fname)
-    raise "file not found" if !File.exists? fname
-    #puts "Reading #{fname}"
-
-    data = {}
-    meta = {}
-    meta["units"] = {}
-
-    File.open(fname, "r") do |fin|
-      # read meta data
-      while str = fin.gets.strip
-        break if str == ""
-        fields = to_fields(str)
-        meta[fields.first] = get_paramval(fields)
-      end
-
-      # read col headers, extract units
-      headers = to_fields(fin.gets)
-      for ii in 0...headers.length do
-        hdr_with_units = /(.*)\((.*)\)/.match(headers[ii])
-        if !hdr_with_units.nil?
-          headers[ii] = hdr_with_units[1].strip
-          meta["units"][to_r(headers[ii])] = hdr_with_units[2].strip
-        end
-        data[headers[ii]] = []
-      end
-
-      # read row data
-      while str = fin.gets
-        fields = headers.zip(to_fields(str))
-        fields.each { |name, value| data[name].push(value) }
-      end
-    end
-    
-    # find dependent variables
-    colnames = data.keys.sort
-    indvarnames = meta["indvars"] || []
-    depvarnames = colnames - indvarnames
-    meta["depvars"] = depvarnames
-
-    {
-      "meta" => meta,
-      "data" => data
-    }
-  end
-
   def import_csv(fname)
     import(read_csv(fname));
   end
@@ -141,16 +94,5 @@ class Importer
       @data_dw.del to_r(key)
     end
     true
-  end
-
-  private
-
-  # parameters may be a string or an array
-  def get_paramval(param)
-    if param[0] == "indvars" || param[0] == "new_indvar_names"
-      param[1..-1]
-    else
-      remove_quotes(param[1].to_s)
-    end
   end
 end

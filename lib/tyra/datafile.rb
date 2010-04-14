@@ -4,12 +4,14 @@ $LOAD_PATH << File.dirname(__FILE__)
 require "span"
 require "merge"
 require "squash"
+require "to_dataset"
 
 # DataFile manages an input text file.  it keeps track of which lines have been dropped.
 
 class DataFile
   include Merge
   include Squash
+  include ToDataset
 
   attr_reader :droppedlines
   attr_reader :content
@@ -186,14 +188,28 @@ class DataFile
     end 
   end
 
-  # insert content from one table to another
+  # copy content from one table to another
   # from tables[1] to tables[0]
   # insert_index is the point of insertion
   # copy_span are the lines being copied
-  def insert_cmd(tables, insert_index, copy_span)
-    puts "inserting lines " + copy_span.to_s + " at line " + insert_index.to_s
+  def copy_cmd(tables, insert_index, copy_span)
+    puts "copying lines " + copy_span.to_s + " at line " + insert_index.to_s
     count = 0
     tables[1].each_line_in_span(copy_span) do |line|
+      @content.insert(insert_index - 1 + count, line)
+      count += 1
+    end
+    @fulllength += count
+    @droppedlines.map!{ |x| x += count if x > insert_index }
+  end
+
+  # insert content from one table to another
+  # content is an array of strings
+  # insert_index is the point of insertion
+  def insert_cmd(content, insert_index)
+    puts "inserting lines: " + content.inspect
+    count = 0
+    for line in content do
       @content.insert(insert_index - 1 + count, line)
       count += 1
     end
@@ -220,7 +236,7 @@ class DataFile
 
   # squash table
   def squash_cmd(indcols, new_indvar_names)
-    puts "squashing table " + tablename.to_s
+    puts "squashing table"
     @content = squash_table(@content, indcols, new_indvar_names)
     @fulllength = @content.length
     @droppedlines = []
@@ -234,6 +250,12 @@ class DataFile
         fout.write line + "\n"
       }
     end
+  end
+
+  # write data to output file
+  def to_dataset_cmd()
+    puts "converting to a dataset"
+    puts to_dataset(content).inspect
   end
 
   # shift given index by the number of dropped lines above it

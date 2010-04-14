@@ -18,8 +18,8 @@ class Tyra
   def process(command)
     case command["cmd"]
     when "remove" then Importer.new(@base_db).remove(command["dataset"])
-    when "import" then Importer.new(@base_db).import(command["dataset"])
-    when "import_csv" then Importer.new(@base_db).import_csv(command["fname"])
+    when "import_dataset" then Importer.new(@base_db).import(command["dataset"])
+    when "import_text" then Importer.new(@base_db).import_text(command["content"], command["commands"])
     when "search" then Retriever.new(@base_db).search(command["search_str"])
     when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dimension"])
     when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"], command["op"])
@@ -34,19 +34,30 @@ class Tyra
   #   - meta: fields that describe the data
   #   - data: the data itself
   #
-  def import(dataset)
+  def import_dataset(dataset)
     process( {"cmd" => "import", "dataset" => dataset} )
   end
 
+  # content is an array of strings (text file content)
+  # commands is an array of bender commands that transform the
+  #   content into the dataset datastructure accepted by "import_dataset"
+  def import_text(content, commands)
+    process( {"cmd" => "import", "content" => content, "commands" => commands} )
+  end
+
+  # search_str is an array of search terms
+  # returns an array of dimensions
   def search(search_str)
     process( {"cmd" => "search", "search_str" => search_str} )
   end
 
+  # returns metadata for the specified dimension name
   def get_metadata(dimension)
     process( {"cmd" => "get_metadata", "dimension" => dimension} )
   end
 
-  def get_data(dimension, xaxis=nil, op=nil)
+  # returns data for the given dimension name
+  def get_data(dimension, xaxis = nil, op = nil)
     process( {"cmd" => "get_data", "dimension" => dimension, "xaxis" => xaxis, "op" => op} )
   end
 
@@ -55,7 +66,7 @@ end
 # --------- run main ---------
 
 def show_version
-  puts "tyra.rb v0.2.2"
+  puts "tyra.rb v0.2.3"
 end
 
 def show_help
@@ -89,7 +100,7 @@ if __FILE__ == $0
     when "-v" then show_version; exit 0
     when "-n" then base_db = ARGV.shift.to_i
     when "-r" then cmd = {"cmd" => "remove", "dataset" => ARGV.shift}
-    when "-i" then cmd = {"cmd" => "import_csv", "fname" => ARGV.shift}
+    when "-i" then cmd = {"cmd" => "import_text", "content" => File.readlines(ARGV.shift), "commands" => File.readlines(ARGV.shift) }
     when "-s" then cmd = {"cmd" => "search", "search_str" => ARGV.shift}
     when "-m" then cmd = {"cmd" => "get_metadata", "dimension" => ARGV.shift}
     when "-x" then params["xaxis"] = ARGV.shift

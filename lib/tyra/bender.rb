@@ -24,9 +24,15 @@ class Bender
   end
 
   # execute commands from the config file
-  def run(configfname)
+  # config and content are open files or arrays of strings
+  def run(config, content = nil)
+    # init content as default table if available
+    if content != nil
+      settable_cmd("default", content)
+    end
+
     # process each command in order
-    read_config(configfname) do | cmd, args |
+    read_config(config) do | cmd, args |
       if cmd == "read"
         read_cmd(*args)
       else
@@ -46,13 +52,10 @@ class Bender
   private
 
   # read config
-  def read_config(fname)
-    File.open(fname) do |fin|
-      YAML.load_documents(fin) do |ydoc|
-        for cmd in ydoc do
-          yield cmd[0], cmd[1..-1]
-        end
-      end
+  def read_config(config)
+    # FIXME why doesn't this work? YAML.load(config) do |cmd|
+    for cmd in YAML.load(config) do
+      yield cmd[0], cmd[1..-1]
     end
   end
 
@@ -72,6 +75,12 @@ class Bender
     args
   end
 
+  # set a table from given content
+  def settable_cmd(tablename, content)
+    @datafiles[tablename] = DataFile.new
+    @datafiles[tablename].insert_cmd(content, 1)
+  end
+
   # load the given file
   def read_cmd(tablename, fname)
     puts "reading " + fname
@@ -89,7 +98,7 @@ end
 # --------- run main ---------
 
 def showversion()
-  puts "bender.rb v0.0.2"
+  puts "bender.rb v0.0.3"
 end
 
 def showhelp()
@@ -106,17 +115,19 @@ if $0 == __FILE__
   end
 
   bender = Bender.new
-  for ff in ARGV do
+  for fname in ARGV do
     
-    case ff
+    case fname
     when "-h" then showhelp; exit 0
     when "-v" then showversion; exit 0
     else
-      if !File.exists? ff
-        puts "file not found: " + ff
+      if !File.exists? fname
+        puts "file not found: " + fname
         next
       end
-      bender.run ff
+      File.open(fname) do |fin|
+        bender.run fin
+      end
     end
   end
 end
