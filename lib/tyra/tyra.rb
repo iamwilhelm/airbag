@@ -15,8 +15,7 @@ class Tyra
   end
 
   # delegate to the responsible object/method
-  # FIXME Why don't you call it delegate then?  Ruby has a delegate module.
-  def process(command)
+  def delegate(command)
     case command["cmd"]
     when "remove" then Importer.new(@base_db).remove(command["dataset"])
     when "import_dataset" then Importer.new(@base_db).import(command["dataset"])
@@ -36,30 +35,30 @@ class Tyra
   #   - data: the data itself
   #
   def import_dataset(dataset)
-    process( {"cmd" => "import", "dataset" => dataset} )
+    delegate( {"cmd" => "import", "dataset" => dataset} )
   end
 
   # content is an array of strings (text file content)
   # commands is an array of bender commands that transform the
   #   content into the dataset datastructure accepted by "import_dataset"
   def import_text(content, commands)
-    process( {"cmd" => "import", "content" => content, "commands" => commands} )
+    delegate( {"cmd" => "import", "content" => content, "commands" => commands} )
   end
 
   # search_str is an array of search terms
   # returns an array of dimensions
   def search(search_str)
-    process( {"cmd" => "search", "search_str" => search_str} )
+    delegate( {"cmd" => "search", "search_str" => search_str} )
   end
 
   # returns metadata for the specified dimension name
   def get_metadata(dimension)
-    process( {"cmd" => "get_metadata", "dimension" => dimension} )
+    delegate( {"cmd" => "get_metadata", "dimension" => dimension} )
   end
 
   # returns data for the given dimension name
   def get_data(dimension, xaxis = nil, op = nil)
-    process( {"cmd" => "get_data", "dimension" => dimension, "xaxis" => xaxis, "op" => op} )
+    delegate( {"cmd" => "get_data", "dimension" => dimension, "xaxis" => xaxis, "op" => op} )
   end
 
 end
@@ -75,7 +74,7 @@ def show_help
   puts "Options:"
   puts "  -n dbnum                base db number"
   puts "  -r dataset              remove dataset"
-  puts "  -i file.csv             import dataset"
+  puts "  -i file.txt cmds.yaml   import dataset"
   puts "  -s search_str           search for dimensions"
   puts "  -m dimension            get dataset metadata"
   puts "  -x xaxis                set xaxis for get data call"
@@ -115,5 +114,5 @@ if __FILE__ == $0
   cmd.merge!(params)
 
   tyra = Tyra.new(base_db)
-  puts tyra.process(cmd).inspect
+  puts tyra.delegate(cmd).inspect
 end

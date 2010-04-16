@@ -40,17 +40,16 @@ class Importer
     @data_dw = Redis.new(:host => host, :db => base_db + 1)
   end
 
-  def import_csv(fname)
-    import(read_csv(fname));
+  # content is an array of strings loaded from textfile
+  # commands is the array of commands loaded from yaml file
+  def import_text(content, commands)
+    bender = Bender.new
+    bender.run commands.join(""), content
+    import(bender.get_dataset("default"));
   end
 
   # import takes a dataset hash with two keys:
   def import(dataset)
-    #if dataset["meta"].key? 'new_indvar_names'
-    #  squasher = Squash.new
-    #  dataset = squasher.squash(dataset)
-    #end
-
     meta = dataset["meta"]
     data = dataset["data"]
     

@@ -6,6 +6,7 @@ require "string_utils"
 require "misc_utils"
 require "datafile"
 require "span"
+require "to_dataset"
 
 # bender
 # bends source data into a format the importer understands
@@ -18,6 +19,7 @@ require "span"
 class Bender
   include StringUtils
   include MiscUtils
+  include ToDataset
   
   def initialize()
     @datafiles = {}
@@ -47,6 +49,12 @@ class Bender
         end
       end
     end
+  end
+
+  # convert table to dataset structure
+  def get_dataset(table)
+    #puts "converting to a dataset"
+    to_dataset(@datafiles[table].content)
   end
 
   private
@@ -83,13 +91,13 @@ class Bender
 
   # load the given file
   def read_cmd(tablename, fname)
-    puts "reading " + fname
+    #puts "reading " + fname
     @datafiles[tablename] = DataFile.new fname
   end
 
   # create table
   def create_cmd(tablename)
-    puts "creating empty table " + tablename.to_s
+    #puts "creating empty table " + tablename.to_s
     @datafiles[tablename] = DataFile.new
   end
 end
