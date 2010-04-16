@@ -6,8 +6,8 @@ require "merge"
 require "squash"
 require "to_dataset"
 
-# DataFile manages an input text file.  it keeps track of which lines have been dropped.
-
+# DataFile manages an input text file.  it keeps track of which lines
+# have been dropped.
 class DataFile
   include Merge
   include Squash

@@ -6,6 +6,7 @@ require 'redis'
 require 'json/add/core'
 require 'importer'
 require 'retriever'
+require 'bender'
 require 'pp'
 
 class Tyra

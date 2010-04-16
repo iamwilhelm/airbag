@@ -2,6 +2,8 @@ $LOAD_PATH << File.dirname(__FILE__)
 require "importer"
 require 'misc_utils'
 
+# HashTree class. this is a tree made of hashes used to combine
+# multidimensional data so it can be merged or reordered.
 class HashTree
   include MiscUtils
 

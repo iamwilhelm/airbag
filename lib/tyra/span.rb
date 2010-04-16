@@ -1,3 +1,5 @@
+# iterate over the values defined by a string made up of items and
+# ranges
 class Span
   # str can be of the form "1-4,6,8,10-12"
   # or "*" for "1-end"
