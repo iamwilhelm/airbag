@@ -33,10 +33,12 @@ class Bender
       settable_cmd("default", content)
     end
 
+    return if config == "---\n"
+
     # process each command in order
     read_config(config) do | cmd, args |
-      if cmd == "read"
-        read_cmd(*args)
+      if cmd == "read" or cmd == "create"
+        self.send("#{cmd}_cmd", *args)
       else
         # dynamically call method based on command name
         args = set_table_refs(cmd, args)
@@ -78,7 +80,7 @@ class Bender
     elsif args[0].class == String
       args[0] = @datafiles[args[0]]
     else
-      throw "first arg wasn't a tablename"
+      throw "first arg wasn't a tablename: " + args[0].to_s
     end
     args
   end

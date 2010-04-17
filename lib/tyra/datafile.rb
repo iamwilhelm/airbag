@@ -43,8 +43,6 @@ class DataFile
     @droppedlines.map!{ |x| x += count if x > insert_index }
   end
 
-  private
-
   # apply block to each line in span, skipping dropped lines
   def each_line_in_span(spanstr)
     #puts @droppedlines.inspect
@@ -55,6 +53,8 @@ class DataFile
       end
     }
   end
+
+  private
 
   # apply block to each col in span to the specified line, skipping dropped lines
   # assumes datafile is csv format
