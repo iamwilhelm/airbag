@@ -22,8 +22,8 @@ class Tyra
     when "import_text" then Importer.new(@base_db).import_text(command["content"], command["commands"])
     when "search" then Retriever.new(@base_db).search(command["search_str"])
     when "get_metadata" then Retriever.new(@base_db).get_metadata(command["dimension"])
-    when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"], command["op"], command["xaxislabels"],
-                                                          command["caxis"], command["caxislabels"], command["laxis"], command["laxislabels"])
+    when "get_data" then Retriever.new(@base_db).get_data(command["dimension"], command["xaxis"], command["op"], command["desired_xlabels"],
+                                                          command["caxis"], command["desired_clabels"], command["laxis"], command["desired_llabels"])
     else raise "unknown command"
     end
   end

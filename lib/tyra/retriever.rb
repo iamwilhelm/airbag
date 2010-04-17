@@ -51,8 +51,7 @@ class Retriever
 
   # get the data for a dimension
   # op can be sum, mean, or count
-  def get_data(dimension, xaxis = nil, op = nil, xaxislabels = nil,
-               caxis = nil, caxislabels = nil, laxis = nil, laxislabels = nil)
+  def get_data(dimension, xaxis, op, desired_xlabels, caxis, desired_clabels, laxis, desired_llabels)
     op = "mean" if op.nil?
 
     if !dimension.include? "|"
@@ -63,59 +62,80 @@ class Retriever
     # pull whats needed from dw
     meta = get_metadata(dataset)
     xaxis = meta['default'] if xaxis.nil?
-    xaxislabels = getcol "#{dataset}|#{xaxis}"
-    raise "xaxis dimension not found" if xaxislabels.empty?
+    xlabels = getcol "#{dataset}|#{xaxis}"
+    raise "xaxis dimension not found" if xlabels.empty?
 
     if !caxis.nil?
-      caxislabels = getcol "#{dataset}|#{caxis}"
-      raise "caxis dimension not found" if caxislabels.empty?
+      clabels = getcol "#{dataset}|#{caxis}"
+      raise "caxis dimension not found" if clabels.empty?
     else
-      caxislabels = [nil]
+      clabels = [nil]
+    end
+
+    if !laxis.nil?
+      llabels = getcol "#{dataset}|#{laxis}"
+      raise "laxis dimension not found" if llabels.empty?
     end
 
     data = getcol dimension
 
-    full_xlabels = xaxislabels
+    # select desired labels
+    ii=0
+    while ii < xlabels.length
+      if (desired_xlabels != nil and !desired_xlabels.include? xlabels[ii]) or
+          (desired_clabels != nil and !desired_clabels.include? clabels[ii]) or
+          (desired_llabels != nil and !desired_llabels.include? llabels[ii])
+        xlabels.delete_at(ii)
+        clabels.delete_at(ii) if clabels != nil
+        llabels.delete_at(ii) if llabels != nil
+        data.delete_at(ii)
+      else
+        ii += 1
+      end
+    end
+      
+    full_xlabels = xlabels
+    full_llabels = llabels
     full_data = data
 
-    retxaxislabels = []
-    retcaxislabels = caxislabels.uniq.sort
-    retdata = []
-    retcaxislabels.each_with_index do |clabel, cindx|
-      xaxislabels = full_xlabels
+    ret_xlabels = []
+    ret_clabels = clabels.uniq.sort
+    ret_data = []
+    ret_clabels.each_with_index do |clabel, cindx|
+      xlabels = full_xlabels
       data = full_data
 
-      # aggregate by xaxislabels
+      # aggregate by xlabels
       agg = {}
-      xaxislabels.each_with_index do |row, ii|
-        next if clabel != nil and caxislabels[ii] != clabel
+      xlabels.each_with_index do |row, ii|
+        next if clabel != nil and clabels[ii] != clabel
         agg[row] = [] if !agg.key? row
         agg[row] << data[ii]
       end
       agg.each { |row, vals| agg[row] = self.send(op, vals) }
 
       # clear labels and data to fill with sorted, aggregated values
-      xaxislabels = []
+      xlabels = []
       data = []
       agg.sort.each { |row|
-        xaxislabels << row[0]
+        xlabels << row[0]
         data << row[1]
       }
-      retxaxislabels << xaxislabels
-      retdata << data
+      ret_xlabels << xlabels
+      ret_data << data
     end
 
     laxis = nil
-    retlaxislabels = nil
+    ret_llabels = nil
 
     # build return value
     { "dimension" => dimension,
       "xaxis" => xaxis,
-      "xaxislabels" => retxaxislabels,
+      "xaxislabels" => ret_xlabels,
       "caxis" => caxis,
-      "caxislabels" => retcaxislabels,
+      "caxislabels" => ret_clabels,
       "laxis" => laxis,
-      "laxislabels" => retlaxislabels,
+      "laxislabels" => ret_llabels,
       "data" => data }
   end
 
