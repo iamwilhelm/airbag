@@ -51,8 +51,9 @@ class Retriever
 
   # get the data for a dimension
   # op can be sum, mean, or count
-  def get_data(dimension, xaxis, op, desired_xlabels, caxis, desired_clabels, laxis, desired_llabels)
+  def get_data(dimension, xaxis, op, desired_xlabels, caxis, desired_clabels, laxis, lop, desired_llabels)
     op = "mean" if op.nil?
+    lop = "mean" if lop.nil?
 
     if !dimension.include? "|"
       dimension += "|" + dimension
@@ -100,33 +101,45 @@ class Retriever
 
     ret_xlabels = []
     ret_clabels = clabels.uniq.sort
+    ret_llabels = []
     ret_data = []
     ret_clabels.each_with_index do |clabel, cindx|
       xlabels = full_xlabels
       data = full_data
+      llabels = full_llabels
 
       # aggregate by xlabels
-      agg = {}
+      agg_data = {}
+      agg_llabel = {}
       xlabels.each_with_index do |row, ii|
         next if clabel != nil and clabels[ii] != clabel
-        agg[row] = [] if !agg.key? row
-        agg[row] << data[ii]
+        agg_data[row] = [] if !agg_data.key? row
+        agg_data[row] << data[ii]
+        if laxis != nil
+          agg_llabel[row] = [] if !agg_llabel.key? row
+          agg_llabel[row] << llabels[ii]
+        end
       end
-      agg.each { |row, vals| agg[row] = self.send(op, vals) }
+      agg_data.each { |row, vals| agg_data[row] = self.send(op, vals) }
+      if laxis != nil
+        agg_llabel.each { |row, vals| agg_llabel[row] = self.send(lop, vals) }
+      end
 
       # clear labels and data to fill with sorted, aggregated values
       xlabels = []
       data = []
-      agg.sort.each { |row|
+      llabels = []
+      agg_data.sort.each { |row|
         xlabels << row[0]
         data << row[1]
       }
+      agg_llabel.sort.each { |row|
+        llabels << row[1]
+      }
       ret_xlabels << xlabels
       ret_data << data
+      ret_llabels << llabels
     end
-
-    laxis = nil
-    ret_llabels = nil
 
     # build return value
     { "dimension" => dimension,
