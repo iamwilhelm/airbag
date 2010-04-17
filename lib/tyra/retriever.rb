@@ -109,32 +109,29 @@ class Retriever
       llabels = full_llabels
 
       # aggregate by xlabels
-      agg_data = {}
-      agg_llabel = {}
+      agg = {}
       xlabels.each_with_index do |row, ii|
         next if clabel != nil and clabels[ii] != clabel
-        agg_data[row] = [] if !agg_data.key? row
-        agg_data[row] << data[ii]
+        agg[row] = [[]] if !agg.key? row
+        agg[row][0] << data[ii]
         if laxis != nil
-          agg_llabel[row] = [] if !agg_llabel.key? row
-          agg_llabel[row] << llabels[ii]
+          agg[row][1] = [] if agg[row].length == 1
+          agg[row][1] << llabels[ii]
         end
       end
-      agg_data.each { |row, vals| agg_data[row] = self.send(op, vals) }
+      agg.each { |row, vals| agg[row][0] = self.send(op, vals[0]) }
       if laxis != nil
-        agg_llabel.each { |row, vals| agg_llabel[row] = self.send(lop, vals) }
+        agg.each { |row, vals| agg[row][1] = self.send(lop, vals[1]) }
       end
 
       # clear labels and data to fill with sorted, aggregated values
       xlabels = []
       data = []
       llabels = []
-      agg_data.sort.each { |row|
+      agg.sort.each { |row|
         xlabels << row[0]
-        data << row[1]
-      }
-      agg_llabel.sort.each { |row|
-        llabels << row[1]
+        data << row[1][0]
+        llabels << row[1][1] if laxis != nil
       }
       ret_xlabels << xlabels
       ret_data << data
