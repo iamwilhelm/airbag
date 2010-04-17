@@ -50,9 +50,9 @@ class Retriever
   end
 
   # get the data for a dimension
-  # TODO implement xaxislabels and zaxis
   # op can be sum, mean, or count
-  def get_data(dimension, xaxis = nil, op = nil, xaxislabels = nil, zaxis = nil)
+  def get_data(dimension, xaxis = nil, op = nil, xaxislabels = nil,
+               caxis = nil, caxislabels = nil, laxis = nil, laxislabels = nil)
     op = "mean" if op.nil?
 
     if !dimension.include? "|"
@@ -65,28 +65,57 @@ class Retriever
     xaxis = meta['default'] if xaxis.nil?
     xaxislabels = getcol "#{dataset}|#{xaxis}"
     raise "xaxis dimension not found" if xaxislabels.empty?
+
+    if !caxis.nil?
+      caxislabels = getcol "#{dataset}|#{caxis}"
+      raise "caxis dimension not found" if caxislabels.empty?
+    else
+      caxislabels = [nil]
+    end
+
     data = getcol dimension
 
-    # aggregate by xaxislabels
-    agg = {}
-    xaxislabels.each_with_index do |row, ii|
-      agg[row] = [] if !agg.key? row
-      agg[row] << data[ii]
-    end
-    agg.each { |row, vals| agg[row] = self.send(op, vals) }
+    full_xlabels = xaxislabels
+    full_data = data
 
-    # clear labels and data to fill with sorted, aggregated values
-    xaxislabels = []
-    data = []
-    agg.sort.each { |row|
-      xaxislabels << row[0]
-      data << row[1]
-    }
+    retxaxislabels = []
+    retcaxislabels = caxislabels.uniq.sort
+    retdata = []
+    retcaxislabels.each_with_index do |clabel, cindx|
+      xaxislabels = full_xlabels
+      data = full_data
+
+      # aggregate by xaxislabels
+      agg = {}
+      xaxislabels.each_with_index do |row, ii|
+        next if clabel != nil and caxislabels[ii] != clabel
+        agg[row] = [] if !agg.key? row
+        agg[row] << data[ii]
+      end
+      agg.each { |row, vals| agg[row] = self.send(op, vals) }
+
+      # clear labels and data to fill with sorted, aggregated values
+      xaxislabels = []
+      data = []
+      agg.sort.each { |row|
+        xaxislabels << row[0]
+        data << row[1]
+      }
+      retxaxislabels << xaxislabels
+      retdata << data
+    end
+
+    laxis = nil
+    retlaxislabels = nil
 
     # build return value
     { "dimension" => dimension,
       "xaxis" => xaxis,
-      "xaxislabels" => xaxislabels,
+      "xaxislabels" => retxaxislabels,
+      "caxis" => caxis,
+      "caxislabels" => retcaxislabels,
+      "laxis" => laxis,
+      "laxislabels" => retlaxislabels,
       "data" => data }
   end
 
