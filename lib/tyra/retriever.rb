@@ -134,9 +134,19 @@ class Retriever
         llabels << row[1][1] if laxis != nil
       }
       ret_xlabels << xlabels
+      ret_clabels = nil if caxis == nil
       ret_data << data
-      ret_llabels << llabels
+      if laxis == nil
+        ret_llabels = nil
+      else
+        ret_llabels << llabels
+      end
     end
+
+    #puts ret_xlabels.inspect
+    #puts ret_data.inspect
+    #puts ret_clabels.inspect
+    #puts ret_llabels.inspect
 
     # build return value
     { "dimension" => dimension,
@@ -146,7 +156,7 @@ class Retriever
       "caxislabels" => ret_clabels,
       "laxis" => laxis,
       "laxislabels" => ret_llabels,
-      "data" => data }
+      "data" => ret_data }
   end
 
   # gets the metadata for the specified dimension
