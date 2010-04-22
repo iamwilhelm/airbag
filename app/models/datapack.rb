@@ -10,11 +10,11 @@ class Datapack
   end
 
   def ordinal_pack
-    [@xaxis || [], @xaxislabels || []]
+    [@xaxis || [], @xaxislabels[0] || []]
   end  
 
   def cardinal_pack
-    [@dimension || [], @data || []]
+    [@dimension || [], @data[0] || []]
   end
 
   # When there is a datapack request for an attribute that doesn't
